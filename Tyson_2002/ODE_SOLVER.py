@@ -1,4 +1,4 @@
-
+# Credit goes to https://sundnes.github.io/solving_odes_in_python/
 import numpy as np
 
 class ODESolver:
