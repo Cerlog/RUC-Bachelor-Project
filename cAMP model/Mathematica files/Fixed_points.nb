@@ -1,0 +1,2934 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    138137,       2924]
+NotebookOptionsPosition[    137383,       2904]
+NotebookOutlinePosition[    137844,       2921]
+CellTagsIndexPosition[    137801,       2918]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Define", " ", "parameters"}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{"k0", "=", "0"}], ";", 
+    RowBox[{"k1", "=", 
+     RowBox[{"432", "/", "100"}]}], ";", 
+    RowBox[{"k3", "=", 
+     RowBox[{"29", "/", "50"}]}], ";", 
+    RowBox[{"k2", "=", 
+     RowBox[{"373", "/", "100"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"r1", "=", 
+     RowBox[{"49", "/", "50"}]}], ";", 
+    RowBox[{"r2", "=", 
+     RowBox[{"224", "/", "50"}]}], ";", 
+    RowBox[{"r3", "=", 
+     RowBox[{"1", "/", "10"}]}], ";", 
+    RowBox[{"r4", "=", 
+     RowBox[{"7", "/", "50"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Km1", "=", 
+     RowBox[{"124", "/", "50"}]}], ";", 
+    RowBox[{"Km2", "=", 
+     RowBox[{"167", "/", "50"}]}], ";", 
+    RowBox[{"Km3", "=", 
+     RowBox[{"231", "/", "25"}]}], ";", 
+    RowBox[{"Km4", "=", 
+     RowBox[{"181", "/", "25"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Dvalue", "=", 
+     RowBox[{"106", "/", "50"}]}], ";", 
+    RowBox[{"Et", "=", 
+     RowBox[{"8", "/", "5"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"ACt", "=", 
+     RowBox[{"334", "/", "50"}]}], ";", 
+    RowBox[{"PDEt", "=", 
+     RowBox[{"232", "/", "50"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Define", " ", "equations"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dPDEp", "=", 
+     RowBox[{
+      RowBox[{"r3", "*", "cAMP", "*", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"PDEt", "-", "PDEp"}], ")"}], "/", "Km3"}], ")"}]}], "-", 
+      RowBox[{"r4", "*", "Et", "*", 
+       RowBox[{"PDEp", "/", 
+        RowBox[{"(", 
+         RowBox[{"Km4", "+", "PDEp"}], ")"}]}]}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"dACp", "=", 
+     RowBox[{
+      RowBox[{"r1", "*", "cAMP", "*", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"ACt", "-", "ACp"}], ")"}], "/", "Km1"}], ")"}]}], "-", 
+      RowBox[{"r2", "*", "Dvalue", "*", 
+       RowBox[{"ACp", "/", 
+        RowBox[{"(", 
+         RowBox[{"Km2", "+", "ACp"}], ")"}]}]}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"dcAMP", "=", 
+     RowBox[{"k0", "+", 
+      RowBox[{"k1", "*", "ACp"}], "-", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"k3", "+", 
+         RowBox[{"k2", "*", "PDEp"}]}], ")"}], "*", "cAMP"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Equations", " ", "for", " ", "fixed", " ", "points", " ", 
+     RowBox[{"(", 
+      RowBox[{"set", " ", "derivatives", " ", "to", " ", "zero"}], ")"}]}], 
+    "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"eq1", "=", 
+     RowBox[{"dPDEp", "==", "0"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"eq2", "=", 
+     RowBox[{"dACp", "==", "0"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"eq3", "=", 
+     RowBox[{"dcAMP", "==", "0"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Solve", " ", "the", " ", "equations", " ", "for", " ", "fixed", " ", 
+     "points"}], "*)"}], "\n", 
+   RowBox[{"fixedPoints", "=", 
+    RowBox[{"Solve", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"eq1", ",", "eq2", ",", "eq3"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"ACp", ",", "PDEp", ",", "cAMP"}], "}"}]}], "]"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Convert", " ", "the", " ", "fixed", " ", "points", " ", "back", " ", 
+     "to", " ", "numerical", " ", "values"}], "*)"}], "\n", 
+   RowBox[{"fixedPointsNumerical", "=", 
+    RowBox[{"fixedPoints", "/.", " ", 
+     RowBox[{"x_Rational", ":>", 
+      RowBox[{"N", "[", "x", "]"}]}]}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Print", " ", "the", " ", "numerical", " ", "fixed", " ", "points"}], 
+    "*)"}], "\n", "fixedPointsNumerical", "\n"}]}]], "Input",
+ CellChangeTimes->{{3.8920993422494555`*^9, 3.89209935841436*^9}},
+ CellLabel->"In[43]:=",ExpressionUUID->"debf6a1a-48bd-4447-a863-8bc3b821d08b"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", "0"}], ",", 
+     RowBox[{"PDEp", "\[Rule]", "0"}], ",", 
+     RowBox[{"cAMP", "\[Rule]", "0"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", 
+      RowBox[{
+       FractionBox["1", "467303743075288459898256161899709399040000"], "7", 
+       " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2864018173962235991539615685993886231232512", " ", 
+          InterpretationBox[
+           TemplateBox[{"Root", 
+             InterpretationBox[
+              StyleBox[
+               TemplateBox[{"\"-3.41\"", 
+                 DynamicBox[
+                  FEPrivate`FrontEndResource[
+                  "FEExpressions", "NumericalApproximationElider"], 
+                  ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                "RowDefault"], ShowStringCharacters -> 
+               False], \
+-3.4055176493373604529324438772164285183`15.954589770191003, Editable -> 
+              False], 
+             TagBox[
+              RowBox[{"Root", "[", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "1"}], "]"}], 
+              Short[#, 7]& ], -3.4055176493373605`},
+            "NumericalApproximation"],
+           Root[
+           94870176619689753182208 - 232799909654960205889536 # + 
+            151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+            528364612247852782500 #^4 + 7424289924740568455625 #^5& , 1, 
+            0]]}], "-", 
+         RowBox[{"4116830354078578662206623047169196850759936", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"-3.41\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> 
+                False], \
+-3.4055176493373604529324438772164285183`15.954589770191003, Editable -> 
+               False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "1"}], "]"}], 
+               Short[#, 7]& ], -3.4055176493373605`},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 1, 0]],
+            "2"]}], "+", 
+         RowBox[{"411411816621556915966260882408519876606400", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"-3.41\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> 
+                False], \
+-3.4055176493373604529324438772164285183`15.954589770191003, Editable -> 
+               False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "1"}], "]"}], 
+               Short[#, 7]& ], -3.4055176493373605`},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 1, 0]],
+            "3"]}], "-", 
+         RowBox[{"217641050696266683384632909183332338052500", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"-3.41\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> 
+                False], \
+-3.4055176493373604529324438772164285183`15.954589770191003, Editable -> 
+               False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "1"}], "]"}], 
+               Short[#, 7]& ], -3.4055176493373605`},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 1, 0]],
+            "4"]}], "-", 
+         RowBox[{"226692098271926003706343008047711944486875", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"-3.41\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> 
+                False], \
+-3.4055176493373604529324438772164285183`15.954589770191003, Editable -> 
+               False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "1"}], "]"}], 
+               Short[#, 7]& ], -3.4055176493373605`},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 1, 0]],
+            "5"]}]}], ")"}]}]}], ",", 
+     RowBox[{"PDEp", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"60123282097046143491705058783771505363237375083332864", " ", 
+          InterpretationBox[
+           TemplateBox[{"Root", 
+             InterpretationBox[
+              StyleBox[
+               TemplateBox[{"\"-3.41\"", 
+                 DynamicBox[
+                  FEPrivate`FrontEndResource[
+                  "FEExpressions", "NumericalApproximationElider"], 
+                  ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                "RowDefault"], ShowStringCharacters -> 
+               False], \
+-3.4055176493373604529324438772164285183`15.954589770191003, Editable -> 
+              False], 
+             TagBox[
+              RowBox[{"Root", "[", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "1"}], "]"}], 
+              Short[#, 7]& ], -3.4055176493373605`},
+            "NumericalApproximation"],
+           Root[
+           94870176619689753182208 - 232799909654960205889536 # + 
+            151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+            528364612247852782500 #^4 + 7424289924740568455625 #^5& , 1, 
+            0]]}], "-", 
+         RowBox[{"86090355171892267281666568572381961823649442219411392", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"-3.41\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> 
+                False], \
+-3.4055176493373604529324438772164285183`15.954589770191003, Editable -> 
+               False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "1"}], "]"}], 
+               Short[#, 7]& ], -3.4055176493373605`},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 1, 0]],
+            "2"]}], "+", 
+         RowBox[{"8652461470278556895512708154117454416865796143623300", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"-3.41\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> 
+                False], \
+-3.4055176493373604529324438772164285183`15.954589770191003, Editable -> 
+               False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "1"}], "]"}], 
+               Short[#, 7]& ], -3.4055176493373605`},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 1, 0]],
+            "3"]}], "-", 
+         RowBox[{"4386603907083417630430763884788732326034222137983125", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"-3.41\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> 
+                False], \
+-3.4055176493373604529324438772164285183`15.954589770191003, Editable -> 
+               False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "1"}], "]"}], 
+               Short[#, 7]& ], -3.4055176493373605`},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 1, 0]],
+            "4"]}], "-", 
+         RowBox[{"4649598517914130424150141445259855641379985323914375", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"-3.41\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> 
+                False], \
+-3.4055176493373604529324438772164285183`15.954589770191003, Editable -> 
+               False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "1"}], "]"}], 
+               Short[#, 7]& ], -3.4055176493373605`},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 1, 0]],
+            "5"]}]}], ")"}], "/", 
+       "1199504867315836997597987950347286940009331363840000"}]}], ",", 
+     RowBox[{"cAMP", "\[Rule]", 
+      InterpretationBox[
+       TemplateBox[{"Root", 
+         InterpretationBox[
+          StyleBox[
+           TemplateBox[{"\"-3.41\"", 
+             DynamicBox[
+              FEPrivate`FrontEndResource[
+              "FEExpressions", "NumericalApproximationElider"], 
+              ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+            "RowDefault"], ShowStringCharacters -> 
+           False], -3.4055176493373604529324438772164285183`15.\
+954589770191003, Editable -> False], 
+         TagBox[
+          RowBox[{"Root", "[", 
+            RowBox[{
+              RowBox[{
+                RowBox[{"94870176619689753182208", "-", 
+                  RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                  RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                  RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                  RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                  RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "1"}], "]"}], 
+          Short[#, 7]& ], -3.4055176493373605`},
+        "NumericalApproximation"],
+       Root[
+       94870176619689753182208 - 232799909654960205889536 # + 
+        151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+        528364612247852782500 #^4 + 7424289924740568455625 #^5& , 1, 0]]}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", 
+      RowBox[{
+       FractionBox["1", "467303743075288459898256161899709399040000"], "7", 
+       " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2864018173962235991539615685993886231232512", " ", 
+          InterpretationBox[
+           TemplateBox[{"Root", 
+             InterpretationBox[
+              StyleBox[
+               TemplateBox[{"\"0.697\"", 
+                 DynamicBox[
+                  FEPrivate`FrontEndResource[
+                  "FEExpressions", "NumericalApproximationElider"], 
+                  ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                "RowDefault"], ShowStringCharacters -> False], 
+              0.69703624444133305271265044211759231985`15.954589770191003, 
+              Editable -> False], 
+             TagBox[
+              RowBox[{"Root", "[", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "2"}], "]"}], 
+              Short[#, 7]& ], 0.697036244441333},
+            "NumericalApproximation"],
+           Root[
+           94870176619689753182208 - 232799909654960205889536 # + 
+            151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+            528364612247852782500 #^4 + 7424289924740568455625 #^5& , 2, 
+            0]]}], "-", 
+         RowBox[{"4116830354078578662206623047169196850759936", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"0.697\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> False], 
+               0.69703624444133305271265044211759231985`15.954589770191003, 
+               Editable -> False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "2"}], "]"}], 
+               Short[#, 7]& ], 0.697036244441333},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 2, 0]],
+            "2"]}], "+", 
+         RowBox[{"411411816621556915966260882408519876606400", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"0.697\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> False], 
+               0.69703624444133305271265044211759231985`15.954589770191003, 
+               Editable -> False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "2"}], "]"}], 
+               Short[#, 7]& ], 0.697036244441333},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 2, 0]],
+            "3"]}], "-", 
+         RowBox[{"217641050696266683384632909183332338052500", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"0.697\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> False], 
+               0.69703624444133305271265044211759231985`15.954589770191003, 
+               Editable -> False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "2"}], "]"}], 
+               Short[#, 7]& ], 0.697036244441333},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 2, 0]],
+            "4"]}], "-", 
+         RowBox[{"226692098271926003706343008047711944486875", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"0.697\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> False], 
+               0.69703624444133305271265044211759231985`15.954589770191003, 
+               Editable -> False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "2"}], "]"}], 
+               Short[#, 7]& ], 0.697036244441333},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 2, 0]],
+            "5"]}]}], ")"}]}]}], ",", 
+     RowBox[{"PDEp", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"60123282097046143491705058783771505363237375083332864", " ", 
+          InterpretationBox[
+           TemplateBox[{"Root", 
+             InterpretationBox[
+              StyleBox[
+               TemplateBox[{"\"0.697\"", 
+                 DynamicBox[
+                  FEPrivate`FrontEndResource[
+                  "FEExpressions", "NumericalApproximationElider"], 
+                  ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                "RowDefault"], ShowStringCharacters -> False], 
+              0.69703624444133305271265044211759231985`15.954589770191003, 
+              Editable -> False], 
+             TagBox[
+              RowBox[{"Root", "[", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "2"}], "]"}], 
+              Short[#, 7]& ], 0.697036244441333},
+            "NumericalApproximation"],
+           Root[
+           94870176619689753182208 - 232799909654960205889536 # + 
+            151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+            528364612247852782500 #^4 + 7424289924740568455625 #^5& , 2, 
+            0]]}], "-", 
+         RowBox[{"86090355171892267281666568572381961823649442219411392", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"0.697\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> False], 
+               0.69703624444133305271265044211759231985`15.954589770191003, 
+               Editable -> False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "2"}], "]"}], 
+               Short[#, 7]& ], 0.697036244441333},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 2, 0]],
+            "2"]}], "+", 
+         RowBox[{"8652461470278556895512708154117454416865796143623300", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"0.697\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> False], 
+               0.69703624444133305271265044211759231985`15.954589770191003, 
+               Editable -> False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "2"}], "]"}], 
+               Short[#, 7]& ], 0.697036244441333},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 2, 0]],
+            "3"]}], "-", 
+         RowBox[{"4386603907083417630430763884788732326034222137983125", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"0.697\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> False], 
+               0.69703624444133305271265044211759231985`15.954589770191003, 
+               Editable -> False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "2"}], "]"}], 
+               Short[#, 7]& ], 0.697036244441333},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 2, 0]],
+            "4"]}], "-", 
+         RowBox[{"4649598517914130424150141445259855641379985323914375", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"0.697\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> False], 
+               0.69703624444133305271265044211759231985`15.954589770191003, 
+               Editable -> False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "2"}], "]"}], 
+               Short[#, 7]& ], 0.697036244441333},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 2, 0]],
+            "5"]}]}], ")"}], "/", 
+       "1199504867315836997597987950347286940009331363840000"}]}], ",", 
+     RowBox[{"cAMP", "\[Rule]", 
+      InterpretationBox[
+       TemplateBox[{"Root", 
+         InterpretationBox[
+          StyleBox[
+           TemplateBox[{"\"0.697\"", 
+             DynamicBox[
+              FEPrivate`FrontEndResource[
+              "FEExpressions", "NumericalApproximationElider"], 
+              ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+            "RowDefault"], ShowStringCharacters -> False], 
+          0.69703624444133305271265044211759231985`15.954589770191003, 
+          Editable -> False], 
+         TagBox[
+          RowBox[{"Root", "[", 
+            RowBox[{
+              RowBox[{
+                RowBox[{"94870176619689753182208", "-", 
+                  RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                  RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                  RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                  RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                  RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "2"}], "]"}], 
+          Short[#, 7]& ], 0.697036244441333},
+        "NumericalApproximation"],
+       Root[
+       94870176619689753182208 - 232799909654960205889536 # + 
+        151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+        528364612247852782500 #^4 + 7424289924740568455625 #^5& , 2, 0]]}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", 
+      RowBox[{
+       FractionBox["1", "467303743075288459898256161899709399040000"], "7", 
+       " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2864018173962235991539615685993886231232512", " ", 
+          InterpretationBox[
+           TemplateBox[{"Root", 
+             InterpretationBox[
+              StyleBox[
+               TemplateBox[{"\"1.02\"", 
+                 DynamicBox[
+                  FEPrivate`FrontEndResource[
+                  "FEExpressions", "NumericalApproximationElider"], 
+                  ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                "RowDefault"], ShowStringCharacters -> False], 
+              1.0211380364798301467743613102356903255`15.954589770191003, 
+              Editable -> False], 
+             TagBox[
+              RowBox[{"Root", "[", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "3"}], "]"}], 
+              Short[#, 7]& ], 1.0211380364798301`},
+            "NumericalApproximation"],
+           Root[
+           94870176619689753182208 - 232799909654960205889536 # + 
+            151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+            528364612247852782500 #^4 + 7424289924740568455625 #^5& , 3, 
+            0]]}], "-", 
+         RowBox[{"4116830354078578662206623047169196850759936", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"1.02\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> False], 
+               1.0211380364798301467743613102356903255`15.954589770191003, 
+               Editable -> False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "3"}], "]"}], 
+               Short[#, 7]& ], 1.0211380364798301`},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 3, 0]],
+            "2"]}], "+", 
+         RowBox[{"411411816621556915966260882408519876606400", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"1.02\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> False], 
+               1.0211380364798301467743613102356903255`15.954589770191003, 
+               Editable -> False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "3"}], "]"}], 
+               Short[#, 7]& ], 1.0211380364798301`},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 3, 0]],
+            "3"]}], "-", 
+         RowBox[{"217641050696266683384632909183332338052500", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"1.02\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> False], 
+               1.0211380364798301467743613102356903255`15.954589770191003, 
+               Editable -> False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "3"}], "]"}], 
+               Short[#, 7]& ], 1.0211380364798301`},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 3, 0]],
+            "4"]}], "-", 
+         RowBox[{"226692098271926003706343008047711944486875", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"1.02\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> False], 
+               1.0211380364798301467743613102356903255`15.954589770191003, 
+               Editable -> False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "3"}], "]"}], 
+               Short[#, 7]& ], 1.0211380364798301`},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 3, 0]],
+            "5"]}]}], ")"}]}]}], ",", 
+     RowBox[{"PDEp", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"60123282097046143491705058783771505363237375083332864", " ", 
+          InterpretationBox[
+           TemplateBox[{"Root", 
+             InterpretationBox[
+              StyleBox[
+               TemplateBox[{"\"1.02\"", 
+                 DynamicBox[
+                  FEPrivate`FrontEndResource[
+                  "FEExpressions", "NumericalApproximationElider"], 
+                  ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                "RowDefault"], ShowStringCharacters -> False], 
+              1.0211380364798301467743613102356903255`15.954589770191003, 
+              Editable -> False], 
+             TagBox[
+              RowBox[{"Root", "[", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "3"}], "]"}], 
+              Short[#, 7]& ], 1.0211380364798301`},
+            "NumericalApproximation"],
+           Root[
+           94870176619689753182208 - 232799909654960205889536 # + 
+            151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+            528364612247852782500 #^4 + 7424289924740568455625 #^5& , 3, 
+            0]]}], "-", 
+         RowBox[{"86090355171892267281666568572381961823649442219411392", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"1.02\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> False], 
+               1.0211380364798301467743613102356903255`15.954589770191003, 
+               Editable -> False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "3"}], "]"}], 
+               Short[#, 7]& ], 1.0211380364798301`},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 3, 0]],
+            "2"]}], "+", 
+         RowBox[{"8652461470278556895512708154117454416865796143623300", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"1.02\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> False], 
+               1.0211380364798301467743613102356903255`15.954589770191003, 
+               Editable -> False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "3"}], "]"}], 
+               Short[#, 7]& ], 1.0211380364798301`},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 3, 0]],
+            "3"]}], "-", 
+         RowBox[{"4386603907083417630430763884788732326034222137983125", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"1.02\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> False], 
+               1.0211380364798301467743613102356903255`15.954589770191003, 
+               Editable -> False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "3"}], "]"}], 
+               Short[#, 7]& ], 1.0211380364798301`},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 3, 0]],
+            "4"]}], "-", 
+         RowBox[{"4649598517914130424150141445259855641379985323914375", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              InterpretationBox[
+               StyleBox[
+                TemplateBox[{"\"1.02\"", 
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEExpressions", "NumericalApproximationElider"], 
+                   ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                 "RowDefault"], ShowStringCharacters -> False], 
+               1.0211380364798301467743613102356903255`15.954589770191003, 
+               Editable -> False], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "3"}], "]"}], 
+               Short[#, 7]& ], 1.0211380364798301`},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 3, 0]],
+            "5"]}]}], ")"}], "/", 
+       "1199504867315836997597987950347286940009331363840000"}]}], ",", 
+     RowBox[{"cAMP", "\[Rule]", 
+      InterpretationBox[
+       TemplateBox[{"Root", 
+         InterpretationBox[
+          StyleBox[
+           TemplateBox[{"\"1.02\"", 
+             DynamicBox[
+              FEPrivate`FrontEndResource[
+              "FEExpressions", "NumericalApproximationElider"], 
+              ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+            "RowDefault"], ShowStringCharacters -> False], 
+          1.0211380364798301467743613102356903255`15.954589770191003, 
+          Editable -> False], 
+         TagBox[
+          RowBox[{"Root", "[", 
+            RowBox[{
+              RowBox[{
+                RowBox[{"94870176619689753182208", "-", 
+                  RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                  RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                  RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                  RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                  RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "3"}], "]"}], 
+          Short[#, 7]& ], 1.0211380364798301`},
+        "NumericalApproximation"],
+       Root[
+       94870176619689753182208 - 232799909654960205889536 # + 
+        151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+        528364612247852782500 #^4 + 7424289924740568455625 #^5& , 3, 0]]}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", 
+      RowBox[{
+       FractionBox["1", "467303743075288459898256161899709399040000"], "7", 
+       " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2864018173962235991539615685993886231232512", " ", 
+          InterpretationBox[
+           TemplateBox[{"Root", 
+             RowBox[{
+               InterpretationBox[
+                StyleBox[
+                 TemplateBox[{"\"0.879\"", 
+                   DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                  "RowDefault"], ShowStringCharacters -> False], 
+                0.87925519573605903644875070312991738319`15.688243793402286, 
+                Editable -> False], "-", 
+               RowBox[{
+                 InterpretationBox[
+                  StyleBox[
+                   TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                  2.12099604897870541719839820871129631996`16.070668709559836,
+                   Editable -> False], " ", "\[ImaginaryI]"}]}], 
+             TagBox[
+              RowBox[{"Root", "[", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "4"}], "]"}], 
+              Short[#, 7]& ], 
+             Complex[0.879255195736059, -2.1209960489787054`]},
+            "NumericalApproximation"],
+           Root[
+           94870176619689753182208 - 232799909654960205889536 # + 
+            151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+            528364612247852782500 #^4 + 7424289924740568455625 #^5& , 4, 
+            0]]}], "-", 
+         RowBox[{"4116830354078578662206623047169196850759936", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              RowBox[{
+                InterpretationBox[
+                 StyleBox[
+                  TemplateBox[{"\"0.879\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                   "RowDefault"], ShowStringCharacters -> False], 
+                 0.87925519573605903644875070312991738319`15.688243793402286, 
+                 Editable -> False], "-", 
+                RowBox[{
+                  InterpretationBox[
+                   StyleBox[
+                    TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                   2.12099604897870541719839820871129631996`16.\
+070668709559836, Editable -> False], " ", "\[ImaginaryI]"}]}], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "4"}], "]"}], 
+               Short[#, 7]& ], 
+              Complex[0.879255195736059, -2.1209960489787054`]},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 4, 0]],
+            "2"]}], "+", 
+         RowBox[{"411411816621556915966260882408519876606400", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              RowBox[{
+                InterpretationBox[
+                 StyleBox[
+                  TemplateBox[{"\"0.879\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                   "RowDefault"], ShowStringCharacters -> False], 
+                 0.87925519573605903644875070312991738319`15.688243793402286, 
+                 Editable -> False], "-", 
+                RowBox[{
+                  InterpretationBox[
+                   StyleBox[
+                    TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                   2.12099604897870541719839820871129631996`16.\
+070668709559836, Editable -> False], " ", "\[ImaginaryI]"}]}], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "4"}], "]"}], 
+               Short[#, 7]& ], 
+              Complex[0.879255195736059, -2.1209960489787054`]},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 4, 0]],
+            "3"]}], "-", 
+         RowBox[{"217641050696266683384632909183332338052500", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              RowBox[{
+                InterpretationBox[
+                 StyleBox[
+                  TemplateBox[{"\"0.879\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                   "RowDefault"], ShowStringCharacters -> False], 
+                 0.87925519573605903644875070312991738319`15.688243793402286, 
+                 Editable -> False], "-", 
+                RowBox[{
+                  InterpretationBox[
+                   StyleBox[
+                    TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                   2.12099604897870541719839820871129631996`16.\
+070668709559836, Editable -> False], " ", "\[ImaginaryI]"}]}], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "4"}], "]"}], 
+               Short[#, 7]& ], 
+              Complex[0.879255195736059, -2.1209960489787054`]},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 4, 0]],
+            "4"]}], "-", 
+         RowBox[{"226692098271926003706343008047711944486875", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              RowBox[{
+                InterpretationBox[
+                 StyleBox[
+                  TemplateBox[{"\"0.879\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                   "RowDefault"], ShowStringCharacters -> False], 
+                 0.87925519573605903644875070312991738319`15.688243793402286, 
+                 Editable -> False], "-", 
+                RowBox[{
+                  InterpretationBox[
+                   StyleBox[
+                    TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                   2.12099604897870541719839820871129631996`16.\
+070668709559836, Editable -> False], " ", "\[ImaginaryI]"}]}], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "4"}], "]"}], 
+               Short[#, 7]& ], 
+              Complex[0.879255195736059, -2.1209960489787054`]},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 4, 0]],
+            "5"]}]}], ")"}]}]}], ",", 
+     RowBox[{"PDEp", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"60123282097046143491705058783771505363237375083332864", " ", 
+          InterpretationBox[
+           TemplateBox[{"Root", 
+             RowBox[{
+               InterpretationBox[
+                StyleBox[
+                 TemplateBox[{"\"0.879\"", 
+                   DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                  "RowDefault"], ShowStringCharacters -> False], 
+                0.87925519573605903644875070312991738319`15.688243793402286, 
+                Editable -> False], "-", 
+               RowBox[{
+                 InterpretationBox[
+                  StyleBox[
+                   TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                  2.12099604897870541719839820871129631996`16.070668709559836,
+                   Editable -> False], " ", "\[ImaginaryI]"}]}], 
+             TagBox[
+              RowBox[{"Root", "[", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "4"}], "]"}], 
+              Short[#, 7]& ], 
+             Complex[0.879255195736059, -2.1209960489787054`]},
+            "NumericalApproximation"],
+           Root[
+           94870176619689753182208 - 232799909654960205889536 # + 
+            151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+            528364612247852782500 #^4 + 7424289924740568455625 #^5& , 4, 
+            0]]}], "-", 
+         RowBox[{"86090355171892267281666568572381961823649442219411392", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              RowBox[{
+                InterpretationBox[
+                 StyleBox[
+                  TemplateBox[{"\"0.879\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                   "RowDefault"], ShowStringCharacters -> False], 
+                 0.87925519573605903644875070312991738319`15.688243793402286, 
+                 Editable -> False], "-", 
+                RowBox[{
+                  InterpretationBox[
+                   StyleBox[
+                    TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                   2.12099604897870541719839820871129631996`16.\
+070668709559836, Editable -> False], " ", "\[ImaginaryI]"}]}], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "4"}], "]"}], 
+               Short[#, 7]& ], 
+              Complex[0.879255195736059, -2.1209960489787054`]},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 4, 0]],
+            "2"]}], "+", 
+         RowBox[{"8652461470278556895512708154117454416865796143623300", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              RowBox[{
+                InterpretationBox[
+                 StyleBox[
+                  TemplateBox[{"\"0.879\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                   "RowDefault"], ShowStringCharacters -> False], 
+                 0.87925519573605903644875070312991738319`15.688243793402286, 
+                 Editable -> False], "-", 
+                RowBox[{
+                  InterpretationBox[
+                   StyleBox[
+                    TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                   2.12099604897870541719839820871129631996`16.\
+070668709559836, Editable -> False], " ", "\[ImaginaryI]"}]}], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "4"}], "]"}], 
+               Short[#, 7]& ], 
+              Complex[0.879255195736059, -2.1209960489787054`]},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 4, 0]],
+            "3"]}], "-", 
+         RowBox[{"4386603907083417630430763884788732326034222137983125", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              RowBox[{
+                InterpretationBox[
+                 StyleBox[
+                  TemplateBox[{"\"0.879\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                   "RowDefault"], ShowStringCharacters -> False], 
+                 0.87925519573605903644875070312991738319`15.688243793402286, 
+                 Editable -> False], "-", 
+                RowBox[{
+                  InterpretationBox[
+                   StyleBox[
+                    TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                   2.12099604897870541719839820871129631996`16.\
+070668709559836, Editable -> False], " ", "\[ImaginaryI]"}]}], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "4"}], "]"}], 
+               Short[#, 7]& ], 
+              Complex[0.879255195736059, -2.1209960489787054`]},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 4, 0]],
+            "4"]}], "-", 
+         RowBox[{"4649598517914130424150141445259855641379985323914375", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              RowBox[{
+                InterpretationBox[
+                 StyleBox[
+                  TemplateBox[{"\"0.879\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                   "RowDefault"], ShowStringCharacters -> False], 
+                 0.87925519573605903644875070312991738319`15.688243793402286, 
+                 Editable -> False], "-", 
+                RowBox[{
+                  InterpretationBox[
+                   StyleBox[
+                    TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                   2.12099604897870541719839820871129631996`16.\
+070668709559836, Editable -> False], " ", "\[ImaginaryI]"}]}], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "4"}], "]"}], 
+               Short[#, 7]& ], 
+              Complex[0.879255195736059, -2.1209960489787054`]},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 4, 0]],
+            "5"]}]}], ")"}], "/", 
+       "1199504867315836997597987950347286940009331363840000"}]}], ",", 
+     RowBox[{"cAMP", "\[Rule]", 
+      InterpretationBox[
+       TemplateBox[{"Root", 
+         RowBox[{
+           InterpretationBox[
+            StyleBox[
+             TemplateBox[{"\"0.879\"", 
+               DynamicBox[
+                FEPrivate`FrontEndResource[
+                "FEExpressions", "NumericalApproximationElider"], 
+                ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+              "RowDefault"], ShowStringCharacters -> False], 
+            0.87925519573605903644875070312991738319`15.688243793402286, 
+            Editable -> False], "-", 
+           RowBox[{
+             InterpretationBox[
+              StyleBox[
+               TemplateBox[{"\"2.12\"", 
+                 DynamicBox[
+                  FEPrivate`FrontEndResource[
+                  "FEExpressions", "NumericalApproximationElider"], 
+                  ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                "RowDefault"], ShowStringCharacters -> False], 
+              2.12099604897870541719839820871129631996`16.070668709559836, 
+              Editable -> False], " ", "\[ImaginaryI]"}]}], 
+         TagBox[
+          RowBox[{"Root", "[", 
+            RowBox[{
+              RowBox[{
+                RowBox[{"94870176619689753182208", "-", 
+                  RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                  RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                  RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                  RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                  RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "4"}], "]"}], 
+          Short[#, 7]& ], 
+         Complex[0.879255195736059, -2.1209960489787054`]},
+        "NumericalApproximation"],
+       Root[
+       94870176619689753182208 - 232799909654960205889536 # + 
+        151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+        528364612247852782500 #^4 + 7424289924740568455625 #^5& , 4, 0]]}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", 
+      RowBox[{
+       FractionBox["1", "467303743075288459898256161899709399040000"], "7", 
+       " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2864018173962235991539615685993886231232512", " ", 
+          InterpretationBox[
+           TemplateBox[{"Root", 
+             RowBox[{
+               InterpretationBox[
+                StyleBox[
+                 TemplateBox[{"\"0.879\"", 
+                   DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                  "RowDefault"], ShowStringCharacters -> False], 
+                0.87925519573605903644875070312991738319`15.688243793402286, 
+                Editable -> False], "+", 
+               RowBox[{
+                 InterpretationBox[
+                  StyleBox[
+                   TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                  2.12099604897870541719839820871129631996`16.070668709559836,
+                   Editable -> False], " ", "\[ImaginaryI]"}]}], 
+             TagBox[
+              RowBox[{"Root", "[", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "5"}], "]"}], 
+              Short[#, 7]& ], 
+             Complex[0.879255195736059, 2.1209960489787054`]},
+            "NumericalApproximation"],
+           Root[
+           94870176619689753182208 - 232799909654960205889536 # + 
+            151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+            528364612247852782500 #^4 + 7424289924740568455625 #^5& , 5, 
+            0]]}], "-", 
+         RowBox[{"4116830354078578662206623047169196850759936", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              RowBox[{
+                InterpretationBox[
+                 StyleBox[
+                  TemplateBox[{"\"0.879\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                   "RowDefault"], ShowStringCharacters -> False], 
+                 0.87925519573605903644875070312991738319`15.688243793402286, 
+                 Editable -> False], "+", 
+                RowBox[{
+                  InterpretationBox[
+                   StyleBox[
+                    TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                   2.12099604897870541719839820871129631996`16.\
+070668709559836, Editable -> False], " ", "\[ImaginaryI]"}]}], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "5"}], "]"}], 
+               Short[#, 7]& ], 
+              Complex[0.879255195736059, 2.1209960489787054`]},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 5, 0]],
+            "2"]}], "+", 
+         RowBox[{"411411816621556915966260882408519876606400", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              RowBox[{
+                InterpretationBox[
+                 StyleBox[
+                  TemplateBox[{"\"0.879\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                   "RowDefault"], ShowStringCharacters -> False], 
+                 0.87925519573605903644875070312991738319`15.688243793402286, 
+                 Editable -> False], "+", 
+                RowBox[{
+                  InterpretationBox[
+                   StyleBox[
+                    TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                   2.12099604897870541719839820871129631996`16.\
+070668709559836, Editable -> False], " ", "\[ImaginaryI]"}]}], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "5"}], "]"}], 
+               Short[#, 7]& ], 
+              Complex[0.879255195736059, 2.1209960489787054`]},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 5, 0]],
+            "3"]}], "-", 
+         RowBox[{"217641050696266683384632909183332338052500", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              RowBox[{
+                InterpretationBox[
+                 StyleBox[
+                  TemplateBox[{"\"0.879\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                   "RowDefault"], ShowStringCharacters -> False], 
+                 0.87925519573605903644875070312991738319`15.688243793402286, 
+                 Editable -> False], "+", 
+                RowBox[{
+                  InterpretationBox[
+                   StyleBox[
+                    TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                   2.12099604897870541719839820871129631996`16.\
+070668709559836, Editable -> False], " ", "\[ImaginaryI]"}]}], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "5"}], "]"}], 
+               Short[#, 7]& ], 
+              Complex[0.879255195736059, 2.1209960489787054`]},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 5, 0]],
+            "4"]}], "-", 
+         RowBox[{"226692098271926003706343008047711944486875", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              RowBox[{
+                InterpretationBox[
+                 StyleBox[
+                  TemplateBox[{"\"0.879\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                   "RowDefault"], ShowStringCharacters -> False], 
+                 0.87925519573605903644875070312991738319`15.688243793402286, 
+                 Editable -> False], "+", 
+                RowBox[{
+                  InterpretationBox[
+                   StyleBox[
+                    TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                   2.12099604897870541719839820871129631996`16.\
+070668709559836, Editable -> False], " ", "\[ImaginaryI]"}]}], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "5"}], "]"}], 
+               Short[#, 7]& ], 
+              Complex[0.879255195736059, 2.1209960489787054`]},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 5, 0]],
+            "5"]}]}], ")"}]}]}], ",", 
+     RowBox[{"PDEp", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"60123282097046143491705058783771505363237375083332864", " ", 
+          InterpretationBox[
+           TemplateBox[{"Root", 
+             RowBox[{
+               InterpretationBox[
+                StyleBox[
+                 TemplateBox[{"\"0.879\"", 
+                   DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                  "RowDefault"], ShowStringCharacters -> False], 
+                0.87925519573605903644875070312991738319`15.688243793402286, 
+                Editable -> False], "+", 
+               RowBox[{
+                 InterpretationBox[
+                  StyleBox[
+                   TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                  2.12099604897870541719839820871129631996`16.070668709559836,
+                   Editable -> False], " ", "\[ImaginaryI]"}]}], 
+             TagBox[
+              RowBox[{"Root", "[", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "5"}], "]"}], 
+              Short[#, 7]& ], 
+             Complex[0.879255195736059, 2.1209960489787054`]},
+            "NumericalApproximation"],
+           Root[
+           94870176619689753182208 - 232799909654960205889536 # + 
+            151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+            528364612247852782500 #^4 + 7424289924740568455625 #^5& , 5, 
+            0]]}], "-", 
+         RowBox[{"86090355171892267281666568572381961823649442219411392", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              RowBox[{
+                InterpretationBox[
+                 StyleBox[
+                  TemplateBox[{"\"0.879\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                   "RowDefault"], ShowStringCharacters -> False], 
+                 0.87925519573605903644875070312991738319`15.688243793402286, 
+                 Editable -> False], "+", 
+                RowBox[{
+                  InterpretationBox[
+                   StyleBox[
+                    TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                   2.12099604897870541719839820871129631996`16.\
+070668709559836, Editable -> False], " ", "\[ImaginaryI]"}]}], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "5"}], "]"}], 
+               Short[#, 7]& ], 
+              Complex[0.879255195736059, 2.1209960489787054`]},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 5, 0]],
+            "2"]}], "+", 
+         RowBox[{"8652461470278556895512708154117454416865796143623300", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              RowBox[{
+                InterpretationBox[
+                 StyleBox[
+                  TemplateBox[{"\"0.879\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                   "RowDefault"], ShowStringCharacters -> False], 
+                 0.87925519573605903644875070312991738319`15.688243793402286, 
+                 Editable -> False], "+", 
+                RowBox[{
+                  InterpretationBox[
+                   StyleBox[
+                    TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                   2.12099604897870541719839820871129631996`16.\
+070668709559836, Editable -> False], " ", "\[ImaginaryI]"}]}], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "5"}], "]"}], 
+               Short[#, 7]& ], 
+              Complex[0.879255195736059, 2.1209960489787054`]},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 5, 0]],
+            "3"]}], "-", 
+         RowBox[{"4386603907083417630430763884788732326034222137983125", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              RowBox[{
+                InterpretationBox[
+                 StyleBox[
+                  TemplateBox[{"\"0.879\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                   "RowDefault"], ShowStringCharacters -> False], 
+                 0.87925519573605903644875070312991738319`15.688243793402286, 
+                 Editable -> False], "+", 
+                RowBox[{
+                  InterpretationBox[
+                   StyleBox[
+                    TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                   2.12099604897870541719839820871129631996`16.\
+070668709559836, Editable -> False], " ", "\[ImaginaryI]"}]}], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "5"}], "]"}], 
+               Short[#, 7]& ], 
+              Complex[0.879255195736059, 2.1209960489787054`]},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 5, 0]],
+            "4"]}], "-", 
+         RowBox[{"4649598517914130424150141445259855641379985323914375", " ", 
+          SuperscriptBox[
+           InterpretationBox[
+            TemplateBox[{"Root", 
+              RowBox[{
+                InterpretationBox[
+                 StyleBox[
+                  TemplateBox[{"\"0.879\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                   "RowDefault"], ShowStringCharacters -> False], 
+                 0.87925519573605903644875070312991738319`15.688243793402286, 
+                 Editable -> False], "+", 
+                RowBox[{
+                  InterpretationBox[
+                   StyleBox[
+                    TemplateBox[{"\"2.12\"", 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEExpressions", "NumericalApproximationElider"], 
+                    ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                    "RowDefault"], ShowStringCharacters -> False], 
+                   2.12099604897870541719839820871129631996`16.\
+070668709559836, Editable -> False], " ", "\[ImaginaryI]"}]}], 
+              TagBox[
+               RowBox[{"Root", "[", 
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"94870176619689753182208", "-", 
+                    RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                    RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                    RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                    RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                    RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "5"}], "]"}], 
+               Short[#, 7]& ], 
+              Complex[0.879255195736059, 2.1209960489787054`]},
+             "NumericalApproximation"],
+            Root[
+            94870176619689753182208 - 232799909654960205889536 # + 
+             151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+             528364612247852782500 #^4 + 7424289924740568455625 #^5& , 5, 0]],
+            "5"]}]}], ")"}], "/", 
+       "1199504867315836997597987950347286940009331363840000"}]}], ",", 
+     RowBox[{"cAMP", "\[Rule]", 
+      InterpretationBox[
+       TemplateBox[{"Root", 
+         RowBox[{
+           InterpretationBox[
+            StyleBox[
+             TemplateBox[{"\"0.879\"", 
+               DynamicBox[
+                FEPrivate`FrontEndResource[
+                "FEExpressions", "NumericalApproximationElider"], 
+                ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+              "RowDefault"], ShowStringCharacters -> False], 
+            0.87925519573605903644875070312991738319`15.688243793402286, 
+            Editable -> False], "+", 
+           RowBox[{
+             InterpretationBox[
+              StyleBox[
+               TemplateBox[{"\"2.12\"", 
+                 DynamicBox[
+                  FEPrivate`FrontEndResource[
+                  "FEExpressions", "NumericalApproximationElider"], 
+                  ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                "RowDefault"], ShowStringCharacters -> False], 
+              2.12099604897870541719839820871129631996`16.070668709559836, 
+              Editable -> False], " ", "\[ImaginaryI]"}]}], 
+         TagBox[
+          RowBox[{"Root", "[", 
+            RowBox[{
+              RowBox[{
+                RowBox[{"94870176619689753182208", "-", 
+                  RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                  RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                  RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                  RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                  RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "5"}], "]"}], 
+          Short[#, 7]& ], 
+         Complex[0.879255195736059, 2.1209960489787054`]},
+        "NumericalApproximation"],
+       Root[
+       94870176619689753182208 - 232799909654960205889536 # + 
+        151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+        528364612247852782500 #^4 + 7424289924740568455625 #^5& , 5, 0]]}]}], 
+    "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.892099343054798*^9, 3.892099359633215*^9}},
+ CellLabel->"Out[54]=",ExpressionUUID->"7d7201e7-4643-4f7b-b751-1eae0524345e"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", "0"}], ",", 
+     RowBox[{"PDEp", "\[Rule]", "0"}], ",", 
+     RowBox[{"cAMP", "\[Rule]", "0"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", "12.222942882949503`"}], ",", 
+     RowBox[{"PDEp", "\[Rule]", 
+      RowBox[{"-", "4.312376690636433`"}]}], ",", 
+     RowBox[{"cAMP", "\[Rule]", 
+      InterpretationBox[
+       TemplateBox[{"Root", 
+         InterpretationBox[
+          StyleBox[
+           TemplateBox[{"\"-3.41\"", 
+             DynamicBox[
+              FEPrivate`FrontEndResource[
+              "FEExpressions", "NumericalApproximationElider"], 
+              ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+            "RowDefault"], ShowStringCharacters -> 
+           False], -3.4055176493373604529324438772164285183`15.\
+954589770191003, Editable -> False], 
+         TagBox[
+          RowBox[{"Root", "[", 
+            RowBox[{
+              RowBox[{
+                RowBox[{"94870176619689753182208", "-", 
+                  RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                  RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                  RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                  RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                  RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "1"}], "]"}], 
+          Short[#, 7]& ], -3.4055176493373605`},
+        "NumericalApproximation"],
+       Root[
+       94870176619689753182208 - 232799909654960205889536 # + 
+        151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+        528364612247852782500 #^4 + 7424289924740568455625 #^5& , 1, 0]]}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", "0.7006841272159016`"}], ",", 
+     RowBox[{"PDEp", "\[Rule]", "1.008742190451754`"}], ",", 
+     RowBox[{"cAMP", "\[Rule]", 
+      InterpretationBox[
+       TemplateBox[{"Root", 
+         InterpretationBox[
+          StyleBox[
+           TemplateBox[{"\"0.697\"", 
+             DynamicBox[
+              FEPrivate`FrontEndResource[
+              "FEExpressions", "NumericalApproximationElider"], 
+              ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+            "RowDefault"], ShowStringCharacters -> False], 
+          0.69703624444133305271265044211759231985`15.954589770191003, 
+          Editable -> False], 
+         TagBox[
+          RowBox[{"Root", "[", 
+            RowBox[{
+              RowBox[{
+                RowBox[{"94870176619689753182208", "-", 
+                  RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                  RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                  RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                  RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                  RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "2"}], "]"}], 
+          Short[#, 7]& ], 0.697036244441333},
+        "NumericalApproximation"],
+       Root[
+       94870176619689753182208 - 232799909654960205889536 # + 
+        151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+        528364612247852782500 #^4 + 7424289924740568455625 #^5& , 2, 0]]}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", 
+      RowBox[{"-", "21.247285370238085`"}]}], ",", 
+     RowBox[{"PDEp", "\[Rule]", 
+      RowBox[{"-", "24.254212462417627`"}]}], ",", 
+     RowBox[{"cAMP", "\[Rule]", 
+      InterpretationBox[
+       TemplateBox[{"Root", 
+         InterpretationBox[
+          StyleBox[
+           TemplateBox[{"\"1.02\"", 
+             DynamicBox[
+              FEPrivate`FrontEndResource[
+              "FEExpressions", "NumericalApproximationElider"], 
+              ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+            "RowDefault"], ShowStringCharacters -> False], 
+          1.0211380364798301467743613102356903255`15.954589770191003, 
+          Editable -> False], 
+         TagBox[
+          RowBox[{"Root", "[", 
+            RowBox[{
+              RowBox[{
+                RowBox[{"94870176619689753182208", "-", 
+                  RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                  RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                  RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                  RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                  RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "3"}], "]"}], 
+          Short[#, 7]& ], 1.0211380364798301`},
+        "NumericalApproximation"],
+       Root[
+       94870176619689753182208 - 232799909654960205889536 # + 
+        151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+        528364612247852782500 #^4 + 7424289924740568455625 #^5& , 3, 0]]}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", 
+      RowBox[{
+       RowBox[{"-", "1.433593042186064`"}], "-", 
+       RowBox[{"6.305621538503435`", " ", "\[ImaginaryI]"}]}]}], ",", 
+     RowBox[{"PDEp", "\[Rule]", 
+      RowBox[{"2.5058420823255294`", "\[VeryThinSpace]", "-", 
+       RowBox[{"1.8860712765925738`", " ", "\[ImaginaryI]"}]}]}], ",", 
+     RowBox[{"cAMP", "\[Rule]", 
+      InterpretationBox[
+       TemplateBox[{"Root", 
+         RowBox[{
+           InterpretationBox[
+            StyleBox[
+             TemplateBox[{"\"0.879\"", 
+               DynamicBox[
+                FEPrivate`FrontEndResource[
+                "FEExpressions", "NumericalApproximationElider"], 
+                ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+              "RowDefault"], ShowStringCharacters -> False], 
+            0.87925519573605903644875070312991738319`15.688243793402286, 
+            Editable -> False], "-", 
+           RowBox[{
+             InterpretationBox[
+              StyleBox[
+               TemplateBox[{"\"2.12\"", 
+                 DynamicBox[
+                  FEPrivate`FrontEndResource[
+                  "FEExpressions", "NumericalApproximationElider"], 
+                  ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                "RowDefault"], ShowStringCharacters -> False], 
+              2.12099604897870541719839820871129631996`16.070668709559836, 
+              Editable -> False], " ", "\[ImaginaryI]"}]}], 
+         TagBox[
+          RowBox[{"Root", "[", 
+            RowBox[{
+              RowBox[{
+                RowBox[{"94870176619689753182208", "-", 
+                  RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                  RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                  RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                  RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                  RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "4"}], "]"}], 
+          Short[#, 7]& ], 
+         Complex[0.879255195736059, -2.1209960489787054`]},
+        "NumericalApproximation"],
+       Root[
+       94870176619689753182208 - 232799909654960205889536 # + 
+        151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+        528364612247852782500 #^4 + 7424289924740568455625 #^5& , 4, 0]]}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", 
+      RowBox[{
+       RowBox[{"-", "1.433593042186064`"}], "+", 
+       RowBox[{"6.305621538503435`", " ", "\[ImaginaryI]"}]}]}], ",", 
+     RowBox[{"PDEp", "\[Rule]", 
+      RowBox[{"2.5058420823255294`", "\[VeryThinSpace]", "+", 
+       RowBox[{"1.8860712765925738`", " ", "\[ImaginaryI]"}]}]}], ",", 
+     RowBox[{"cAMP", "\[Rule]", 
+      InterpretationBox[
+       TemplateBox[{"Root", 
+         RowBox[{
+           InterpretationBox[
+            StyleBox[
+             TemplateBox[{"\"0.879\"", 
+               DynamicBox[
+                FEPrivate`FrontEndResource[
+                "FEExpressions", "NumericalApproximationElider"], 
+                ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+              "RowDefault"], ShowStringCharacters -> False], 
+            0.87925519573605903644875070312991738319`15.688243793402286, 
+            Editable -> False], "+", 
+           RowBox[{
+             InterpretationBox[
+              StyleBox[
+               TemplateBox[{"\"2.12\"", 
+                 DynamicBox[
+                  FEPrivate`FrontEndResource[
+                  "FEExpressions", "NumericalApproximationElider"], 
+                  ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                "RowDefault"], ShowStringCharacters -> False], 
+              2.12099604897870541719839820871129631996`16.070668709559836, 
+              Editable -> False], " ", "\[ImaginaryI]"}]}], 
+         TagBox[
+          RowBox[{"Root", "[", 
+            RowBox[{
+              RowBox[{
+                RowBox[{"94870176619689753182208", "-", 
+                  RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                  RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                  RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                  RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                  RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "5"}], "]"}], 
+          Short[#, 7]& ], 
+         Complex[0.879255195736059, 2.1209960489787054`]},
+        "NumericalApproximation"],
+       Root[
+       94870176619689753182208 - 232799909654960205889536 # + 
+        151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+        528364612247852782500 #^4 + 7424289924740568455625 #^5& , 5, 0]]}]}], 
+    "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.892099343054798*^9, 3.8920993598185835`*^9}},
+ CellLabel->"Out[55]=",ExpressionUUID->"66c731cf-47a8-4f85-a6f0-d6eb644081a1"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", "0"}], ",", 
+     RowBox[{"PDEp", "\[Rule]", "0"}], ",", 
+     RowBox[{"cAMP", "\[Rule]", "0"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", "12.222942882949503`"}], ",", 
+     RowBox[{"PDEp", "\[Rule]", 
+      RowBox[{"-", "4.312376690636433`"}]}], ",", 
+     RowBox[{"cAMP", "\[Rule]", 
+      InterpretationBox[
+       TemplateBox[{"Root", 
+         InterpretationBox[
+          StyleBox[
+           TemplateBox[{"\"-3.41\"", 
+             DynamicBox[
+              FEPrivate`FrontEndResource[
+              "FEExpressions", "NumericalApproximationElider"], 
+              ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+            "RowDefault"], ShowStringCharacters -> 
+           False], -3.4055176493373604529324438772164285183`15.\
+954589770191003, Editable -> False], 
+         TagBox[
+          RowBox[{"Root", "[", 
+            RowBox[{
+              RowBox[{
+                RowBox[{"94870176619689753182208", "-", 
+                  RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                  RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                  RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                  RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                  RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "1"}], "]"}], 
+          Short[#, 7]& ], -3.4055176493373605`},
+        "NumericalApproximation"],
+       Root[
+       94870176619689753182208 - 232799909654960205889536 # + 
+        151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+        528364612247852782500 #^4 + 7424289924740568455625 #^5& , 1, 0]]}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", "0.7006841272159016`"}], ",", 
+     RowBox[{"PDEp", "\[Rule]", "1.008742190451754`"}], ",", 
+     RowBox[{"cAMP", "\[Rule]", 
+      InterpretationBox[
+       TemplateBox[{"Root", 
+         InterpretationBox[
+          StyleBox[
+           TemplateBox[{"\"0.697\"", 
+             DynamicBox[
+              FEPrivate`FrontEndResource[
+              "FEExpressions", "NumericalApproximationElider"], 
+              ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+            "RowDefault"], ShowStringCharacters -> False], 
+          0.69703624444133305271265044211759231985`15.954589770191003, 
+          Editable -> False], 
+         TagBox[
+          RowBox[{"Root", "[", 
+            RowBox[{
+              RowBox[{
+                RowBox[{"94870176619689753182208", "-", 
+                  RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                  RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                  RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                  RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                  RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "2"}], "]"}], 
+          Short[#, 7]& ], 0.697036244441333},
+        "NumericalApproximation"],
+       Root[
+       94870176619689753182208 - 232799909654960205889536 # + 
+        151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+        528364612247852782500 #^4 + 7424289924740568455625 #^5& , 2, 0]]}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", 
+      RowBox[{"-", "21.247285370238085`"}]}], ",", 
+     RowBox[{"PDEp", "\[Rule]", 
+      RowBox[{"-", "24.254212462417627`"}]}], ",", 
+     RowBox[{"cAMP", "\[Rule]", 
+      InterpretationBox[
+       TemplateBox[{"Root", 
+         InterpretationBox[
+          StyleBox[
+           TemplateBox[{"\"1.02\"", 
+             DynamicBox[
+              FEPrivate`FrontEndResource[
+              "FEExpressions", "NumericalApproximationElider"], 
+              ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+            "RowDefault"], ShowStringCharacters -> False], 
+          1.0211380364798301467743613102356903255`15.954589770191003, 
+          Editable -> False], 
+         TagBox[
+          RowBox[{"Root", "[", 
+            RowBox[{
+              RowBox[{
+                RowBox[{"94870176619689753182208", "-", 
+                  RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                  RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                  RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                  RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                  RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "3"}], "]"}], 
+          Short[#, 7]& ], 1.0211380364798301`},
+        "NumericalApproximation"],
+       Root[
+       94870176619689753182208 - 232799909654960205889536 # + 
+        151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+        528364612247852782500 #^4 + 7424289924740568455625 #^5& , 3, 0]]}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", 
+      RowBox[{
+       RowBox[{"-", "1.433593042186064`"}], "-", 
+       RowBox[{"6.305621538503435`", " ", "\[ImaginaryI]"}]}]}], ",", 
+     RowBox[{"PDEp", "\[Rule]", 
+      RowBox[{"2.5058420823255294`", "\[VeryThinSpace]", "-", 
+       RowBox[{"1.8860712765925738`", " ", "\[ImaginaryI]"}]}]}], ",", 
+     RowBox[{"cAMP", "\[Rule]", 
+      InterpretationBox[
+       TemplateBox[{"Root", 
+         RowBox[{
+           InterpretationBox[
+            StyleBox[
+             TemplateBox[{"\"0.879\"", 
+               DynamicBox[
+                FEPrivate`FrontEndResource[
+                "FEExpressions", "NumericalApproximationElider"], 
+                ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+              "RowDefault"], ShowStringCharacters -> False], 
+            0.87925519573605903644875070312991738319`15.688243793402286, 
+            Editable -> False], "-", 
+           RowBox[{
+             InterpretationBox[
+              StyleBox[
+               TemplateBox[{"\"2.12\"", 
+                 DynamicBox[
+                  FEPrivate`FrontEndResource[
+                  "FEExpressions", "NumericalApproximationElider"], 
+                  ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                "RowDefault"], ShowStringCharacters -> False], 
+              2.12099604897870541719839820871129631996`16.070668709559836, 
+              Editable -> False], " ", "\[ImaginaryI]"}]}], 
+         TagBox[
+          RowBox[{"Root", "[", 
+            RowBox[{
+              RowBox[{
+                RowBox[{"94870176619689753182208", "-", 
+                  RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                  RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                  RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                  RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                  RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "4"}], "]"}], 
+          Short[#, 7]& ], 
+         Complex[0.879255195736059, -2.1209960489787054`]},
+        "NumericalApproximation"],
+       Root[
+       94870176619689753182208 - 232799909654960205889536 # + 
+        151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+        528364612247852782500 #^4 + 7424289924740568455625 #^5& , 4, 0]]}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ACp", "\[Rule]", 
+      RowBox[{
+       RowBox[{"-", "1.433593042186064`"}], "+", 
+       RowBox[{"6.305621538503435`", " ", "\[ImaginaryI]"}]}]}], ",", 
+     RowBox[{"PDEp", "\[Rule]", 
+      RowBox[{"2.5058420823255294`", "\[VeryThinSpace]", "+", 
+       RowBox[{"1.8860712765925738`", " ", "\[ImaginaryI]"}]}]}], ",", 
+     RowBox[{"cAMP", "\[Rule]", 
+      InterpretationBox[
+       TemplateBox[{"Root", 
+         RowBox[{
+           InterpretationBox[
+            StyleBox[
+             TemplateBox[{"\"0.879\"", 
+               DynamicBox[
+                FEPrivate`FrontEndResource[
+                "FEExpressions", "NumericalApproximationElider"], 
+                ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+              "RowDefault"], ShowStringCharacters -> False], 
+            0.87925519573605903644875070312991738319`15.688243793402286, 
+            Editable -> False], "+", 
+           RowBox[{
+             InterpretationBox[
+              StyleBox[
+               TemplateBox[{"\"2.12\"", 
+                 DynamicBox[
+                  FEPrivate`FrontEndResource[
+                  "FEExpressions", "NumericalApproximationElider"], 
+                  ImageSizeCache -> {16.59492219798267, {1., 2.}}]}, 
+                "RowDefault"], ShowStringCharacters -> False], 
+              2.12099604897870541719839820871129631996`16.070668709559836, 
+              Editable -> False], " ", "\[ImaginaryI]"}]}], 
+         TagBox[
+          RowBox[{"Root", "[", 
+            RowBox[{
+              RowBox[{
+                RowBox[{"94870176619689753182208", "-", 
+                  RowBox[{"232799909654960205889536", " ", "#1"}], "+", 
+                  RowBox[{"151136317262956797063936", " ", 
+                    SuperscriptBox["#1", "2"]}], "-", 
+                  RowBox[{"21047858407427326126400", " ", 
+                    SuperscriptBox["#1", "3"]}], "-", 
+                  RowBox[{"528364612247852782500", " ", 
+                    SuperscriptBox["#1", "4"]}], "+", 
+                  RowBox[{"7424289924740568455625", " ", 
+                    SuperscriptBox["#1", "5"]}]}], "&"}], ",", "5"}], "]"}], 
+          Short[#, 7]& ], 
+         Complex[0.879255195736059, 2.1209960489787054`]},
+        "NumericalApproximation"],
+       Root[
+       94870176619689753182208 - 232799909654960205889536 # + 
+        151136317262956797063936 #^2 - 21047858407427326126400 #^3 - 
+        528364612247852782500 #^4 + 7424289924740568455625 #^5& , 5, 0]]}]}], 
+    "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.892099343054798*^9, 3.892099359839551*^9}},
+ CellLabel->"Out[56]=",ExpressionUUID->"cc8a202d-4d26-4e38-a974-a3a1ecfe110f"]
+}, Open  ]]
+},
+WindowSize->{821.1428571428571, 852.},
+WindowMargins->{{Automatic, -4.285714285714448}, {Automatic, 0}},
+Magnification:>1.4 Inherited,
+FrontEndVersion->"13.0 for Microsoft Windows (64-bit) (February 4, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"29fc8557-85b6-43d1-b05f-73d331860f5b"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 4026, 117, 760, "Input",ExpressionUUID->"debf6a1a-48bd-4447-a863-8bc3b821d08b"],
+Cell[4609, 141, 111464, 2280, 3793, "Output",ExpressionUUID->"7d7201e7-4643-4f7b-b751-1eae0524345e"],
+Cell[116076, 2423, 10645, 238, 306, "Output",ExpressionUUID->"66c731cf-47a8-4f85-a6f0-d6eb644081a1"],
+Cell[126724, 2663, 10643, 238, 306, "Output",ExpressionUUID->"cc8a202d-4d26-4e38-a974-a3a1ecfe110f"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

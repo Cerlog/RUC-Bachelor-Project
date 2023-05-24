@@ -1,0 +1,1237 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     61500,       1229]
+NotebookOptionsPosition[     59342,       1192]
+NotebookOutlinePosition[     59816,       1210]
+CellTagsIndexPosition[     59773,       1207]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"sol", ",", "ACpt", ",", "PDEpt", ",", "cAMP", ",", "t"}], 
+       "}"}], ",", 
+      RowBox[{
+       RowBox[{"sol", "=", 
+        RowBox[{"NDSolve", "[", 
+         RowBox[{
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"ACpt", "'"}], "[", "t", "]"}], "==", 
+             RowBox[{
+              RowBox[{"r1", "*", 
+               RowBox[{"cAMP", "[", "t", "]"}], "*", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"W0", "-", 
+                   RowBox[{"ACpt", "[", "t", "]"}]}], ")"}], "/", 
+                 RowBox[{"(", 
+                  RowBox[{"K1", "+", 
+                   RowBox[{"cAMP", "[", "t", "]"}], "+", 
+                   RowBox[{"(", 
+                    RowBox[{"W0", "-", 
+                    RowBox[{"ACpt", "[", "t", "]"}]}], ")"}]}], ")"}]}], 
+                ")"}]}], "-", 
+              RowBox[{"r2", "*", "Dt", "*", 
+               RowBox[{
+                RowBox[{"ACpt", "[", "t", "]"}], "/", 
+                RowBox[{"(", 
+                 RowBox[{"K2", "+", 
+                  RowBox[{"ACpt", "[", "t", "]"}], "+", "Dt"}], ")"}]}]}]}]}],
+             ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"PDEpt", "'"}], "[", "t", "]"}], "==", 
+             RowBox[{
+              RowBox[{"r3", "*", 
+               RowBox[{"cAMP", "[", "t", "]"}], "*", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"W1", "-", 
+                   RowBox[{"PDEpt", "[", "t", "]"}]}], ")"}], "/", 
+                 RowBox[{"(", 
+                  RowBox[{"K3", "+", 
+                   RowBox[{"cAMP", "[", "t", "]"}], "+", 
+                   RowBox[{"(", 
+                    RowBox[{"W1", "-", 
+                    RowBox[{"PDEpt", "[", "t", "]"}]}], ")"}]}], ")"}]}], 
+                ")"}]}], "-", 
+              RowBox[{"r4", "*", "Et", "*", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"PDEpt", "[", "t", "]"}], ")"}], "/", 
+                RowBox[{"(", 
+                 RowBox[{"K4", "+", 
+                  RowBox[{"PDEpt", "[", "t", "]"}], "+", "Et"}], 
+                 ")"}]}]}]}]}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"cAMP", "'"}], "[", "t", "]"}], "==", 
+             RowBox[{
+              RowBox[{"k1", "*", 
+               RowBox[{"ACpt", "[", "t", "]"}]}], "-", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"k2", "*", 
+                  RowBox[{"PDEpt", "[", "t", "]"}]}], "+", "k3"}], ")"}], "*", 
+               RowBox[{"cAMP", "[", "t", "]"}]}]}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"ACpt", "[", "0", "]"}], "==", 
+             RowBox[{"x0", "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+            RowBox[{
+             RowBox[{"PDEpt", "[", "0", "]"}], "==", 
+             RowBox[{"x0", "[", 
+              RowBox[{"[", "2", "]"}], "]"}]}], ",", 
+            RowBox[{
+             RowBox[{"cAMP", "[", "0", "]"}], "==", 
+             RowBox[{"x0", "[", 
+              RowBox[{"[", "3", "]"}], "]"}]}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"ACpt", ",", "PDEpt", ",", "cAMP"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "500"}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Plot", "[", 
+        RowBox[{
+         RowBox[{"Evaluate", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"ACpt", "[", "t", "]"}], ",", 
+             RowBox[{"PDEpt", "[", "t", "]"}], ",", 
+             RowBox[{"cAMP", "[", "t", "]"}]}], "}"}], "/.", " ", "sol"}], 
+          "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "0", ",", "500"}], "}"}], ",", 
+         RowBox[{"PlotRange", "->", "All"}], ",", 
+         RowBox[{"PlotLegends", "->", 
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<ACpt(t)\>\"", ",", "\"\<PDEpt(t)\>\"", ",", 
+            "\"\<cAMP(t)\>\""}], "}"}]}], ",", 
+         RowBox[{"AxesLabel", "->", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Time\>\"", ",", "\"\<Concentration\>\""}], "}"}]}]}], 
+        "]"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"k1", ",", "2.85"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"W0", ",", "2.85"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"W1", ",", "2.85"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"cAMPt1", ",", "2.85"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"cAMPt2", ",", "2.85"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"k2", ",", "2.85"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"k3", ",", "0.69"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"r1", ",", "0.52"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"r2", ",", "0.47"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"r3", ",", "2"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"r4", ",", "10"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"Et", ",", "0.28"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"Dt", ",", "0.15"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"K1", ",", "0.1"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"K2", ",", "0.1"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"K3", ",", "0.001"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"K4", ",", "1"}], "}"}], ",", "0", ",", "10", ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"x0", ",", 
+        RowBox[{"{", 
+         RowBox[{"0.33", ",", "0.33", ",", "0.33"}], "}"}]}], "}"}], ",", 
+      RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    RowBox[{"Button", "[", 
+     RowBox[{"\"\<Randomize Parameters\>\"", ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"k1", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"W0", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"W1", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"cAMPt1", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"cAMPt2", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"k2", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"k3", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"r1", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"r2", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"r3", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"r4", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Et", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Dt", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"K1", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"K2", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"K3", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"K4", "=", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";"}]}], "]"}], ",", 
+    RowBox[{"TrackedSymbols", "->", 
+     RowBox[{"{", 
+      RowBox[{
+      "k2", ",", "W0", ",", " ", "W1", ",", " ", "cAMPt1", ",", " ", "cAMPt2",
+        ",", " ", "k1", ",", "k3", ",", "r1", ",", "r2", ",", "r3", ",", "r4",
+        ",", "Et", ",", "Dt", ",", "K1", ",", "K2", ",", "K3", ",", "K4", ",",
+        "x0"}], "}"}]}]}], "\n", "]"}]}]], "Input",
+ CellChangeTimes->{{3.891508484362259*^9, 3.891508494291018*^9}, 
+   3.8915085359884806`*^9, {3.8915089299569654`*^9, 3.891508984012299*^9}, {
+   3.891509041710333*^9, 3.8915090582786565`*^9}, {3.8915092107476735`*^9, 
+   3.891509229806819*^9}, 3.8915092699415236`*^9, {3.891509370365937*^9, 
+   3.8915093710019674`*^9}, {3.8915094247601185`*^9, 3.8915095150408335`*^9}, 
+   3.8915096280769415`*^9, {3.8915096643220854`*^9, 3.8915096802422237`*^9}, {
+   3.892004338372535*^9, 3.8920044940184565`*^9}, {3.892004571172326*^9, 
+   3.8920045714173236`*^9}, {3.8920053350551295`*^9, 3.892005366583202*^9}, {
+   3.892005793179702*^9, 3.89200605789929*^9}, {3.8920060891888237`*^9, 
+   3.892006119195913*^9}, {3.892006248164203*^9, 3.8920062549647365`*^9}, {
+   3.892008167439098*^9, 3.892008183972518*^9}, {3.892008214556256*^9, 
+   3.892008217048284*^9}, {3.8920082485865526`*^9, 3.8920082566281614`*^9}, 
+   3.8920083720188475`*^9, {3.8920084426379857`*^9, 3.8920084694910316`*^9}, {
+   3.892008534526585*^9, 3.8920085350463324`*^9}, {3.892008595853679*^9, 
+   3.892008626154207*^9}, {3.8920089957125535`*^9, 3.8920089965708466`*^9}, 
+   3.892011880869581*^9, {3.8920119980168953`*^9, 3.892012005946165*^9}, {
+   3.89201216368114*^9, 3.8920121683905134`*^9}, {3.8920130765575237`*^9, 
+   3.892013126040645*^9}, {3.893268636969472*^9, 3.8932686800686007`*^9}, {
+   3.8932687435197263`*^9, 3.893268951241559*^9}, {3.8932697605344057`*^9, 
+   3.893269785746071*^9}, {3.8934092376064024`*^9, 3.893409282479868*^9}, {
+   3.893409360461156*^9, 3.8934094082138824`*^9}, {3.8934094644382105`*^9, 
+   3.893409498714188*^9}, {3.893409601587679*^9, 3.8934096781536875`*^9}, {
+   3.8934099495707064`*^9, 3.893409975043601*^9}, {3.893410026672144*^9, 
+   3.8934101598939543`*^9}, {3.8934104825219016`*^9, 3.893410484178412*^9}, {
+   3.8934105966664276`*^9, 3.893410651152162*^9}, {3.8934106860390882`*^9, 
+   3.893410790480962*^9}, {3.893411175687109*^9, 3.8934112608786907`*^9}, {
+   3.893411302588289*^9, 3.89341130280829*^9}, {3.893411405989787*^9, 
+   3.8934114175556955`*^9}, {3.89341200576315*^9, 3.8934120071597853`*^9}, {
+   3.8934126081710343`*^9, 3.893412611222063*^9}, {3.893414621018407*^9, 
+   3.8934146246029496`*^9}},
+ CellLabel->"In[40]:=",ExpressionUUID->"41076cc3-795b-47f4-8871-21e322afa9fd"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`cAMPt1$$ = 
+    2.814421522323114, $CellContext`cAMPt2$$ = 9.802337609232069, Dt$$ = 
+    1.06, $CellContext`Et$$ = 0.1, $CellContext`k1$$ = 
+    8.58, $CellContext`K1$$ = 5.39, $CellContext`k2$$ = 
+    10., $CellContext`K2$$ = 4.46, $CellContext`k3$$ = 
+    2.44, $CellContext`K3$$ = 5.96, $CellContext`K4$$ = 
+    7.62, $CellContext`r1$$ = 9.540000000000001, $CellContext`r2$$ = 
+    9.34, $CellContext`r3$$ = 0.64, $CellContext`r4$$ = 
+    2.02, $CellContext`W0$$ = 10., $CellContext`W1$$ = 
+    6.54, $CellContext`x0$$ = {0.33, 0.33, 0.33}, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`k1$$], 2.85}, 0, 10}, {{
+       Hold[$CellContext`W0$$], 2.85}, 0, 10}, {{
+       Hold[$CellContext`W1$$], 2.85}, 0, 10}, {{
+       Hold[$CellContext`cAMPt1$$], 2.85}, 0, 10}, {{
+       Hold[$CellContext`cAMPt2$$], 2.85}, 0, 10}, {{
+       Hold[$CellContext`k2$$], 2.85}, 0, 10}, {{
+       Hold[$CellContext`k3$$], 0.69}, 0, 10}, {{
+       Hold[$CellContext`r1$$], 0.52}, 0, 10}, {{
+       Hold[$CellContext`r2$$], 0.47}, 0, 10}, {{
+       Hold[$CellContext`r3$$], 2}, 0, 10}, {{
+       Hold[$CellContext`r4$$], 10}, 0, 10}, {{
+       Hold[$CellContext`Et$$], 0.28}, 0, 10}, {{
+       Hold[Dt$$], 0.15}, 0, 10}, {{
+       Hold[$CellContext`K1$$], 0.1}, 0, 10}, {{
+       Hold[$CellContext`K2$$], 0.1}, 0, 10}, {{
+       Hold[$CellContext`K3$$], 0.001}, 0, 10}, {{
+       Hold[$CellContext`K4$$], 1}, 0, 10}, {{
+       Hold[$CellContext`x0$$], {0.33, 0.33, 0.33}}}, {
+      Hold[
+       Button[
+       "Randomize Parameters", $CellContext`k1$$ = 
+         RandomReal[{0, 10}]; $CellContext`W0$$ = 
+         RandomReal[{0, 10}]; $CellContext`W1$$ = 
+         RandomReal[{0, 10}]; $CellContext`cAMPt1$$ = 
+         RandomReal[{0, 10}]; $CellContext`cAMPt2$$ = 
+         RandomReal[{0, 10}]; $CellContext`k2$$ = 
+         RandomReal[{0, 10}]; $CellContext`k3$$ = 
+         RandomReal[{0, 10}]; $CellContext`r1$$ = 
+         RandomReal[{0, 10}]; $CellContext`r2$$ = 
+         RandomReal[{0, 10}]; $CellContext`r3$$ = 
+         RandomReal[{0, 10}]; $CellContext`r4$$ = 
+         RandomReal[{0, 10}]; $CellContext`Et$$ = RandomReal[{0, 10}]; 
+        Dt$$ = RandomReal[{0, 10}]; $CellContext`K1$$ = 
+         RandomReal[{0, 10}]; $CellContext`K2$$ = 
+         RandomReal[{0, 10}]; $CellContext`K3$$ = 
+         RandomReal[{0, 10}]; $CellContext`K4$$ = RandomReal[{0, 10}]; Null]],
+       Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    543., {123., 130.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`cAMPt1$$ = 2.85, $CellContext`cAMPt2$$ = 
+        2.85, Dt$$ = 0.15, $CellContext`Et$$ = 0.28, $CellContext`k1$$ = 
+        2.85, $CellContext`K1$$ = 0.1, $CellContext`k2$$ = 
+        2.85, $CellContext`K2$$ = 0.1, $CellContext`k3$$ = 
+        0.69, $CellContext`K3$$ = 0.001, $CellContext`K4$$ = 
+        1, $CellContext`r1$$ = 0.52, $CellContext`r2$$ = 
+        0.47, $CellContext`r3$$ = 2, $CellContext`r4$$ = 
+        10, $CellContext`W0$$ = 2.85, $CellContext`W1$$ = 
+        2.85, $CellContext`x0$$ = {0.33, 0.33, 0.33}}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`sol$, $CellContext`ACpt$, $CellContext`PDEpt$, \
+$CellContext`cAMP$, $CellContext`t$}, $CellContext`sol$ = 
+         NDSolve[{
+           Derivative[
+             1][$CellContext`ACpt$][$CellContext`t$] == $CellContext`r1$$ \
+$CellContext`cAMP$[$CellContext`t$] (($CellContext`W0$$ - \
+$CellContext`ACpt$[$CellContext`t$])/($CellContext`K1$$ + \
+$CellContext`cAMP$[$CellContext`t$] + ($CellContext`W0$$ - \
+$CellContext`ACpt$[$CellContext`t$]))) - $CellContext`r2$$ 
+             Dt$$ ($CellContext`ACpt$[$CellContext`t$]/($CellContext`K2$$ + \
+$CellContext`ACpt$[$CellContext`t$] + Dt$$)), 
+            Derivative[
+             1][$CellContext`PDEpt$][$CellContext`t$] == $CellContext`r3$$ \
+$CellContext`cAMP$[$CellContext`t$] (($CellContext`W1$$ - \
+$CellContext`PDEpt$[$CellContext`t$])/($CellContext`K3$$ + \
+$CellContext`cAMP$[$CellContext`t$] + ($CellContext`W1$$ - \
+$CellContext`PDEpt$[$CellContext`t$]))) - $CellContext`r4$$ $CellContext`Et$$ \
+($CellContext`PDEpt$[$CellContext`t$]/($CellContext`K4$$ + \
+$CellContext`PDEpt$[$CellContext`t$] + $CellContext`Et$$)), 
+            Derivative[
+             1][$CellContext`cAMP$][$CellContext`t$] == $CellContext`k1$$ \
+$CellContext`ACpt$[$CellContext`t$] - ($CellContext`k2$$ \
+$CellContext`PDEpt$[$CellContext`t$] + $CellContext`k3$$) \
+$CellContext`cAMP$[$CellContext`t$], $CellContext`ACpt$[0] == 
+            Part[$CellContext`x0$$, 1], $CellContext`PDEpt$[0] == 
+            Part[$CellContext`x0$$, 2], $CellContext`cAMP$[0] == 
+            Part[$CellContext`x0$$, 
+              3]}, {$CellContext`ACpt$, $CellContext`PDEpt$, \
+$CellContext`cAMP$}, {$CellContext`t$, 0, 500}]; Plot[
+          Evaluate[
+           ReplaceAll[{
+             $CellContext`ACpt$[$CellContext`t$], 
+             $CellContext`PDEpt$[$CellContext`t$], 
+             $CellContext`cAMP$[$CellContext`t$]}, $CellContext`sol$]], \
+{$CellContext`t$, 0, 500}, PlotRange -> All, 
+          PlotLegends -> {"ACpt(t)", "PDEpt(t)", "cAMP(t)"}, 
+          AxesLabel -> {"Time", "Concentration"}]], 
+      "Specifications" :> {{{$CellContext`k1$$, 2.85}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`W0$$, 2.85}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`W1$$, 2.85}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`cAMPt1$$, 2.85}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`cAMPt2$$, 2.85}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`k2$$, 2.85}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`k3$$, 0.69}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`r1$$, 0.52}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`r2$$, 0.47}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`r3$$, 2}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`r4$$, 10}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`Et$$, 0.28}, 0, 10, Appearance -> 
+         "Labeled"}, {{Dt$$, 0.15}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`K1$$, 0.1}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`K2$$, 0.1}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`K3$$, 0.001}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`K4$$, 1}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`x0$$, {0.33, 0.33, 0.33}}, Appearance -> 
+         "Labeled"}, 
+        Button[
+        "Randomize Parameters", $CellContext`k1$$ = 
+          RandomReal[{0, 10}]; $CellContext`W0$$ = 
+          RandomReal[{0, 10}]; $CellContext`W1$$ = 
+          RandomReal[{0, 10}]; $CellContext`cAMPt1$$ = 
+          RandomReal[{0, 10}]; $CellContext`cAMPt2$$ = 
+          RandomReal[{0, 10}]; $CellContext`k2$$ = 
+          RandomReal[{0, 10}]; $CellContext`k3$$ = 
+          RandomReal[{0, 10}]; $CellContext`r1$$ = 
+          RandomReal[{0, 10}]; $CellContext`r2$$ = 
+          RandomReal[{0, 10}]; $CellContext`r3$$ = 
+          RandomReal[{0, 10}]; $CellContext`r4$$ = 
+          RandomReal[{0, 10}]; $CellContext`Et$$ = RandomReal[{0, 10}]; 
+         Dt$$ = RandomReal[{0, 10}]; $CellContext`K1$$ = 
+          RandomReal[{0, 10}]; $CellContext`K2$$ = 
+          RandomReal[{0, 10}]; $CellContext`K3$$ = 
+          RandomReal[{0, 10}]; $CellContext`K4$$ = RandomReal[{0, 10}]; 
+         Null]}, "Options" :> {
+       TrackedSymbols -> {$CellContext`k2$$, $CellContext`W0$$, \
+$CellContext`W1$$, $CellContext`cAMPt1$$, $CellContext`cAMPt2$$, 1, 1, 0.98, 
+          4.48, 1, 1, $CellContext`Et$$, Dt$$, 1, 4.230816991563199, 1, 
+          1, $CellContext`x0$$}}, "DefaultOptions" :> {}],
+     ImageSizeCache->{945., {277.06083969958127`, 283.93916030041873`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.893411304117502*^9, 3.8934114205721717`*^9, 
+  3.893411604674386*^9, 3.893411961557845*^9, 3.8934126242003384`*^9, 
+  3.8934146256899023`*^9},
+ CellLabel->"Out[40]=",ExpressionUUID->"d9749064-01e4-4281-95f7-ab6062e5df04"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`cAMPt1$$ = 
+    3.4723366819570405`, $CellContext`cAMPt2$$ = 8.425387289931948, Dt$$ = 
+    0.3806966628683899, $CellContext`Et$$ = 
+    4.002083724705717, $CellContext`k1$$ = 
+    2.065436395554732, $CellContext`K1$$ = 
+    6.046419768701025, $CellContext`k2$$ = 
+    6.813197860848504, $CellContext`K2$$ = 
+    0.2772996167618871, $CellContext`k3$$ = 
+    7.079967196672339, $CellContext`K3$$ = 
+    3.943565546073227, $CellContext`K4$$ = 
+    7.104010519927144, $CellContext`r1$$ = 
+    5.248675495316668, $CellContext`r2$$ = 
+    7.509493202652028, $CellContext`r3$$ = 
+    6.79496001672312, $CellContext`r4$$ = 
+    3.397674786093134, $CellContext`W0$$ = 
+    1.4535056407197864`, $CellContext`W1$$ = 
+    0.9344871742608518, $CellContext`x0$$ = 4.178559594373416, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`k1$$], 2.85}, 0, 10}, {{
+       Hold[$CellContext`W0$$], 2.85}, 0, 10}, {{
+       Hold[$CellContext`W1$$], 2.85}, 0, 10}, {{
+       Hold[$CellContext`cAMPt1$$], 2.85}, 0, 10}, {{
+       Hold[$CellContext`cAMPt2$$], 2.85}, 0, 10}, {{
+       Hold[$CellContext`k2$$], 2.85}, 0, 10}, {{
+       Hold[$CellContext`k3$$], 0.69}, 0, 10}, {{
+       Hold[$CellContext`r1$$], 0.52}, 0, 10}, {{
+       Hold[$CellContext`r2$$], 0.47}, 0, 10}, {{
+       Hold[$CellContext`r3$$], 2}, 0, 10}, {{
+       Hold[$CellContext`r4$$], 10}, 0, 10}, {{
+       Hold[$CellContext`Et$$], 0.28}, 0, 10}, {{
+       Hold[Dt$$], 0.15}, 0, 10}, {{
+       Hold[$CellContext`K1$$], 0.1}, 0, 10}, {{
+       Hold[$CellContext`K2$$], 0.1}, 0, 10}, {{
+       Hold[$CellContext`K3$$], 0.001}, 0, 10}, {{
+       Hold[$CellContext`K4$$], 1}, 0, 10}, {{
+       Hold[$CellContext`x0$$], {0.33, 0.33, 0.33}}}, {
+      Hold[
+       Button[
+       "Randomize Parameters", $CellContext`k1$$ = 
+         RandomReal[{0, 10}]; $CellContext`W0$$ = 
+         RandomReal[{0, 10}]; $CellContext`W1$$ = 
+         RandomReal[{0, 10}]; $CellContext`cAMPt1$$ = 
+         RandomReal[{0, 10}]; $CellContext`cAMPt2$$ = 
+         RandomReal[{0, 10}]; $CellContext`k2$$ = 
+         RandomReal[{0, 10}]; $CellContext`k3$$ = 
+         RandomReal[{0, 10}]; $CellContext`x0$$ = 
+         RandomReal[{0, 10}]; $CellContext`r1$$ = 
+         RandomReal[{0, 10}]; $CellContext`r2$$ = 
+         RandomReal[{0, 10}]; $CellContext`r3$$ = 
+         RandomReal[{0, 10}]; $CellContext`r4$$ = 
+         RandomReal[{0, 10}]; $CellContext`Et$$ = RandomReal[{0, 10}]; 
+        Dt$$ = RandomReal[{0, 10}]; $CellContext`K1$$ = 
+         RandomReal[{0, 10}]; $CellContext`K2$$ = 
+         RandomReal[{0, 10}]; $CellContext`K3$$ = 
+         RandomReal[{0, 10}]; $CellContext`K4$$ = RandomReal[{0, 10}]; Null]],
+       Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    533., {129., 134.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`cAMPt1$$ = 2.85, $CellContext`cAMPt2$$ = 
+        2.85, Dt$$ = 0.15, $CellContext`Et$$ = 0.28, $CellContext`k1$$ = 
+        2.85, $CellContext`K1$$ = 0.1, $CellContext`k2$$ = 
+        2.85, $CellContext`K2$$ = 0.1, $CellContext`k3$$ = 
+        0.69, $CellContext`K3$$ = 0.001, $CellContext`K4$$ = 
+        1, $CellContext`r1$$ = 0.52, $CellContext`r2$$ = 
+        0.47, $CellContext`r3$$ = 2, $CellContext`r4$$ = 
+        10, $CellContext`W0$$ = 2.85, $CellContext`W1$$ = 
+        2.85, $CellContext`x0$$ = {0.33, 0.33, 0.33}}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`sol$, $CellContext`ACpt$, $CellContext`PDEpt$, \
+$CellContext`cAMP$, $CellContext`t$}, $CellContext`sol$ = 
+         NDSolve[{
+           Derivative[
+             1][$CellContext`ACpt$][$CellContext`t$] == $CellContext`r1$$ \
+$CellContext`cAMPt1$$ (($CellContext`W0$$ - \
+$CellContext`ACpt$[$CellContext`t$])/($CellContext`K1$$ + \
+$CellContext`cAMPt1$$ + ($CellContext`W0$$ - \
+$CellContext`ACpt$[$CellContext`t$]))) - $CellContext`r2$$ 
+             Dt$$ ($CellContext`ACpt$[$CellContext`t$]/($CellContext`K2$$ + \
+$CellContext`ACpt$[$CellContext`t$] + Dt$$)), 
+            Derivative[
+             1][$CellContext`PDEpt$][$CellContext`t$] == $CellContext`r3$$ \
+$CellContext`cAMPt2$$ (($CellContext`W1$$ - \
+$CellContext`PDEpt$[$CellContext`t$])/($CellContext`K3$$ + \
+$CellContext`cAMPt2$$ + ($CellContext`W1$$ - \
+$CellContext`PDEpt$[$CellContext`t$]))) - $CellContext`r4$$ $CellContext`Et$$ \
+($CellContext`PDEpt$[$CellContext`t$]/($CellContext`K4$$ + \
+$CellContext`PDEpt$[$CellContext`t$] + $CellContext`Et$$)), 
+            Derivative[
+             1][$CellContext`cAMP$][$CellContext`t$] == $CellContext`k1$$ \
+$CellContext`ACpt$[$CellContext`t$] - ($CellContext`k2$$ \
+$CellContext`PDEpt$[$CellContext`t$] + $CellContext`k3$$) \
+$CellContext`cAMP$[$CellContext`t$], $CellContext`ACpt$[0] == 
+            Part[$CellContext`x0$$, 1], $CellContext`PDEpt$[0] == 
+            Part[$CellContext`x0$$, 2], $CellContext`cAMP$[0] == 
+            Part[$CellContext`x0$$, 
+              3]}, {$CellContext`ACpt$, $CellContext`PDEpt$, \
+$CellContext`cAMP$}, {$CellContext`t$, 0, 500}]; Plot[
+          Evaluate[
+           ReplaceAll[{
+             $CellContext`ACpt$[$CellContext`t$], 
+             $CellContext`PDEpt$[$CellContext`t$], 
+             $CellContext`cAMP$[$CellContext`t$]}, $CellContext`sol$]], \
+{$CellContext`t$, 0, 500}, PlotRange -> All, 
+          PlotLegends -> {"ACpt(t)", "PDEpt(t)", "cAMP(t)"}, 
+          AxesLabel -> {"Time", "Concentration"}]], 
+      "Specifications" :> {{{$CellContext`k1$$, 2.85}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`W0$$, 2.85}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`W1$$, 2.85}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`cAMPt1$$, 2.85}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`cAMPt2$$, 2.85}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`k2$$, 2.85}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`k3$$, 0.69}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`r1$$, 0.52}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`r2$$, 0.47}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`r3$$, 2}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`r4$$, 10}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`Et$$, 0.28}, 0, 10, Appearance -> 
+         "Labeled"}, {{Dt$$, 0.15}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`K1$$, 0.1}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`K2$$, 0.1}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`K3$$, 0.001}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`K4$$, 1}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`x0$$, {0.33, 0.33, 0.33}}, Appearance -> 
+         "Labeled"}, 
+        Button[
+        "Randomize Parameters", $CellContext`k1$$ = 
+          RandomReal[{0, 10}]; $CellContext`W0$$ = 
+          RandomReal[{0, 10}]; $CellContext`W1$$ = 
+          RandomReal[{0, 10}]; $CellContext`cAMPt1$$ = 
+          RandomReal[{0, 10}]; $CellContext`cAMPt2$$ = 
+          RandomReal[{0, 10}]; $CellContext`k2$$ = 
+          RandomReal[{0, 10}]; $CellContext`k3$$ = 
+          RandomReal[{0, 10}]; $CellContext`x0$$ = 
+          RandomReal[{0, 10}]; $CellContext`r1$$ = 
+          RandomReal[{0, 10}]; $CellContext`r2$$ = 
+          RandomReal[{0, 10}]; $CellContext`r3$$ = 
+          RandomReal[{0, 10}]; $CellContext`r4$$ = 
+          RandomReal[{0, 10}]; $CellContext`Et$$ = RandomReal[{0, 10}]; 
+         Dt$$ = RandomReal[{0, 10}]; $CellContext`K1$$ = 
+          RandomReal[{0, 10}]; $CellContext`K2$$ = 
+          RandomReal[{0, 10}]; $CellContext`K3$$ = 
+          RandomReal[{0, 10}]; $CellContext`K4$$ = RandomReal[{0, 10}]; 
+         Null]}, "Options" :> {
+       TrackedSymbols -> {$CellContext`k2$$, $CellContext`W0$$, \
+$CellContext`W1$$, $CellContext`cAMPt1$$, $CellContext`cAMPt2$$, 1, 1, 0.98, 
+          4.48, 1, 1, $CellContext`Et$$, Dt$$, 1, 9.716695277525176, 1, 
+          1, $CellContext`x0$$}}, "DefaultOptions" :> {}],
+     ImageSizeCache->{935., {277.06083969958127`, 283.93916030041873`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Input",
+ CellChangeTimes->{3.8934112848796635`*^9},
+ CellLabel->"In[36]:=",ExpressionUUID->"b3cf7ab7-09a4-447e-8046-8e38c127f506"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`cAMPt1$$ = 
+    3.4723366819570405`, $CellContext`cAMPt2$$ = 8.425387289931948, Dt$$ = 
+    0.3806966628683899, $CellContext`Et$$ = 
+    4.002083724705717, $CellContext`k1$$ = 
+    2.065436395554732, $CellContext`K1$$ = 
+    6.046419768701025, $CellContext`k2$$ = 
+    6.813197860848504, $CellContext`K2$$ = 
+    0.2772996167618871, $CellContext`k3$$ = 
+    7.079967196672339, $CellContext`K3$$ = 
+    3.943565546073227, $CellContext`K4$$ = 
+    7.104010519927144, $CellContext`r1$$ = 
+    5.248675495316668, $CellContext`r2$$ = 
+    7.509493202652028, $CellContext`r3$$ = 
+    6.79496001672312, $CellContext`r4$$ = 
+    3.397674786093134, $CellContext`W0$$ = 
+    1.4535056407197864`, $CellContext`W1$$ = 
+    0.9344871742608518, $CellContext`x0$$ = 4.178559594373416, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`k1$$], 2.065436395554732}, 0, 10}, {{
+       Hold[$CellContext`W0$$], 1.4535056407197864`}, 0, 10}, {{
+       Hold[$CellContext`W1$$], 0.9344871742608518}, 0, 10}, {{
+       Hold[$CellContext`cAMPt1$$], 3.4723366819570405`}, 0, 10}, {{
+       Hold[$CellContext`cAMPt2$$], 8.425387289931948}, 0, 10}, {{
+       Hold[$CellContext`k2$$], 6.813197860848504}, 0, 10}, {{
+       Hold[$CellContext`k3$$], 7.079967196672339}, 0, 10}, {{
+       Hold[$CellContext`r1$$], 5.248675495316668}, 0, 10}, {{
+       Hold[$CellContext`r2$$], 7.509493202652028}, 0, 10}, {{
+       Hold[$CellContext`r3$$], 6.79496001672312}, 0, 10}, {{
+       Hold[$CellContext`r4$$], 3.397674786093134}, 0, 10}, {{
+       Hold[$CellContext`Et$$], 4.002083724705717}, 0, 10}, {{
+       Hold[Dt$$], 0.3806966628683899}, 0, 10}, {{
+       Hold[$CellContext`K1$$], 6.046419768701025}, 0, 10}, {{
+       Hold[$CellContext`K2$$], 0.2772996167618871}, 0, 10}, {{
+       Hold[$CellContext`K3$$], 3.943565546073227}, 0, 10}, {{
+       Hold[$CellContext`K4$$], 7.104010519927144}, 0, 10}, {{
+       Hold[$CellContext`x0$$], 4.178559594373416}}, {
+      Hold[
+       Button[
+       "Randomize Parameters", $CellContext`k1$$ = 
+         RandomReal[{0, 10}]; $CellContext`W0$$ = 
+         RandomReal[{0, 10}]; $CellContext`W1$$ = 
+         RandomReal[{0, 10}]; $CellContext`cAMPt1$$ = 
+         RandomReal[{0, 10}]; $CellContext`cAMPt2$$ = 
+         RandomReal[{0, 10}]; $CellContext`k2$$ = 
+         RandomReal[{0, 10}]; $CellContext`k3$$ = 
+         RandomReal[{0, 10}]; $CellContext`x0$$ = 
+         RandomReal[{0, 10}]; $CellContext`r1$$ = 
+         RandomReal[{0, 10}]; $CellContext`r2$$ = 
+         RandomReal[{0, 10}]; $CellContext`r3$$ = 
+         RandomReal[{0, 10}]; $CellContext`r4$$ = 
+         RandomReal[{0, 10}]; $CellContext`Et$$ = RandomReal[{0, 10}]; 
+        Dt$$ = RandomReal[{0, 10}]; $CellContext`K1$$ = 
+         RandomReal[{0, 10}]; $CellContext`K2$$ = 
+         RandomReal[{0, 10}]; $CellContext`K3$$ = 
+         RandomReal[{0, 10}]; $CellContext`K4$$ = RandomReal[{0, 10}]; Null]],
+       Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    533., {129., 134.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`cAMPt1$$ = 
+        3.4723366819570405`, $CellContext`cAMPt2$$ = 8.425387289931948, Dt$$ = 
+        0.3806966628683899, $CellContext`Et$$ = 
+        4.002083724705717, $CellContext`k1$$ = 
+        2.065436395554732, $CellContext`K1$$ = 
+        6.046419768701025, $CellContext`k2$$ = 
+        6.813197860848504, $CellContext`K2$$ = 
+        0.2772996167618871, $CellContext`k3$$ = 
+        7.079967196672339, $CellContext`K3$$ = 
+        3.943565546073227, $CellContext`K4$$ = 
+        7.104010519927144, $CellContext`r1$$ = 
+        5.248675495316668, $CellContext`r2$$ = 
+        7.509493202652028, $CellContext`r3$$ = 
+        6.79496001672312, $CellContext`r4$$ = 
+        3.397674786093134, $CellContext`W0$$ = 
+        1.4535056407197864`, $CellContext`W1$$ = 
+        0.9344871742608518, $CellContext`x0$$ = 4.178559594373416}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`sol$, $CellContext`ACpt$, $CellContext`PDEpt$, \
+$CellContext`cAMP$, $CellContext`t$}, $CellContext`sol$ = 
+         NDSolve[{
+           Derivative[
+             1][$CellContext`ACpt$][$CellContext`t$] == $CellContext`r1$$ \
+$CellContext`cAMPt1$$ (($CellContext`W0$$ - \
+$CellContext`ACpt$[$CellContext`t$])/($CellContext`K1$$ + \
+$CellContext`cAMPt1$$ + ($CellContext`W0$$ - \
+$CellContext`ACpt$[$CellContext`t$]))) - $CellContext`r2$$ 
+             Dt$$ ($CellContext`ACpt$[$CellContext`t$]/($CellContext`K2$$ + \
+$CellContext`ACpt$[$CellContext`t$] + Dt$$)), 
+            Derivative[
+             1][$CellContext`PDEpt$][$CellContext`t$] == $CellContext`r3$$ \
+$CellContext`cAMPt2$$ (($CellContext`W1$$ - \
+$CellContext`PDEpt$[$CellContext`t$])/($CellContext`K3$$ + \
+$CellContext`cAMPt2$$ + ($CellContext`W1$$ - \
+$CellContext`PDEpt$[$CellContext`t$]))) - $CellContext`r4$$ $CellContext`Et$$ \
+($CellContext`PDEpt$[$CellContext`t$]/($CellContext`K4$$ + \
+$CellContext`PDEpt$[$CellContext`t$] + $CellContext`Et$$)), 
+            Derivative[
+             1][$CellContext`cAMP$][$CellContext`t$] == $CellContext`k1$$ \
+$CellContext`ACpt$[$CellContext`t$] - ($CellContext`k2$$ \
+$CellContext`PDEpt$[$CellContext`t$] + $CellContext`k3$$) \
+$CellContext`cAMP$[$CellContext`t$], $CellContext`ACpt$[0] == 
+            Part[$CellContext`x0$$, 1], $CellContext`PDEpt$[0] == 
+            Part[$CellContext`x0$$, 2], $CellContext`cAMP$[0] == 
+            Part[$CellContext`x0$$, 
+              3]}, {$CellContext`ACpt$, $CellContext`PDEpt$, \
+$CellContext`cAMP$}, {$CellContext`t$, 0, 500}]; Plot[
+          Evaluate[
+           ReplaceAll[{
+             $CellContext`ACpt$[$CellContext`t$], 
+             $CellContext`PDEpt$[$CellContext`t$], 
+             $CellContext`cAMP$[$CellContext`t$]}, $CellContext`sol$]], \
+{$CellContext`t$, 0, 500}, PlotRange -> All, 
+          PlotLegends -> {"ACpt(t)", "PDEpt(t)", "cAMP(t)"}, 
+          AxesLabel -> {"Time", "Concentration"}]], 
+      "Specifications" :> {{{$CellContext`k1$$, 2.065436395554732}, 0, 10, 
+         Appearance -> "Labeled"}, {{$CellContext`W0$$, 1.4535056407197864`}, 
+         0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`W1$$, 0.9344871742608518}, 0, 10, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`cAMPt1$$, 3.4723366819570405`}, 0, 10, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`cAMPt2$$, 8.425387289931948}, 0, 10, 
+         Appearance -> "Labeled"}, {{$CellContext`k2$$, 6.813197860848504}, 0,
+          10, Appearance -> 
+         "Labeled"}, {{$CellContext`k3$$, 7.079967196672339}, 0, 10, 
+         Appearance -> "Labeled"}, {{$CellContext`r1$$, 5.248675495316668}, 0,
+          10, Appearance -> 
+         "Labeled"}, {{$CellContext`r2$$, 7.509493202652028}, 0, 10, 
+         Appearance -> "Labeled"}, {{$CellContext`r3$$, 6.79496001672312}, 0, 
+         10, Appearance -> 
+         "Labeled"}, {{$CellContext`r4$$, 3.397674786093134}, 0, 10, 
+         Appearance -> "Labeled"}, {{$CellContext`Et$$, 4.002083724705717}, 0,
+          10, Appearance -> "Labeled"}, {{Dt$$, 0.3806966628683899}, 0, 10, 
+         Appearance -> "Labeled"}, {{$CellContext`K1$$, 6.046419768701025}, 0,
+          10, Appearance -> 
+         "Labeled"}, {{$CellContext`K2$$, 0.2772996167618871}, 0, 10, 
+         Appearance -> "Labeled"}, {{$CellContext`K3$$, 3.943565546073227}, 0,
+          10, Appearance -> 
+         "Labeled"}, {{$CellContext`K4$$, 7.104010519927144}, 0, 10, 
+         Appearance -> "Labeled"}, {{$CellContext`x0$$, 4.178559594373416}, 
+         Appearance -> "Labeled"}, 
+        Button[
+        "Randomize Parameters", $CellContext`k1$$ = 
+          RandomReal[{0, 10}]; $CellContext`W0$$ = 
+          RandomReal[{0, 10}]; $CellContext`W1$$ = 
+          RandomReal[{0, 10}]; $CellContext`cAMPt1$$ = 
+          RandomReal[{0, 10}]; $CellContext`cAMPt2$$ = 
+          RandomReal[{0, 10}]; $CellContext`k2$$ = 
+          RandomReal[{0, 10}]; $CellContext`k3$$ = 
+          RandomReal[{0, 10}]; $CellContext`x0$$ = 
+          RandomReal[{0, 10}]; $CellContext`r1$$ = 
+          RandomReal[{0, 10}]; $CellContext`r2$$ = 
+          RandomReal[{0, 10}]; $CellContext`r3$$ = 
+          RandomReal[{0, 10}]; $CellContext`r4$$ = 
+          RandomReal[{0, 10}]; $CellContext`Et$$ = RandomReal[{0, 10}]; 
+         Dt$$ = RandomReal[{0, 10}]; $CellContext`K1$$ = 
+          RandomReal[{0, 10}]; $CellContext`K2$$ = 
+          RandomReal[{0, 10}]; $CellContext`K3$$ = 
+          RandomReal[{0, 10}]; $CellContext`K4$$ = RandomReal[{0, 10}]; 
+         Null]}, "Options" :> {
+       TrackedSymbols -> {$CellContext`k2$$, $CellContext`W0$$, \
+$CellContext`W1$$, $CellContext`cAMPt1$$, $CellContext`cAMPt2$$, 1, 1, 0.98, 
+          4.48, 1, 1, $CellContext`Et$$, Dt$$, 1, 9.716695277525176, 1, 
+          1, $CellContext`x0$$}}, "DefaultOptions" :> {}],
+     ImageSizeCache->{935., {277.06083969958127`, 283.93916030041873`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.8934112853804526`*^9, 3.893411304777737*^9}, 
+   3.8934114212035036`*^9, 3.893411605485714*^9},
+ CellLabel->"Out[36]=",ExpressionUUID->"00a34c30-f024-40ec-9e8a-79d1713223ff"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part", "partd", 
+   "\"Part specification \\!\\(\\*RowBox[{\\\"4.178559594373416`\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is \
+longer than depth of object.\"", 2, 38, 412, 23818558091808455364, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8934116064651484`*^9},
+ CellLabel->"",ExpressionUUID->"ed1d05b2-ace8-4e5e-9506-1116e13c41e2"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part", "partd", 
+   "\"Part specification \\!\\(\\*RowBox[{\\\"4.178559594373416`\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"2\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is \
+longer than depth of object.\"", 2, 38, 413, 23818558091808455364, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8934116065126314`*^9},
+ CellLabel->"",ExpressionUUID->"33dbbde9-50ec-40f5-b3a6-973ea6a773be"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part", "partd", 
+   "\"Part specification \\!\\(\\*RowBox[{\\\"4.178559594373416`\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"3\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is \
+longer than depth of object.\"", 2, 38, 414, 23818558091808455364, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8934116065433044`*^9},
+ CellLabel->"",ExpressionUUID->"d161b865-5990-420f-bce9-c83962447839"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Part\\\", \\\"::\\\", \
+\\\"partd\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"", 2, 38, 415, 23818558091808455364, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8934116065756893`*^9},
+ CellLabel->"",ExpressionUUID->"79980993-9c64-4de5-b8b2-701c1caf9fdf"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NDSolve", "ndinnt", 
+   "\"Initial condition \\!\\(\\*RowBox[{\\\"4.178559594373416`\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is \
+not a number or a rectangular array of numbers.\"", 2, 38, 416, 
+   23818558091808455364, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8934116066050367`*^9},
+ CellLabel->"",ExpressionUUID->"eace43f0-1beb-4794-b8de-6eb8d814b073"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll", "reps", 
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"NDSolve\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{RowBox[{SuperscriptBox[\\\"ACpt$189046\\\", \\\"\[Prime]\\\", \
+Rule[MultilineFunction, None]], \\\"[\\\", \\\"t$189046\\\", \\\"]\\\"}], \
+\\\"\[Equal]\\\", RowBox[{FractionBox[RowBox[{\\\"18.225168454077107`\\\", \\\
+\" \\\", RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"1.4535056407197864`\\\", \\\"\
+\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\
+\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \
+\\\"]\\\"}]}], \\\")\\\"}]}], RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]], \
+\\\"-\\\", FractionBox[RowBox[{\\\"2.8588390020824845`\\\", \\\" \\\", \
+RowBox[{\\\"ACpt$189046\\\", \\\"[\\\", \\\"t$189046\\\", \\\"]\\\"}]}], \
+RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]]}]}], \\\",\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"PDEpt$189046\\\", \\\"\[Prime]\\\", \
+Rule[MultilineFunction, None]], \\\"[\\\", \\\"t$189046\\\", \\\"]\\\"}], \
+\\\"\[Equal]\\\", RowBox[{FractionBox[RowBox[{\\\"57.25016976049475`\\\", \
+\\\" \\\", RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"0.9344871742608518`\\\", \\\
+\"\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\\\"Times\\\", \\\"[\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\
+\\\"}]}], \\\")\\\"}]}], RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]], \
+\\\"-\\\", FractionBox[RowBox[{\\\"13.59777896326631`\\\", \\\" \\\", \
+RowBox[{\\\"PDEpt$189046\\\", \\\"[\\\", \\\"t$189046\\\", \\\"]\\\"}]}], \
+RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]]}]}], \\\",\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"cAMP$189046\\\", \\\"\[Prime]\\\", \
+Rule[MultilineFunction, None]], \\\"[\\\", \\\"t$189046\\\", \\\"]\\\"}], \
+\\\"\[Equal]\\\", RowBox[{RowBox[{\\\"2.065436395554732`\\\", \\\" \\\", \
+RowBox[{\\\"ACpt$189046\\\", \\\"[\\\", \\\"t$189046\\\", \\\"]\\\"}]}], \
+\\\"-\\\", RowBox[{RowBox[{\\\"cAMP$189046\\\", \\\"[\\\", \\\"t$189046\\\", \
+\\\"]\\\"}], \\\" \\\", RowBox[{\\\"(\\\", \
+RowBox[{RowBox[{\\\"7.079967196672339`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"+\
+\\\", RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \
+\\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}]}]}]}], \
+\\\",\\\", RowBox[{RowBox[{\\\"ACpt$189046\\\", \\\"[\\\", \\\"0\\\", \\\"]\\\
+\"}], \\\"\[Equal]\\\", RowBox[{\\\"4.178559594373416`\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]}], \\\",\
+\\\", RowBox[{RowBox[{\\\"PDEpt$189046\\\", \\\"[\\\", \\\"0\\\", \
+\\\"]\\\"}], \\\"\[Equal]\\\", RowBox[{\\\"4.178559594373416`\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"2\\\", \\\"\[RightDoubleBracket]\\\"}]}], \\\",\
+\\\", RowBox[{RowBox[{\\\"cAMP$189046\\\", \\\"[\\\", \\\"0\\\", \\\"]\\\"}], \
+\\\"\[Equal]\\\", RowBox[{\\\"4.178559594373416`\\\", \
+\\\"\[LeftDoubleBracket]\\\", \\\"3\\\", \\\"\[RightDoubleBracket]\\\"}]}]}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"ACpt$189046\\\", \\\",\
+\\\", \\\"PDEpt$189046\\\", \\\",\\\", \\\"cAMP$189046\\\"}], \\\"}\\\"}], \\\
+\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"t$189046\\\", \\\",\\\", \\\"0\\\", \
+\\\",\\\", \\\"500\\\"}], \\\"}\\\"}]}], \\\"]\\\"}], \\\"}\\\"}]\\) is \
+neither a list of replacement rules nor a valid dispatch table, and so cannot \
+be used for replacing.\"", 2, 38, 417, 23818558091808455364, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.893411606636242*^9},
+ CellLabel->"",ExpressionUUID->"a9a73a70-766a-4ac5-b7d9-99565473852a"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NDSolve", "dsvar", 
+   "\"\\!\\(\\*RowBox[{\\\"0.010214285714285714`\\\"}]\\) cannot be used as a \
+variable.\"", 2, 38, 418, 23818558091808455364, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8934116067802258`*^9},
+ CellLabel->"",ExpressionUUID->"9d3f59a4-8dcc-459c-8811-8c43a2737ce6"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll", "reps", 
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"NDSolve\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{RowBox[{SuperscriptBox[\\\"ACpt$189046\\\", \\\"\[Prime]\\\", \
+Rule[MultilineFunction, None]], \\\"[\\\", \\\"0.010214285714285714`\\\", \
+\\\"]\\\"}], \\\"\[Equal]\\\", \
+RowBox[{FractionBox[RowBox[{\\\"18.225168454077107`\\\", \\\" \\\", \
+RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"1.4535056407197864`\\\", \\\"\
+\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\
+\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \
+\\\"]\\\"}]}], \\\")\\\"}]}], RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]], \
+\\\"-\\\", FractionBox[RowBox[{\\\"2.8588390020824845`\\\", \\\" \\\", \
+RowBox[{\\\"ACpt$189046\\\", \\\"[\\\", \\\"0.010214285714285714`\\\", \
+\\\"]\\\"}]}], RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\
+\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]]}]}], \\\",\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"PDEpt$189046\\\", \\\"\[Prime]\\\", \
+Rule[MultilineFunction, None]], \\\"[\\\", \\\"0.010214285714285714`\\\", \
+\\\"]\\\"}], \\\"\[Equal]\\\", \
+RowBox[{FractionBox[RowBox[{\\\"57.25016976049475`\\\", \\\" \\\", RowBox[{\\\
+\"(\\\", RowBox[{RowBox[{\\\"0.9344871742608518`\\\", \
+\\\"\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\\\"Times\\\", \\\"[\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\
+\\\"}]}], \\\")\\\"}]}], RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]], \
+\\\"-\\\", FractionBox[RowBox[{\\\"13.59777896326631`\\\", \\\" \\\", \
+RowBox[{\\\"PDEpt$189046\\\", \\\"[\\\", \\\"0.010214285714285714`\\\", \\\"]\
+\\\"}]}], RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \
+\\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]]}]}], \\\",\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"cAMP$189046\\\", \\\"\[Prime]\\\", \
+Rule[MultilineFunction, None]], \\\"[\\\", \\\"0.010214285714285714`\\\", \
+\\\"]\\\"}], \\\"\[Equal]\\\", RowBox[{RowBox[{\\\"2.065436395554732`\\\", \\\
+\" \\\", RowBox[{\\\"ACpt$189046\\\", \\\"[\\\", \
+\\\"0.010214285714285714`\\\", \\\"]\\\"}]}], \\\"-\\\", \
+RowBox[{RowBox[{\\\"cAMP$189046\\\", \\\"[\\\", \
+\\\"0.010214285714285714`\\\", \\\"]\\\"}], \\\" \\\", RowBox[{\\\"(\\\", \
+RowBox[{RowBox[{\\\"7.079967196672339`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"+\
+\\\", RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \
+\\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}]}]}]}], \
+\\\",\\\", RowBox[{RowBox[{\\\"ACpt$189046\\\", \\\"[\\\", \\\"0\\\", \\\"]\\\
+\"}], \\\"\[Equal]\\\", RowBox[{\\\"4.178559594373416`\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]}], \\\",\
+\\\", RowBox[{RowBox[{\\\"PDEpt$189046\\\", \\\"[\\\", \\\"0\\\", \
+\\\"]\\\"}], \\\"\[Equal]\\\", RowBox[{\\\"4.178559594373416`\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"2\\\", \\\"\[RightDoubleBracket]\\\"}]}], \\\",\
+\\\", RowBox[{RowBox[{\\\"cAMP$189046\\\", \\\"[\\\", \\\"0\\\", \\\"]\\\"}], \
+\\\"\[Equal]\\\", RowBox[{\\\"4.178559594373416`\\\", \
+\\\"\[LeftDoubleBracket]\\\", \\\"3\\\", \\\"\[RightDoubleBracket]\\\"}]}]}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"ACpt$189046\\\", \\\",\
+\\\", \\\"PDEpt$189046\\\", \\\",\\\", \\\"cAMP$189046\\\"}], \\\"}\\\"}], \\\
+\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"0.010214285714285714`\\\", \\\",\\\", \
+\\\"0\\\", \\\",\\\", \\\"500\\\"}], \\\"}\\\"}]}], \\\"]\\\"}], \
+\\\"}\\\"}]\\) is neither a list of replacement rules nor a valid dispatch \
+table, and so cannot be used for replacing.\"", 2, 38, 419, 
+   23818558091808455364, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.893411606798354*^9},
+ CellLabel->"",ExpressionUUID->"0df4f61c-6ab6-44a9-9872-1ce4a546197e"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NDSolve", "dsvar", 
+   "\"\\!\\(\\*RowBox[{\\\"0.010214285714285714`\\\"}]\\) cannot be used as a \
+variable.\"", 2, 38, 420, 23818558091808455364, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8934116068142176`*^9},
+ CellLabel->"",ExpressionUUID->"8cebbe72-6da2-4814-98f8-be428ae67683"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll", "reps", 
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"NDSolve\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{RowBox[{SuperscriptBox[\\\"ACpt$189046\\\", \\\"\[Prime]\\\", \
+Rule[MultilineFunction, None]], \\\"[\\\", \\\"0.010214285714285714`\\\", \
+\\\"]\\\"}], \\\"\[Equal]\\\", \
+RowBox[{FractionBox[RowBox[{\\\"18.225168454077107`\\\", \\\" \\\", \
+RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"1.4535056407197864`\\\", \\\"\
+\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\
+\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \
+\\\"]\\\"}]}], \\\")\\\"}]}], RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]], \
+\\\"-\\\", FractionBox[RowBox[{\\\"2.8588390020824845`\\\", \\\" \\\", \
+RowBox[{\\\"ACpt$189046\\\", \\\"[\\\", \\\"0.010214285714285714`\\\", \
+\\\"]\\\"}]}], RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\
+\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]]}]}], \\\",\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"PDEpt$189046\\\", \\\"\[Prime]\\\", \
+Rule[MultilineFunction, None]], \\\"[\\\", \\\"0.010214285714285714`\\\", \
+\\\"]\\\"}], \\\"\[Equal]\\\", \
+RowBox[{FractionBox[RowBox[{\\\"57.25016976049475`\\\", \\\" \\\", RowBox[{\\\
+\"(\\\", RowBox[{RowBox[{\\\"0.9344871742608518`\\\", \
+\\\"\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\\\"Times\\\", \\\"[\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\
+\\\"}]}], \\\")\\\"}]}], RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]], \
+\\\"-\\\", FractionBox[RowBox[{\\\"13.59777896326631`\\\", \\\" \\\", \
+RowBox[{\\\"PDEpt$189046\\\", \\\"[\\\", \\\"0.010214285714285714`\\\", \\\"]\
+\\\"}]}], RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \
+\\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]]}]}], \\\",\\\", \
+RowBox[{RowBox[{SuperscriptBox[\\\"cAMP$189046\\\", \\\"\[Prime]\\\", \
+Rule[MultilineFunction, None]], \\\"[\\\", \\\"0.010214285714285714`\\\", \
+\\\"]\\\"}], \\\"\[Equal]\\\", RowBox[{RowBox[{\\\"2.065436395554732`\\\", \\\
+\" \\\", RowBox[{\\\"ACpt$189046\\\", \\\"[\\\", \
+\\\"0.010214285714285714`\\\", \\\"]\\\"}]}], \\\"-\\\", RowBox[{\\\"1.`\\\", \
+\\\" \\\", RowBox[{\\\"cAMP$189046\\\", \\\"[\\\", \
+\\\"0.010214285714285714`\\\", \\\"]\\\"}], \\\" \\\", RowBox[{\\\"(\\\", \
+RowBox[{RowBox[{\\\"7.079967196672339`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"+\
+\\\", RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \
+\\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}]}]}]}], \
+\\\",\\\", RowBox[{RowBox[{\\\"ACpt$189046\\\", \\\"[\\\", \\\"0.`\\\", \\\"]\
+\\\"}], \\\"\[Equal]\\\", RowBox[{\\\"4.178559594373416`\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]}], \\\",\
+\\\", RowBox[{RowBox[{\\\"PDEpt$189046\\\", \\\"[\\\", \\\"0.`\\\", \
+\\\"]\\\"}], \\\"\[Equal]\\\", RowBox[{\\\"4.178559594373416`\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"2\\\", \\\"\[RightDoubleBracket]\\\"}]}], \\\",\
+\\\", RowBox[{RowBox[{\\\"cAMP$189046\\\", \\\"[\\\", \\\"0.`\\\", \
+\\\"]\\\"}], \\\"\[Equal]\\\", RowBox[{\\\"4.178559594373416`\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"3\\\", \\\"\[RightDoubleBracket]\\\"}]}]}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"ACpt$189046\\\", \\\",\
+\\\", \\\"PDEpt$189046\\\", \\\",\\\", \\\"cAMP$189046\\\"}], \\\"}\\\"}], \\\
+\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"0.010214285714285714`\\\", \\\",\\\", \
+\\\"0.`\\\", \\\",\\\", \\\"500.`\\\"}], \\\"}\\\"}]}], \\\"]\\\"}], \
+\\\"}\\\"}]\\) is neither a list of replacement rules nor a valid dispatch \
+table, and so cannot be used for replacing.\"", 2, 38, 421, 
+   23818558091808455364, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8934116068283377`*^9},
+ CellLabel->"",ExpressionUUID->"2195e1fa-3299-4f82-a68f-ccd185b2d1d7"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"ReplaceAll\\\", \
+\\\"::\\\", \\\"reps\\\"}], \\\"MessageName\\\"]\\) will be suppressed during \
+this calculation.\"", 2, 38, 422, 23818558091808455364, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8934116068465004`*^9},
+ CellLabel->"",ExpressionUUID->"c53d7809-6328-4869-b857-8d29f787f3ef"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NDSolve", "dsvar", 
+   "\"\\!\\(\\*RowBox[{\\\"10.214295918367347`\\\"}]\\) cannot be used as a \
+variable.\"", 2, 38, 423, 23818558091808455364, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.893411606868679*^9},
+ CellLabel->"",ExpressionUUID->"20436eb3-9cd5-43cd-82d2-1fd471fd9b69"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"NDSolve\\\", \
+\\\"::\\\", \\\"dsvar\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"", 2, 38, 424, 23818558091808455364, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.893411606900335*^9},
+ CellLabel->"",ExpressionUUID->"1280272d-a1c7-4fd7-adaa-c50a2ec8be1f"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"K2", "=", 
+   RowBox[{"RandomReal", "[", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "10"}], "}"}], "]"}]}], ";"}]], "Input",
+ CellLabel->"In[37]:=",ExpressionUUID->"a49e13af-6d8e-420a-b974-6ed64b1cdcff"]
+},
+WindowSize->{1260., 719.25},
+WindowMargins->{{Automatic, -1265.7857142857144`}, {
+  128.46428571428567`, Automatic}},
+Magnification:>1.2 Inherited,
+FrontEndVersion->"13.0 for Microsoft Windows (64-bit) (February 4, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9ee19ae8-c45f-4dc9-b23d-decb1945ae93"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 14260, 350, 994, "Input",ExpressionUUID->"41076cc3-795b-47f4-8871-21e322afa9fd"],
+Cell[14843, 374, 9002, 164, 583, "Output",ExpressionUUID->"d9749064-01e4-4281-95f7-ab6062e5df04"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23882, 543, 9153, 171, 578, InheritFromParent,ExpressionUUID->"b3cf7ab7-09a4-447e-8046-8e38c127f506"],
+Cell[33038, 716, 10085, 188, 583, "Output",ExpressionUUID->"00a34c30-f024-40ec-9e8a-79d1713223ff"],
+Cell[43126, 906, 434, 8, 34, "Message",ExpressionUUID->"ed1d05b2-ace8-4e5e-9506-1116e13c41e2"],
+Cell[43563, 916, 434, 8, 34, "Message",ExpressionUUID->"33dbbde9-50ec-40f5-b3a6-973ea6a773be"],
+Cell[44000, 926, 434, 8, 34, "Message",ExpressionUUID->"d161b865-5990-420f-bce9-c83962447839"],
+Cell[44437, 936, 419, 8, 34, "Message",ExpressionUUID->"79980993-9c64-4de5-b8b2-701c1caf9fdf"],
+Cell[44859, 946, 460, 9, 34, "Message",ExpressionUUID->"eace43f0-1beb-4794-b8de-6eb8d814b073"],
+Cell[45322, 957, 3868, 55, 84, "Message",ExpressionUUID->"a9a73a70-766a-4ac5-b7d9-99565473852a"],
+Cell[49193, 1014, 345, 7, 34, "Message",ExpressionUUID->"9d3f59a4-8dcc-459c-8811-8c43a2737ce6"],
+Cell[49541, 1023, 3982, 59, 84, "Message",ExpressionUUID->"0df4f61c-6ab6-44a9-9872-1ce4a546197e"],
+Cell[53526, 1084, 345, 7, 34, "Message",ExpressionUUID->"8cebbe72-6da2-4814-98f8-be428ae67683"],
+Cell[53874, 1093, 4018, 59, 84, "Message",ExpressionUUID->"2195e1fa-3299-4f82-a68f-ccd185b2d1d7"],
+Cell[57895, 1154, 424, 8, 34, "Message",ExpressionUUID->"c53d7809-6328-4869-b857-8d29f787f3ef"],
+Cell[58322, 1164, 341, 7, 34, "Message",ExpressionUUID->"20436eb3-9cd5-43cd-82d2-1fd471fd9b69"],
+Cell[58666, 1173, 420, 8, 34, "Message",ExpressionUUID->"1280272d-a1c7-4fd7-adaa-c50a2ec8be1f"]
+}, Open  ]],
+Cell[59101, 1184, 237, 6, 33, "Input",ExpressionUUID->"a49e13af-6d8e-420a-b974-6ed64b1cdcff"]
+}
+]
+*)
+

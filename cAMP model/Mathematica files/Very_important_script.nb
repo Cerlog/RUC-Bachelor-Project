@@ -1,0 +1,342 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     13805,        334]
+NotebookOptionsPosition[     13067,        314]
+NotebookOutlinePosition[     13527,        331]
+CellTagsIndexPosition[     13484,        328]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Define", " ", "the", " ", "functions"}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{"G", "[", 
+     RowBox[{"u_", ",", "v_", ",", "J_", ",", "K_"}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "numerator", ",", "den1", ",", "den2", ",", "radicand", ",", 
+        "denominator"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"numerator", "=", 
+        RowBox[{"2", "*", "u", "*", "K"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"den1", "=", 
+        RowBox[{"v", "-", "u", "+", 
+         RowBox[{"v", "*", "J"}], "+", 
+         RowBox[{"u", "*", "K"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"den2", "=", 
+        RowBox[{
+         RowBox[{"-", "4"}], "*", 
+         RowBox[{"(", 
+          RowBox[{"v", "-", "u"}], ")"}], "*", "u", "*", "K"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"radicand", "=", 
+        RowBox[{
+         RowBox[{"den1", "^", "2"}], "+", "den2"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"denominator", "=", 
+        RowBox[{"den1", "+", 
+         RowBox[{"Sqrt", "[", "radicand", "]"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"numerator", "/", "denominator"}]}]}], "]"}]}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"ACp", "[", 
+     RowBox[{
+     "cAMP_", ",", "ACt_", ",", "r1_", ",", "r2_", ",", "Dvalue_", ",", 
+      "Km1_", ",", "Km2_"}], "]"}], ":=", 
+    RowBox[{"ACt", "*", 
+     RowBox[{"G", "[", 
+      RowBox[{
+       RowBox[{"r1", "*", "cAMP"}], ",", 
+       RowBox[{"r2", "*", "Dvalue"}], ",", 
+       RowBox[{"Km1", "/", "ACt"}], ",", 
+       RowBox[{"Km2", "/", "ACt"}]}], "]"}]}]}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"dcAMP", "[", 
+     RowBox[{
+     "cAMP_", ",", "ACp_", ",", "k1_", ",", "k3_", ",", "k2_", ",", "PDEp_"}],
+      "]"}], ":=", 
+    RowBox[{
+     RowBox[{"k1", "*", "ACp"}], "-", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"k3", "+", 
+        RowBox[{"k2", "*", "PDEp"}]}], ")"}], "*", "cAMP"}]}]}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"dPDEp", "[", 
+     RowBox[{
+     "cAMP_", ",", "PDEt_", ",", "PDEp_", ",", "r3_", ",", "Et_", ",", "Km3_",
+       ",", "Km4_", ",", "r4_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{"r3", "*", "cAMP", "*", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"PDEt", "-", "PDEp"}], ")"}], "/", "Km3"}], ")"}]}], "-", 
+     RowBox[{"r4", "*", "Et", "*", 
+      RowBox[{"PDEp", "/", 
+       RowBox[{"(", 
+        RowBox[{"Km4", "+", "PDEp"}], ")"}]}]}]}]}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Define", " ", "the", " ", "system"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"system", "[", 
+     RowBox[{
+     "cAMP_", ",", "PDEp_", ",", "k1_", ",", "k3_", ",", "k2_", ",", "r1_", 
+      ",", "r2_", ",", "r3_", ",", "r4_", ",", "Km1_", ",", "Km2_", ",", 
+      "Km3_", ",", "Km4_", ",", "Dvalue_", ",", "ACt_", ",", "PDEt_", ",", 
+      "Et_"}], "]"}], ":=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"dcAMP", "[", 
+       RowBox[{"cAMP", ",", 
+        RowBox[{"ACp", "[", 
+         RowBox[{
+         "cAMP", ",", "ACt", ",", "r1", ",", "r2", ",", "Dvalue", ",", "Km1", 
+          ",", "Km2"}], "]"}], ",", "k1", ",", "k3", ",", "k2", ",", "PDEp"}],
+        "]"}], ",", 
+      RowBox[{"dPDEp", "[", 
+       RowBox[{
+       "cAMP", ",", "PDEt", ",", "PDEp", ",", "r3", ",", "Et", ",", "Km3", 
+        ",", "Km4", ",", "r4"}], "]"}]}], "}"}]}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Manipulate", " ", "parameters"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"Manipulate", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"fixedPoints", "=", 
+       RowBox[{"NSolve", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"system", "[", 
+           RowBox[{
+           "cAMP", ",", "PDEp", ",", "k1", ",", "k3", ",", "k2", ",", "r1", 
+            ",", "r2", ",", "r3", ",", "r4", ",", "Km1", ",", "Km2", ",", 
+            "Km3", ",", "Km4", ",", "Dvalue", ",", "ACt", ",", "PDEt", ",", 
+            "Et"}], "]"}], "==", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0"}], "}"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"cAMP", ",", "PDEp"}], "}"}], ",", "Reals"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"jacobianMatrix", "=", 
+       RowBox[{"D", "[", 
+        RowBox[{
+         RowBox[{"system", "[", 
+          RowBox[{
+          "cAMP", ",", "PDEp", ",", "k1", ",", "k3", ",", "k2", ",", "r1", 
+           ",", "r2", ",", "r3", ",", "r4", ",", "Km1", ",", "Km2", ",", 
+           "Km3", ",", "Km4", ",", "Dvalue", ",", "ACt", ",", "PDEt", ",", 
+           "Et"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"{", 
+           RowBox[{"cAMP", ",", "PDEp"}], "}"}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"eigenvaluesList", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Eigenvalues", "[", 
+          RowBox[{"jacobianMatrix", "/.", " ", "#"}], "]"}], "&"}], "/@", 
+        "fixedPoints"}]}], ";", "\[IndentingNewLine]", "eigenvaluesList"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"k1", ",", "0.1", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k3", ",", "0.1", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k2", ",", "0.1", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"r1", ",", "0.1", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"r2", ",", "0.1", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"r3", ",", "0.1", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"r4", ",", "0.1", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Km1", ",", "0.1", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Km2", ",", "0.1", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Km3", ",", "0.1", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Km4", ",", "0.1", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Dvalue", ",", "0.1", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"ACt", ",", "0.1", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"PDEt", ",", "0.1", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Et", ",", "0.1", ",", "10"}], "}"}]}], "\n", 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.8926193625143976`*^9, 3.892619402738243*^9}},
+ CellLabel->
+  "In[134]:=",ExpressionUUID->"fb277734-d3d0-44e9-b5e2-2c4aa1d1e39f"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`ACt$$ = 10, $CellContext`Dvalue$$ = 
+    1.26, $CellContext`Et$$ = 2.04, $CellContext`k1$$ = 
+    9.18, $CellContext`k2$$ = 10, $CellContext`k3$$ = 
+    0.12, $CellContext`Km1$$ = 0.46, $CellContext`Km2$$ = 
+    0.1, $CellContext`Km3$$ = 1.26, $CellContext`Km4$$ = 
+    0.18, $CellContext`PDEt$$ = 9.66, $CellContext`r1$$ = 
+    2.04, $CellContext`r2$$ = 9.34, $CellContext`r3$$ = 
+    0.56, $CellContext`r4$$ = 1.84, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`k1$$], 0.1, 10}, {
+      Hold[$CellContext`k3$$], 0.1, 10}, {
+      Hold[$CellContext`k2$$], 0.1, 10}, {
+      Hold[$CellContext`r1$$], 0.1, 10}, {
+      Hold[$CellContext`r2$$], 0.1, 10}, {
+      Hold[$CellContext`r3$$], 0.1, 10}, {
+      Hold[$CellContext`r4$$], 0.1, 10}, {
+      Hold[$CellContext`Km1$$], 0.1, 10}, {
+      Hold[$CellContext`Km2$$], 0.1, 10}, {
+      Hold[$CellContext`Km3$$], 0.1, 10}, {
+      Hold[$CellContext`Km4$$], 0.1, 10}, {
+      Hold[$CellContext`Dvalue$$], 0.1, 10}, {
+      Hold[$CellContext`ACt$$], 0.1, 10}, {
+      Hold[$CellContext`PDEt$$], 0.1, 10}, {
+      Hold[$CellContext`Et$$], 0.1, 10}}, Typeset`size$$ = {
+    335.3725653087188, {3., 9.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`ACt$$ = 0.1, $CellContext`Dvalue$$ = 
+        0.1, $CellContext`Et$$ = 0.1, $CellContext`k1$$ = 
+        0.1, $CellContext`k2$$ = 0.1, $CellContext`k3$$ = 
+        0.1, $CellContext`Km1$$ = 0.1, $CellContext`Km2$$ = 
+        0.1, $CellContext`Km3$$ = 0.1, $CellContext`Km4$$ = 
+        0.1, $CellContext`PDEt$$ = 0.1, $CellContext`r1$$ = 
+        0.1, $CellContext`r2$$ = 0.1, $CellContext`r3$$ = 
+        0.1, $CellContext`r4$$ = 0.1}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`fixedPoints = 
+        NSolve[$CellContext`system[$CellContext`cAMP, $CellContext`PDEp, \
+$CellContext`k1$$, $CellContext`k3$$, $CellContext`k2$$, $CellContext`r1$$, \
+$CellContext`r2$$, $CellContext`r3$$, $CellContext`r4$$, $CellContext`Km1$$, \
+$CellContext`Km2$$, $CellContext`Km3$$, $CellContext`Km4$$, \
+$CellContext`Dvalue$$, $CellContext`ACt$$, $CellContext`PDEt$$, \
+$CellContext`Et$$] == {0, 0}, {$CellContext`cAMP, $CellContext`PDEp}, 
+          Reals]; $CellContext`jacobianMatrix = D[
+          $CellContext`system[$CellContext`cAMP, $CellContext`PDEp, \
+$CellContext`k1$$, $CellContext`k3$$, $CellContext`k2$$, $CellContext`r1$$, \
+$CellContext`r2$$, $CellContext`r3$$, $CellContext`r4$$, $CellContext`Km1$$, \
+$CellContext`Km2$$, $CellContext`Km3$$, $CellContext`Km4$$, \
+$CellContext`Dvalue$$, $CellContext`ACt$$, $CellContext`PDEt$$, \
+$CellContext`Et$$], {{$CellContext`cAMP, $CellContext`PDEp}}]; \
+$CellContext`eigenvaluesList = Map[Eigenvalues[
+           
+           ReplaceAll[$CellContext`jacobianMatrix, #]]& , \
+$CellContext`fixedPoints]; $CellContext`eigenvaluesList), 
+      "Specifications" :> {{$CellContext`k1$$, 0.1, 10}, {$CellContext`k3$$, 
+         0.1, 10}, {$CellContext`k2$$, 0.1, 10}, {$CellContext`r1$$, 0.1, 
+         10}, {$CellContext`r2$$, 0.1, 10}, {$CellContext`r3$$, 0.1, 
+         10}, {$CellContext`r4$$, 0.1, 10}, {$CellContext`Km1$$, 0.1, 
+         10}, {$CellContext`Km2$$, 0.1, 10}, {$CellContext`Km3$$, 0.1, 
+         10}, {$CellContext`Km4$$, 0.1, 10}, {$CellContext`Dvalue$$, 0.1, 
+         10}, {$CellContext`ACt$$, 0.1, 10}, {$CellContext`PDEt$$, 0.1, 
+         10}, {$CellContext`Et$$, 0.1, 10}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{624., {325.1340331430547, 330.8659668569453}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.8926193752617407`*^9, 3.8926194195881424`*^9}, 
+   3.892710541642313*^9, {3.8927105749781637`*^9, 3.892710610676983*^9}},
+ CellLabel->
+  "Out[139]=",ExpressionUUID->"cf802e72-7b12-471a-a0e1-ca9c0cd717a2"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NSolve", "infsolns", 
+   "\"Infinite solution set has dimension at least \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\). Returning intersection of solutions with \\!\
+\\(\\*RowBox[{RowBox[{\\\"-\\\", FractionBox[RowBox[{\\\"121001\\\", \\\" \
+\\\", \\\"cAMP\\\"}], \\\"175984\\\"]}], \\\"-\\\", \
+FractionBox[RowBox[{\\\"92291\\\", \\\" \\\", \\\"PDEp\\\"}], \
+\\\"87992\\\"]}]\\) == 1.\"", 2, 140, 6, 23813882940096896340, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8927145276567554`*^9},
+ CellLabel->"",ExpressionUUID->"c0a2f59a-2101-44c0-a903-3633a9e7d1eb"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NSolve", "infsolns", 
+   "\"Infinite solution set has dimension at least \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\). Returning intersection of solutions with \\!\
+\\(\\*RowBox[{RowBox[{\\\"-\\\", FractionBox[RowBox[{\\\"121001\\\", \\\" \
+\\\", \\\"cAMP\\\"}], \\\"175984\\\"]}], \\\"-\\\", \
+FractionBox[RowBox[{\\\"92291\\\", \\\" \\\", \\\"PDEp\\\"}], \
+\\\"87992\\\"]}]\\) == 1.\"", 2, 140, 7, 23813882940096896340, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8927145279129086`*^9},
+ CellLabel->"",ExpressionUUID->"ee0ee45c-0bd9-4d63-82a1-662ef6405f5b"]
+}, Open  ]]
+},
+WindowSize->{821.1428571428571, 852.},
+WindowMargins->{{Automatic, -4.285714285714448}, {Automatic, 0}},
+Magnification:>1. Inherited,
+FrontEndVersion->"13.0 for Microsoft Windows (64-bit) (February 4, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"63194c7e-55e3-459c-ad97-2214d97ec962"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 6513, 174, 638, "Input",ExpressionUUID->"fb277734-d3d0-44e9-b5e2-2c4aa1d1e39f"],
+Cell[7096, 198, 4733, 87, 698, "Output",ExpressionUUID->"cf802e72-7b12-471a-a0e1-ca9c0cd717a2"],
+Cell[11832, 287, 608, 11, 38, "Message",ExpressionUUID->"c0a2f59a-2101-44c0-a903-3633a9e7d1eb"],
+Cell[12443, 300, 608, 11, 38, "Message",ExpressionUUID->"ee0ee45c-0bd9-4d63-82a1-662ef6405f5b"]
+}, Open  ]]
+}
+]
+*)
+

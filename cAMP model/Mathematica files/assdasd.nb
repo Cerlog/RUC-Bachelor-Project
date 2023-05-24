@@ -1,0 +1,268 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      9749,        258]
+NotebookOptionsPosition[      9379,        244]
+NotebookOutlinePosition[      9795,        260]
+CellTagsIndexPosition[      9752,        257]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", "randomInRange", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"randomInRange", "[", 
+     RowBox[{"min_", ",", "max_"}], "]"}], ":=", 
+    RowBox[{"RandomReal", "[", 
+     RowBox[{"{", 
+      RowBox[{"min", ",", "max"}], "}"}], "]"}]}], ";"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"sol", ",", "cAMP", ",", "PDEp", ",", "t"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"sol", "=", 
+       RowBox[{"NDSolve", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"cAMP", "'"}], "[", "t", "]"}], "==", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"k1", "*", "ACp"}], "-", 
+               RowBox[{"k2", "*", 
+                RowBox[{"PDEp", "[", "t", "]"}], "*", 
+                RowBox[{"cAMP", "[", "t", "]"}]}]}], ")"}]}], "/.", " ", 
+            RowBox[{"ACp", "->", 
+             RowBox[{"ACt", "*", 
+              RowBox[{"G", "[", 
+               RowBox[{
+                RowBox[{"r1", "*", 
+                 RowBox[{"cAMP", "[", "t", "]"}]}], ",", 
+                RowBox[{"r2", "*", "Dt"}], ",", 
+                RowBox[{"Km1", "/", "ACt"}], ",", 
+                RowBox[{"Km2", "/", "ACt"}]}], "]"}]}]}]}], ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"PDEp", "'"}], "[", "t", "]"}], "==", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"r3", "*", "E", "*", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{"PDEt", "-", 
+                    RowBox[{"PDEp", "[", "t", "]"}]}], ")"}], "/", "Km3"}], 
+                 "+", 
+                 RowBox[{"(", 
+                  RowBox[{"PDEt", "-", 
+                   RowBox[{"PDEp", "[", "t", "]"}]}], ")"}]}], ")"}]}], "-", 
+              RowBox[{"r4", "*", 
+               RowBox[{"cAMP", "[", "t", "]"}], "*", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"PDEp", "[", "t", "]"}], ")"}], "/", 
+                 RowBox[{"(", 
+                  RowBox[{"Km3", "+", 
+                   RowBox[{"PDEp", "[", "t", "]"}]}], ")"}]}], ")"}]}]}], 
+             ")"}]}], ",", 
+           RowBox[{
+            RowBox[{"cAMP", "[", "0", "]"}], "==", 
+            RowBox[{"x0", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+           RowBox[{
+            RowBox[{"PDEp", "[", "0", "]"}], "==", 
+            RowBox[{"x0", "[", 
+             RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"cAMP", ",", "PDEp"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "0", ",", "50"}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Plot", "[", 
+       RowBox[{
+        RowBox[{"Evaluate", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"cAMP", "[", "t", "]"}], ",", 
+            RowBox[{"PDEp", "[", "t", "]"}]}], "}"}], "/.", " ", "sol"}], 
+         "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"t", ",", "0", ",", "50"}], "}"}], ",", 
+        RowBox[{"PlotRange", "->", "All"}], ",", 
+        RowBox[{"PlotLegends", "->", 
+         RowBox[{"{", 
+          RowBox[{"\"\<cAMP(t)\>\"", ",", "\"\<PDEp(t)\>\""}], "}"}]}], ",", 
+        RowBox[{"AxesLabel", "->", 
+         RowBox[{"{", 
+          RowBox[{"\"\<Time\>\"", ",", "\"\<Concentration\>\""}], "}"}]}]}], 
+       "]"}]}]}], "]"}], ",", 
+   RowBox[{"Grid", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<Parameter\>\"", ",", "\"\<Value\>\"", ",", "\"\<Randomize\>\"", 
+        ",", "\"\<Fixed\>\""}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<k1\>\"", ",", 
+        RowBox[{"Dynamic", "@", "k1"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "randomizeK1", "]"}], "]"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "fixK1", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<k2\>\"", ",", 
+        RowBox[{"Dynamic", "@", "k2"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "randomizeK2", "]"}], "]"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "fixK2", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<r1\>\"", ",", 
+        RowBox[{"Dynamic", "@", "r1"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "randomizeR1", "]"}], "]"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "fixR1", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<r2\>\"", ",", 
+        RowBox[{"Dynamic", "@", "r2"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "randomizeR2", "]"}], "]"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "fixR2", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<ACt\>\"", ",", 
+        RowBox[{"Dynamic", "@", "ACt"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "randomizeACt", "]"}], "]"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "fixACt", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Dt\>\"", ",", 
+        RowBox[{"Dynamic", "@", "Dt"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "randomizeDt", "]"}], "]"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "fixDt", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Km1\>\"", ",", 
+        RowBox[{"Dynamic", "@", "Km1"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "randomizeKm1", "]"}], "]"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "fixKm1", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Km2\>\"", ",", 
+        RowBox[{"Dynamic", "@", "Km2"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "randomizeKm2", "]"}], "]"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "fixKm2", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<r3\>\"", ",", 
+        RowBox[{"Dynamic", "@", "r3"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "randomizeR3", "]"}], "]"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "fixR3", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<E\>\"", ",", 
+        RowBox[{"Dynamic", "@", "E"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "randomizeE", "]"}], "]"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "fixE", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<PDEt\>\"", ",", 
+        RowBox[{"Dynamic", "@", "PDEt"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "randomizePDEt", "]"}], "]"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "fixPDEt", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Km3\>\"", ",", 
+        RowBox[{"Dynamic", "@", "Km3"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "randomizeKm3", "]"}], "]"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "fixKm3", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<r4\>\"", ",", 
+        RowBox[{"Dynamic", "@", "r4"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "randomizeR4", "]"}], "]"}], ",", 
+        RowBox[{"Checkbox", "[", 
+         RowBox[{"Dynamic", "[", "fixR4", "]"}], "]"}]}], "}"}]}], "}"}], 
+    "]"}], ",", 
+   RowBox[{"Button", "[", 
+    RowBox[{"\"\<Generate Parameters\>\"", ",", 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"!", "fixK1"}], ",", 
+        RowBox[{"k1", "=", 
+         RowBox[{"If", "[", 
+          RowBox[{"randomizeK1", ",", 
+           RowBox[{"randomInRange", "[", 
+            RowBox[{"0", ",", "10"}], "]"}], ",", "k1"}], "]"}]}]}], "]"}], 
+      ";", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"!", "fixK2"}], ",", 
+        RowBox[{"k2", "=", 
+         RowBox[{"If", "[", 
+          RowBox[{"randomizeK2", ",", 
+           RowBox[{"randomInRange", "[", 
+            RowBox[{"0", ","}]}]}]}]}]}]}]}]}]}]}]}]}], "Input",
+ CellChangeTimes->{{3.891222260095233*^9, 3.891222260095233*^9}},
+ EmphasizeSyntaxErrors->True,
+ CellLabel->"In[43]:=",ExpressionUUID->"9edc2542-89af-4fcc-8f93-e9e7466f1637"]
+},
+WindowSize->{1635.4285714285713`, 660.},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"13.0 for Microsoft Windows (64-bit) (February 4, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"52ba9bbe-1e65-4f83-ac23-cf0291fc7696"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 8817, 222, 314, "Input",ExpressionUUID->"9edc2542-89af-4fcc-8f93-e9e7466f1637"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

@@ -1,0 +1,446 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     17422,        436]
+NotebookOptionsPosition[     16838,        417]
+NotebookOutlinePosition[     17336,        435]
+CellTagsIndexPosition[     17293,        432]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Define", " ", "the", " ", "equations"}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ClearAll", "[", "G", "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"G", "[", 
+      RowBox[{"u_", ",", "v_", ",", "J_", ",", "K_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"2", "*", "u", "*", "K"}], ")"}], "/", 
+      RowBox[{"(", 
+       RowBox[{"v", "-", "u", "+", 
+        RowBox[{"v", "*", "J"}], "+", 
+        RowBox[{"u", "*", "K"}], "+", 
+        RowBox[{"Sqrt", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"v", "-", "u", "+", 
+             RowBox[{"v", "*", "J"}], "+", 
+             RowBox[{"u", "*", "K"}]}], ")"}], "^", "2"}], "-", 
+          RowBox[{"4", "*", 
+           RowBox[{"(", 
+            RowBox[{"v", "-", "u"}], ")"}], "*", "u", "*", "K"}]}], "]"}]}], 
+       ")"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"CAMP_PDEP", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"R_", ",", "X_"}], "}"}], ",", "t_", ",", "k0_", ",", "k1_", 
+       ",", "k2_", ",", "k2p_", ",", "k3_", ",", "k4_", ",", "k5_", ",", 
+       "k6_", ",", "J3_", ",", "J4_", ",", "S_"}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", "EP", "}"}], ",", 
+       RowBox[{
+        RowBox[{"EP", "=", 
+         RowBox[{"G", "[", 
+          RowBox[{
+           RowBox[{"k3", "*", "R"}], ",", "k4", ",", "J3", ",", "J4"}], 
+          "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"k0", "*", "EP"}], "+", "k1", "-", 
+           RowBox[{"k2", "*", "R"}], "-", 
+           RowBox[{"k2p", "*", "X", "*", "R"}]}], ",", 
+          RowBox[{
+           RowBox[{"k5", "*", "R"}], "-", 
+           RowBox[{"k6", "*", "X"}]}]}], "}"}]}]}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Create", " ", "an", " ", "interactive", " ", "interface", " ", "to", " ",
+      "adjust", " ", "the", " ", "parameters"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Manipulate", "[", 
+    RowBox[{
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"sol", ",", "R", ",", "X", ",", "t"}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"sol", "=", 
+         RowBox[{"NDSolve", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"R", "'"}], "[", "t", "]"}], "==", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"k0", "*", "EP"}], "+", "k1", "-", 
+                 RowBox[{"k2", "*", 
+                  RowBox[{"R", "[", "t", "]"}]}], "-", 
+                 RowBox[{"k2p", "*", 
+                  RowBox[{"X", "[", "t", "]"}], "*", 
+                  RowBox[{"R", "[", "t", "]"}]}]}], ")"}]}], "/.", " ", 
+              RowBox[{"EP", "->", 
+               RowBox[{"G", "[", 
+                RowBox[{
+                 RowBox[{"k3", "*", 
+                  RowBox[{"R", "[", "t", "]"}]}], ",", "k4", ",", "J3", ",", 
+                 "J4"}], "]"}]}]}], ",", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"X", "'"}], "[", "t", "]"}], "==", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"k5", "*", 
+                 RowBox[{"R", "[", "t", "]"}]}], "-", 
+                RowBox[{"k6", "*", 
+                 RowBox[{"X", "[", "t", "]"}]}]}], ")"}]}], ",", 
+             RowBox[{
+              RowBox[{"R", "[", "0", "]"}], "==", 
+              RowBox[{"x0", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+             RowBox[{
+              RowBox[{"X", "[", "0", "]"}], "==", 
+              RowBox[{"x0", "[", 
+               RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"R", ",", "X"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"t", ",", "0", ",", "100"}], "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Plot", "[", 
+         RowBox[{
+          RowBox[{"Evaluate", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"R", "[", "t", "]"}], ",", 
+              RowBox[{"X", "[", "t", "]"}]}], "}"}], "/.", " ", "sol"}], 
+           "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "100"}], "}"}], ",", 
+          RowBox[{"PlotRange", "->", "All"}], ",", 
+          RowBox[{"PlotLegends", "->", 
+           RowBox[{"{", 
+            RowBox[{"\"\<R(t)\>\"", ",", "\"\<X(t)\>\""}], "}"}]}], ",", 
+          RowBox[{"AxesLabel", "->", 
+           RowBox[{"{", 
+            RowBox[{"\"\<Time\>\"", ",", "\"\<Concentration\>\""}], "}"}]}]}],
+          "]"}]}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"k0", ",", "4"}], "}"}], ",", "0", ",", "10", ",", 
+       RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"k1", ",", "1"}], "}"}], ",", "0", ",", "10", ",", 
+       RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"k2", ",", "1"}], "}"}], ",", "0", ",", "10", ",", 
+       RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"k2p", ",", "1"}], "}"}], ",", "0", ",", "10", ",", 
+       RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"k3", ",", "1"}], "}"}], ",", "0", ",", "10", ",", 
+       RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"k4", ",", "1"}], "}"}], ",", "0", ",", "10", ",", 
+       RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"k5", ",", "0.1"}], "}"}], ",", "0", ",", "1", ",", 
+       RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"k6", ",", "0.075"}], "}"}], ",", "0", ",", "1", ",", 
+       RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"J3", ",", "0.3"}], "}"}], ",", "0", ",", "1", ",", 
+       RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"J4", ",", "0.3"}], "}"}], ",", "0", ",", "1", ",", 
+       RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"S", ",", "0.2"}], "}"}], ",", "0", ",", "1", ",", 
+       RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"x0", ",", 
+         RowBox[{"{", 
+          RowBox[{"0.1", ",", "0.1"}], "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "1"}], "}"}], ",", 
+       RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+     RowBox[{"Button", "[", 
+      RowBox[{"\"\<Randomize\>\"", ",", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+         "k0", ",", "k1", ",", "k2", ",", "k2p", ",", "k3", ",", "k4", ",", 
+          "k5", ",", "k6", ",", "J3", ",", "J4", ",", "S", ",", "x0"}], "}"}],
+         "=", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"RandomReal", "[", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "10"}], "}"}], "]"}], ",", 
+          RowBox[{"RandomReal", "[", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "10"}], "}"}], "]"}], ",", 
+          RowBox[{"RandomReal", "[", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "10"}], "}"}], "]"}], ",", 
+          RowBox[{"RandomReal", "[", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "10"}], "}"}], "]"}], ",", 
+          RowBox[{"RandomReal", "[", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "10"}], "}"}], "]"}], ",", 
+          RowBox[{"RandomReal", "[", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "10"}], "}"}], "]"}], ",", 
+          RowBox[{"RandomReal", "[", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "1"}], "}"}], "]"}], ",", 
+          RowBox[{"RandomReal", "[", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "1"}], "}"}], "]"}], ",", 
+          RowBox[{"RandomReal", "[", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "1"}], "}"}], "]"}], ",", 
+          RowBox[{"RandomReal", "[", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "1"}], "}"}], "]"}], ",", 
+          RowBox[{"RandomReal", "[", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "1"}], "}"}], "]"}], ",", 
+          RowBox[{"RandomReal", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "1"}], "}"}], ",", "2"}], "]"}]}], "}"}]}]}], 
+      "]"}], ",", 
+     RowBox[{"TrackedSymbols", "->", 
+      RowBox[{"{", 
+       RowBox[{
+       "k0", ",", "k1", ",", "k2", ",", "k2p", ",", "k3", ",", "k4", ",", 
+        "k5", ",", "k6", ",", "J3", ",", "J4", ",", "S"}], "}"}]}]}], "\n", 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.8913221237282968`*^9, 3.89132213824371*^9}},
+ CellLabel->
+  "In[104]:=",ExpressionUUID->"9a8e5220-0a8d-4069-8684-25828493f92a"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`J3$$ = 
+    0.4227069315234695, $CellContext`J4$$ = 
+    0.8542023430116066, $CellContext`k0$$ = 
+    4.840179434332528, $CellContext`k1$$ = 
+    1.7359431650582007`, $CellContext`k2$$ = 
+    2.1158830529190524`, $CellContext`k2p$$ = 
+    4.976877503837114, $CellContext`k3$$ = 
+    4.010032005976406, $CellContext`k4$$ = 
+    3.638174205950458, $CellContext`k5$$ = 
+    0.05495443895895091, $CellContext`k6$$ = 
+    0.9925953983736813, $CellContext`S$$ = 
+    0.9410108418964767, $CellContext`x0$$ = {0.108269501496425, 
+    0.39216345464759605`}, Typeset`show$$ = True, Typeset`bookmarkList$$ = {},
+     Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`k0$$], 4}, 0, 10}, {{
+       Hold[$CellContext`k1$$], 1}, 0, 10}, {{
+       Hold[$CellContext`k2$$], 1}, 0, 10}, {{
+       Hold[$CellContext`k2p$$], 1}, 0, 10}, {{
+       Hold[$CellContext`k3$$], 1}, 0, 10}, {{
+       Hold[$CellContext`k4$$], 1}, 0, 10}, {{
+       Hold[$CellContext`k5$$], 0.1}, 0, 1}, {{
+       Hold[$CellContext`k6$$], 0.075}, 0, 1}, {{
+       Hold[$CellContext`J3$$], 0.3}, 0, 1}, {{
+       Hold[$CellContext`J4$$], 0.3}, 0, 1}, {{
+       Hold[$CellContext`S$$], 0.2}, 0, 1}, {{
+       Hold[$CellContext`x0$$], {0.1, 0.1}}, {0, 0}, {1, 1}}, {
+      Hold[
+       Button[
+       "Randomize", {$CellContext`k0$$, $CellContext`k1$$, $CellContext`k2$$, \
+$CellContext`k2p$$, $CellContext`k3$$, $CellContext`k4$$, $CellContext`k5$$, \
+$CellContext`k6$$, $CellContext`J3$$, $CellContext`J4$$, $CellContext`S$$, \
+$CellContext`x0$$} = {
+          RandomReal[{0, 10}], 
+          RandomReal[{0, 10}], 
+          RandomReal[{0, 10}], 
+          RandomReal[{0, 10}], 
+          RandomReal[{0, 10}], 
+          RandomReal[{0, 10}], 
+          RandomReal[{0, 1}], 
+          RandomReal[{0, 1}], 
+          RandomReal[{0, 1}], 
+          RandomReal[{0, 1}], 
+          RandomReal[{0, 1}], 
+          RandomReal[{0, 1}, 2]}]], Manipulate`Dump`ThisIsNotAControl}}, 
+    Typeset`size$$ = {594., {144., 151.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`J3$$ = 0.3, $CellContext`J4$$ = 
+        0.3, $CellContext`k0$$ = 4, $CellContext`k1$$ = 1, $CellContext`k2$$ = 
+        1, $CellContext`k2p$$ = 1, $CellContext`k3$$ = 1, $CellContext`k4$$ = 
+        1, $CellContext`k5$$ = 0.1, $CellContext`k6$$ = 
+        0.075, $CellContext`S$$ = 0.2, $CellContext`x0$$ = {0.1, 0.1}}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`sol$, $CellContext`R$, $CellContext`X$, \
+$CellContext`t$}, $CellContext`sol$ = NDSolve[{
+            ReplaceAll[
+            Derivative[
+              1][$CellContext`R$][$CellContext`t$] == $CellContext`k0$$ \
+$CellContext`EP + $CellContext`k1$$ - $CellContext`k2$$ \
+$CellContext`R$[$CellContext`t$] - $CellContext`k2p$$ \
+$CellContext`X$[$CellContext`t$] $CellContext`R$[$CellContext`t$], \
+$CellContext`EP -> $CellContext`G[$CellContext`k3$$ \
+$CellContext`R$[$CellContext`t$], $CellContext`k4$$, $CellContext`J3$$, \
+$CellContext`J4$$]], 
+            Derivative[
+             1][$CellContext`X$][$CellContext`t$] == $CellContext`k5$$ \
+$CellContext`R$[$CellContext`t$] - $CellContext`k6$$ \
+$CellContext`X$[$CellContext`t$], $CellContext`R$[0] == 
+            Part[$CellContext`x0$$, 1], $CellContext`X$[0] == 
+            Part[$CellContext`x0$$, 
+              2]}, {$CellContext`R$, $CellContext`X$}, {$CellContext`t$, 0, 
+            100}]; Plot[
+          Evaluate[
+           ReplaceAll[{
+             $CellContext`R$[$CellContext`t$], 
+             $CellContext`X$[$CellContext`t$]}, $CellContext`sol$]], \
+{$CellContext`t$, 0, 100}, PlotRange -> All, PlotLegends -> {"R(t)", "X(t)"}, 
+          AxesLabel -> {"Time", "Concentration"}]], 
+      "Specifications" :> {{{$CellContext`k0$$, 4}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`k1$$, 1}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`k2$$, 1}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`k2p$$, 1}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`k3$$, 1}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`k4$$, 1}, 0, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`k5$$, 0.1}, 0, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`k6$$, 0.075}, 0, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`J3$$, 0.3}, 0, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`J4$$, 0.3}, 0, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`S$$, 0.2}, 0, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`x0$$, {0.1, 0.1}}, {0, 0}, {1, 1}, 
+         Appearance -> "Labeled"}, 
+        Button[
+        "Randomize", {$CellContext`k0$$, $CellContext`k1$$, \
+$CellContext`k2$$, $CellContext`k2p$$, $CellContext`k3$$, $CellContext`k4$$, \
+$CellContext`k5$$, $CellContext`k6$$, $CellContext`J3$$, $CellContext`J4$$, \
+$CellContext`S$$, $CellContext`x0$$} = {
+           RandomReal[{0, 10}], 
+           RandomReal[{0, 10}], 
+           RandomReal[{0, 10}], 
+           RandomReal[{0, 10}], 
+           RandomReal[{0, 10}], 
+           RandomReal[{0, 10}], 
+           RandomReal[{0, 1}], 
+           RandomReal[{0, 1}], 
+           RandomReal[{0, 1}], 
+           RandomReal[{0, 1}], 
+           RandomReal[{0, 1}], 
+           RandomReal[{0, 1}, 2]}]}, 
+      "Options" :> {
+       TrackedSymbols -> {$CellContext`k0$$, $CellContext`k1$$, \
+$CellContext`k2$$, $CellContext`k2p$$, $CellContext`k3$$, $CellContext`k4$$, \
+$CellContext`k5$$, $CellContext`k6$$, $CellContext`J3$$, $CellContext`J4$$, \
+$CellContext`S$$}}, "DefaultOptions" :> {}],
+     ImageSizeCache->{1045., {281.9876465264242, 290.0123534735758}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.891322145481288*^9},
+ CellLabel->
+  "Out[107]=",ExpressionUUID->"91142b82-ec2a-4e77-9de3-4e51fcd11fed"]
+}, Open  ]]
+},
+WindowSize->{1634.5714285714284`, 846.8571428571428},
+WindowMargins->{{Automatic, 0.4285714285713311}, {
+  Automatic, 0.42857142857142855`}},
+Magnification:>1.4 Inherited,
+FrontEndVersion->"13.0 for Microsoft Windows (64-bit) (February 4, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"3990580c-c5e0-41d2-a230-e2efdff23892"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 9575, 254, 564, "Input",ExpressionUUID->"9a8e5220-0a8d-4069-8684-25828493f92a"],
+Cell[10158, 278, 6664, 136, 614, "Output",ExpressionUUID->"91142b82-ec2a-4e77-9de3-4e51fcd11fed"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

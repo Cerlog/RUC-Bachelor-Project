@@ -1,0 +1,3249 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    138183,       3241]
+NotebookOptionsPosition[    136374,       3204]
+NotebookOutlinePosition[    136790,       3220]
+CellTagsIndexPosition[    136747,       3217]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"G", "[", 
+     RowBox[{"u_", ",", "v_", ",", "J_", ",", "K_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"2", "*", "u", "*", "K"}], ")"}], "/", 
+     RowBox[{"(", 
+      RowBox[{"v", "-", "u", "+", 
+       RowBox[{"v", "*", "J"}], "+", 
+       RowBox[{"u", "*", "K"}], "+", 
+       RowBox[{"Sqrt", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"v", "-", "u", "+", 
+            RowBox[{"v", "*", "J"}], "+", 
+            RowBox[{"u", "*", "K"}]}], ")"}], "^", "2"}], "-", 
+         RowBox[{"4", "*", 
+          RowBox[{"(", 
+           RowBox[{"v", "-", "u"}], ")"}], "*", "u", "*", "K"}]}], "]"}]}], 
+      ")"}]}]}], ";"}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"ACp", "[", 
+     RowBox[{
+     "r1_", ",", "cAMP_", ",", "r2_", ",", "Dvalue_", ",", "Km1_", ",", 
+      "Km2_", ",", "ACt_"}], "]"}], ":=", 
+    RowBox[{"ACt", "*", 
+     RowBox[{"G", "[", 
+      RowBox[{
+       RowBox[{"r1", "*", "cAMP"}], ",", 
+       RowBox[{"r2", "*", "Dvalue"}], ",", 
+       RowBox[{"Km1", "/", "ACt"}], ",", 
+       RowBox[{"Km2", "/", "ACt"}]}], "]"}]}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"dPDEp", "[", 
+     RowBox[{
+     "r3_", ",", "cAMP_", ",", "PDEt_", ",", "PDEp_", ",", "Km3_", ",", "r4_",
+       ",", "Et_", ",", "Km4_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{"r3", "*", "cAMP", "*", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"PDEt", "-", "PDEp"}], ")"}], "/", "Km3"}], ")"}]}], "-", 
+     RowBox[{"r4", "*", "Et", "*", 
+      RowBox[{"PDEp", "/", 
+       RowBox[{"(", 
+        RowBox[{"Km4", "+", "PDEp"}], ")"}]}]}]}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"dcAMP", "[", 
+     RowBox[{
+     "k1_", ",", "ACp_", ",", "k3_", ",", "k2_", ",", "PDEp_", ",", "cAMP_"}],
+      "]"}], ":=", 
+    RowBox[{
+     RowBox[{"k1", "*", "ACp"}], "-", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"k3", "+", 
+        RowBox[{"k2", "*", "PDEp"}]}], ")"}], "*", "cAMP"}]}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{"F1", "=", 
+   RowBox[{"dcAMP", "[", 
+    RowBox[{"k1", ",", 
+     RowBox[{"ACp", "[", 
+      RowBox[{
+      "r1", ",", "cAMP", ",", "r2", ",", "Dvalue", ",", "Km1", ",", "Km2", 
+       ",", "ACt"}], "]"}], ",", "k3", ",", "k2", ",", "PDEp", ",", "cAMP"}], 
+    "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"F2", "=", 
+    RowBox[{"dPDEp", "[", 
+     RowBox[{
+     "r3", ",", "cAMP", ",", "PDEt", ",", "PDEp", ",", "Km3", ",", "r4", ",", 
+      "Et", ",", "Km4"}], "]"}]}], ";"}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{"JacobianMatrix", "=", 
+  RowBox[{"D", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"F1", ",", "F2"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"cAMP", ",", "PDEp"}], "}"}], "}"}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.8925142441447897`*^9, 3.8925142441457973`*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"631c68fe-4cb8-4a45-8a0f-fdc3ee7922b3"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", "k3"}], "-", 
+      RowBox[{"k2", " ", "PDEp"}], "-", 
+      FractionBox[
+       RowBox[{"2", " ", "cAMP", " ", "k1", " ", "Km2", " ", "r1", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "r1"}], "+", 
+          FractionBox[
+           RowBox[{"Km2", " ", "r1"}], "ACt"], "+", 
+          FractionBox[
+           RowBox[{
+            FractionBox[
+             RowBox[{"4", " ", "cAMP", " ", "Km2", " ", 
+              SuperscriptBox["r1", "2"]}], "ACt"], "-", 
+            FractionBox[
+             RowBox[{"4", " ", "Km2", " ", "r1", " ", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"-", "cAMP"}], " ", "r1"}], "+", 
+                RowBox[{"Dvalue", " ", "r2"}]}], ")"}]}], "ACt"], "+", 
+            RowBox[{"2", " ", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "r1"}], "+", 
+               FractionBox[
+                RowBox[{"Km2", " ", "r1"}], "ACt"]}], ")"}], " ", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"-", "cAMP"}], " ", "r1"}], "+", 
+               FractionBox[
+                RowBox[{"cAMP", " ", "Km2", " ", "r1"}], "ACt"], "+", 
+               RowBox[{"Dvalue", " ", "r2"}], "+", 
+               FractionBox[
+                RowBox[{"Dvalue", " ", "Km1", " ", "r2"}], "ACt"]}], 
+              ")"}]}]}], 
+           RowBox[{"2", " ", 
+            SqrtBox[
+             RowBox[{
+              RowBox[{"-", 
+               FractionBox[
+                RowBox[{"4", " ", "cAMP", " ", "Km2", " ", "r1", " ", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"-", "cAMP"}], " ", "r1"}], "+", 
+                   RowBox[{"Dvalue", " ", "r2"}]}], ")"}]}], "ACt"]}], "+", 
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"-", "cAMP"}], " ", "r1"}], "+", 
+                 FractionBox[
+                  RowBox[{"cAMP", " ", "Km2", " ", "r1"}], "ACt"], "+", 
+                 RowBox[{"Dvalue", " ", "r2"}], "+", 
+                 FractionBox[
+                  RowBox[{"Dvalue", " ", "Km1", " ", "r2"}], "ACt"]}], ")"}], 
+               "2"]}]]}]]}], ")"}]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "cAMP"}], " ", "r1"}], "+", 
+          FractionBox[
+           RowBox[{"cAMP", " ", "Km2", " ", "r1"}], "ACt"], "+", 
+          RowBox[{"Dvalue", " ", "r2"}], "+", 
+          FractionBox[
+           RowBox[{"Dvalue", " ", "Km1", " ", "r2"}], "ACt"], "+", 
+          SqrtBox[
+           RowBox[{
+            RowBox[{"-", 
+             FractionBox[
+              RowBox[{"4", " ", "cAMP", " ", "Km2", " ", "r1", " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"-", "cAMP"}], " ", "r1"}], "+", 
+                 RowBox[{"Dvalue", " ", "r2"}]}], ")"}]}], "ACt"]}], "+", 
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"-", "cAMP"}], " ", "r1"}], "+", 
+               FractionBox[
+                RowBox[{"cAMP", " ", "Km2", " ", "r1"}], "ACt"], "+", 
+               RowBox[{"Dvalue", " ", "r2"}], "+", 
+               FractionBox[
+                RowBox[{"Dvalue", " ", "Km1", " ", "r2"}], "ACt"]}], ")"}], 
+             "2"]}]]}], ")"}], "2"]], "+", 
+      FractionBox[
+       RowBox[{"2", " ", "k1", " ", "Km2", " ", "r1"}], 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "cAMP"}], " ", "r1"}], "+", 
+        FractionBox[
+         RowBox[{"cAMP", " ", "Km2", " ", "r1"}], "ACt"], "+", 
+        RowBox[{"Dvalue", " ", "r2"}], "+", 
+        FractionBox[
+         RowBox[{"Dvalue", " ", "Km1", " ", "r2"}], "ACt"], "+", 
+        SqrtBox[
+         RowBox[{
+          RowBox[{"-", 
+           FractionBox[
+            RowBox[{"4", " ", "cAMP", " ", "Km2", " ", "r1", " ", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"-", "cAMP"}], " ", "r1"}], "+", 
+               RowBox[{"Dvalue", " ", "r2"}]}], ")"}]}], "ACt"]}], "+", 
+          SuperscriptBox[
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"-", "cAMP"}], " ", "r1"}], "+", 
+             FractionBox[
+              RowBox[{"cAMP", " ", "Km2", " ", "r1"}], "ACt"], "+", 
+             RowBox[{"Dvalue", " ", "r2"}], "+", 
+             FractionBox[
+              RowBox[{"Dvalue", " ", "Km1", " ", "r2"}], "ACt"]}], ")"}], 
+           "2"]}]]}]]}], ",", 
+     RowBox[{
+      RowBox[{"-", "cAMP"}], " ", "k2"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox[
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "PDEp"}], "+", "PDEt"}], ")"}], " ", "r3"}], "Km3"], 
+     ",", 
+     RowBox[{
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"cAMP", " ", "r3"}], "Km3"]}], "+", 
+      FractionBox[
+       RowBox[{"Et", " ", "PDEp", " ", "r4"}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"Km4", "+", "PDEp"}], ")"}], "2"]], "-", 
+      FractionBox[
+       RowBox[{"Et", " ", "r4"}], 
+       RowBox[{"Km4", "+", "PDEp"}]]}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.892514245283801*^9, 3.893296672204042*^9},
+ CellLabel->"Out[7]=",ExpressionUUID->"f58c01a0-9064-495b-a2c7-9fde6f7204f6"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SimplifiedJacobian", "=", 
+  RowBox[{"Simplify", "[", "JacobianMatrix", "]"}]}]], "Input",
+ CellChangeTimes->{{3.892514278234129*^9, 3.8925142782351656`*^9}},
+ CellLabel->"In[8]:=",ExpressionUUID->"7f050412-c74b-4bf4-999a-536a4de9dd63"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", "k3"}], "-", 
+      RowBox[{"k2", " ", "PDEp"}], "-", 
+      FractionBox[
+       RowBox[{"2", " ", 
+        SuperscriptBox["ACt", "2"], " ", "cAMP", " ", "k1", " ", "Km2", " ", 
+        SuperscriptBox["r1", "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", 
+          FractionBox["Km2", "ACt"], "+", 
+          FractionBox[
+           RowBox[{
+            RowBox[{"2", " ", "ACt", " ", "cAMP", " ", "Km2", " ", "r1"}], 
+            "-", 
+            RowBox[{"ACt", " ", "Dvalue", " ", 
+             RowBox[{"(", 
+              RowBox[{"Km1", "+", "Km2"}], ")"}], " ", "r2"}], "+", 
+            RowBox[{
+             SuperscriptBox["ACt", "2"], " ", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"cAMP", " ", "r1"}], "-", 
+               RowBox[{"Dvalue", " ", "r2"}]}], ")"}]}], "+", 
+            RowBox[{"Km2", " ", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"cAMP", " ", "Km2", " ", "r1"}], "+", 
+               RowBox[{"Dvalue", " ", "Km1", " ", "r2"}]}], ")"}]}]}], 
+           RowBox[{
+            SuperscriptBox["ACt", "2"], " ", 
+            SqrtBox[
+             FractionBox[
+              RowBox[{
+               RowBox[{
+               "4", " ", "ACt", " ", "cAMP", " ", "Km2", " ", "r1", " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"cAMP", " ", "r1"}], "-", 
+                  RowBox[{"Dvalue", " ", "r2"}]}], ")"}]}], "+", 
+               SuperscriptBox[
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"-", "ACt"}], " ", "cAMP", " ", "r1"}], "+", 
+                  RowBox[{"cAMP", " ", "Km2", " ", "r1"}], "+", 
+                  RowBox[{"ACt", " ", "Dvalue", " ", "r2"}], "+", 
+                  RowBox[{"Dvalue", " ", "Km1", " ", "r2"}]}], ")"}], "2"]}], 
+              SuperscriptBox["ACt", "2"]]]}]]}], ")"}]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "ACt"}], " ", "cAMP", " ", "r1"}], "+", 
+          RowBox[{"cAMP", " ", "Km2", " ", "r1"}], "+", 
+          RowBox[{"ACt", " ", "Dvalue", " ", "r2"}], "+", 
+          RowBox[{"Dvalue", " ", "Km1", " ", "r2"}], "+", 
+          RowBox[{"ACt", " ", 
+           SqrtBox[
+            FractionBox[
+             RowBox[{
+              RowBox[{
+              "4", " ", "ACt", " ", "cAMP", " ", "Km2", " ", "r1", " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"cAMP", " ", "r1"}], "-", 
+                 RowBox[{"Dvalue", " ", "r2"}]}], ")"}]}], "+", 
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"-", "ACt"}], " ", "cAMP", " ", "r1"}], "+", 
+                 RowBox[{"cAMP", " ", "Km2", " ", "r1"}], "+", 
+                 RowBox[{"ACt", " ", "Dvalue", " ", "r2"}], "+", 
+                 RowBox[{"Dvalue", " ", "Km1", " ", "r2"}]}], ")"}], "2"]}], 
+             SuperscriptBox["ACt", "2"]]]}]}], ")"}], "2"]], "+", 
+      FractionBox[
+       RowBox[{"2", " ", "ACt", " ", "k1", " ", "Km2", " ", "r1"}], 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "ACt"}], " ", "cAMP", " ", "r1"}], "+", 
+        RowBox[{"cAMP", " ", "Km2", " ", "r1"}], "+", 
+        RowBox[{"ACt", " ", "Dvalue", " ", "r2"}], "+", 
+        RowBox[{"Dvalue", " ", "Km1", " ", "r2"}], "+", 
+        RowBox[{"ACt", " ", 
+         SqrtBox[
+          FractionBox[
+           RowBox[{
+            RowBox[{"4", " ", "ACt", " ", "cAMP", " ", "Km2", " ", "r1", " ", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"cAMP", " ", "r1"}], "-", 
+               RowBox[{"Dvalue", " ", "r2"}]}], ")"}]}], "+", 
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"-", "ACt"}], " ", "cAMP", " ", "r1"}], "+", 
+               RowBox[{"cAMP", " ", "Km2", " ", "r1"}], "+", 
+               RowBox[{"ACt", " ", "Dvalue", " ", "r2"}], "+", 
+               RowBox[{"Dvalue", " ", "Km1", " ", "r2"}]}], ")"}], "2"]}], 
+           SuperscriptBox["ACt", "2"]]]}]}]]}], ",", 
+     RowBox[{
+      RowBox[{"-", "cAMP"}], " ", "k2"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox[
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "PDEp"}], "+", "PDEt"}], ")"}], " ", "r3"}], "Km3"], 
+     ",", 
+     RowBox[{"-", 
+      FractionBox[
+       RowBox[{
+        RowBox[{"cAMP", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"Km4", "+", "PDEp"}], ")"}], "2"], " ", "r3"}], "+", 
+        RowBox[{"Et", " ", "Km3", " ", "Km4", " ", "r4"}]}], 
+       RowBox[{"Km3", " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{"Km4", "+", "PDEp"}], ")"}], "2"]}]]}]}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.8925142805933304`*^9, 3.8932966761082134`*^9},
+ CellLabel->"Out[8]=",ExpressionUUID->"ee4cfde0-80db-4598-9fb0-9db7bba6b999"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"k1", " ", "=", " ", "9.18"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"k3", " ", "=", " ", "0.12"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"k2", " ", "=", " ", "10"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"r1", " ", "=", " ", "2.04"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"r2", " ", "=", " ", "9.34"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"r3", " ", "=", " ", "0.56"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"r4", " ", "=", " ", "1.84"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Km1", " ", "=", " ", "0.46"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Km2", " ", "=", " ", "9.34"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Km3", " ", "=", " ", "1.26"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Km4", " ", "=", " ", "0.18"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Dvalue", " ", "=", " ", "1.26"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"ACt", " ", "=", " ", "ACt"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"PDEt", " ", "=", " ", "9.66"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Et", " ", "=", " ", "2.04"}], ";"}], "\n"}], "\n", 
+ RowBox[{"JacobianAtFixedPoint", " ", "=", " ", 
+  RowBox[{"SimplifiedJacobian", " ", "/.", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"cAMP", "->", "0.912659"}], ",", 
+     RowBox[{"PDEp", "->", "1.436556"}]}], "}"}]}]}]}], "Input",
+ CellChangeTimes->{{3.8925142902854643`*^9, 3.892514297825955*^9}, {
+  3.893296677974271*^9, 3.893296704881675*^9}},
+ CellLabel->"In[27]:=",ExpressionUUID->"75dfa9f7-4195-471e-a346-401d796aff63"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", "14.485559999999998`"}], "-", 
+      FractionBox[
+       RowBox[{"651.3110236477785`", " ", 
+        SuperscriptBox["ACt", "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", 
+          FractionBox["9.34`", "ACt"], "+", 
+          FractionBox[
+           RowBox[{"212.97911889921602`", "\[VeryThinSpace]", "-", 
+            RowBox[{"80.55144095520001`", " ", "ACt"}], "-", 
+            RowBox[{"9.90657564`", " ", 
+             SuperscriptBox["ACt", "2"]}]}], 
+           RowBox[{
+            SuperscriptBox["ACt", "2"], " ", 
+            SqrtBox[
+             FractionBox[
+              RowBox[{
+               RowBox[{
+                RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+               SuperscriptBox[
+                RowBox[{"(", 
+                 RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                  RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+              SuperscriptBox["ACt", "2"]]]}]]}], ")"}]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{"ACt", " ", 
+           SqrtBox[
+            FractionBox[
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                 RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+             SuperscriptBox["ACt", "2"]]]}]}], ")"}], "2"]], "+", 
+      FractionBox[
+       RowBox[{"349.824096`", " ", "ACt"}], 
+       RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+        RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+        RowBox[{"ACt", " ", 
+         SqrtBox[
+          FractionBox[
+           RowBox[{
+            RowBox[{
+             RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+               RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+           SuperscriptBox["ACt", "2"]]]}]}]]}], ",", 
+     RowBox[{"-", "9.12659`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3.6548640000000003`", ",", 
+     RowBox[{"-", "0.6641729156125227`"}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.892514292401763*^9, 3.8925143032762976`*^9}, {
+  3.893296680705656*^9, 3.8932967067157736`*^9}},
+ CellLabel->"Out[42]=",ExpressionUUID->"813925aa-f99d-44e3-9106-f09c5478c372"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"CharacteristicPoly", "=", 
+  RowBox[{"CharacteristicPolynomial", "[", 
+   RowBox[{"JacobianAtFixedPoint", ",", "\[Lambda]"}], "]"}]}], "\n", 
+ RowBox[{"EigenvaluesAtFixedPoint", "=", 
+  RowBox[{
+  "Eigenvalues", "[", "JacobianAtFixedPoint", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"EigenvaluesAtFixedPointSimplified", " ", "=", " ", 
+  RowBox[{"Simplify", "[", "EigenvaluesAtFixedPoint", "]"}]}]}], "Input",
+ CellChangeTimes->{{3.8925143238720503`*^9, 3.892514323873048*^9}, {
+  3.893296750213915*^9, 3.89329676701564*^9}},
+ CellLabel->"In[45]:=",ExpressionUUID->"88f5afbc-af09-4bf5-98d3-0288b408bd1c"],
+
+Cell[BoxData[
+ RowBox[{"42.97736185324014`", "\[VeryThinSpace]", "+", 
+  FractionBox[
+   RowBox[{"4040.326542046381`", " ", "ACt"}], 
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+      RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+      RowBox[{"ACt", " ", 
+       SqrtBox[
+        FractionBox[
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+          SuperscriptBox[
+           RowBox[{"(", 
+            RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+             RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+         SuperscriptBox["ACt", "2"]]]}]}], ")"}], "2"]], "-", 
+  FractionBox[
+   RowBox[{"432.5831415467217`", " ", 
+    SuperscriptBox["ACt", "2"]}], 
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+      RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+      RowBox[{"ACt", " ", 
+       SqrtBox[
+        FractionBox[
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+          SuperscriptBox[
+           RowBox[{"(", 
+            RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+             RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+         SuperscriptBox["ACt", "2"]]]}]}], ")"}], "2"]], "+", 
+  FractionBox[
+   RowBox[{"92131.17633727564`", " ", 
+    SuperscriptBox["ACt", "2"], " ", 
+    SqrtBox[
+     FractionBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+      SuperscriptBox["ACt", "2"]]]}], 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+         RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], ")"}], " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+       RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+       RowBox[{"ACt", " ", 
+        SqrtBox[
+         FractionBox[
+          RowBox[{
+           RowBox[{
+            RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+              RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+          SuperscriptBox["ACt", "2"]]]}]}], ")"}], "2"]}]], "-", 
+  FractionBox[
+   RowBox[{"34845.19538451568`", " ", 
+    SuperscriptBox["ACt", "3"], " ", 
+    SqrtBox[
+     FractionBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+      SuperscriptBox["ACt", "2"]]]}], 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+         RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], ")"}], " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+       RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+       RowBox[{"ACt", " ", 
+        SqrtBox[
+         FractionBox[
+          RowBox[{
+           RowBox[{
+            RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+              RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+          SuperscriptBox["ACt", "2"]]]}]}], ")"}], "2"]}]], "-", 
+  FractionBox[
+   RowBox[{"4285.417612321425`", " ", 
+    SuperscriptBox["ACt", "4"], " ", 
+    SqrtBox[
+     FractionBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+      SuperscriptBox["ACt", "2"]]]}], 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+         RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], ")"}], " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+       RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+       RowBox[{"ACt", " ", 
+        SqrtBox[
+         FractionBox[
+          RowBox[{
+           RowBox[{
+            RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+              RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+          SuperscriptBox["ACt", "2"]]]}]}], ")"}], "2"]}]], "-", 
+  FractionBox[
+   RowBox[{"232.34368979183503`", " ", "ACt"}], 
+   RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+    RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+    RowBox[{"ACt", " ", 
+     SqrtBox[
+      FractionBox[
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+       SuperscriptBox["ACt", "2"]]]}]}]], "+", 
+  RowBox[{"15.149732915612521`", " ", "\[Lambda]"}], "+", 
+  FractionBox[
+   RowBox[{"6083.244960870251`", " ", "ACt", " ", "\[Lambda]"}], 
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+      RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+      RowBox[{"ACt", " ", 
+       SqrtBox[
+        FractionBox[
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+          SuperscriptBox[
+           RowBox[{"(", 
+            RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+             RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+         SuperscriptBox["ACt", "2"]]]}]}], ")"}], "2"]], "-", 
+  FractionBox[
+   RowBox[{"651.3110236477785`", " ", 
+    SuperscriptBox["ACt", "2"], " ", "\[Lambda]"}], 
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+      RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+      RowBox[{"ACt", " ", 
+       SqrtBox[
+        FractionBox[
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+          SuperscriptBox[
+           RowBox[{"(", 
+            RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+             RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+         SuperscriptBox["ACt", "2"]]]}]}], ")"}], "2"]], "+", 
+  FractionBox[
+   RowBox[{"138715.6479458503`", " ", 
+    SuperscriptBox["ACt", "2"], " ", 
+    SqrtBox[
+     FractionBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+      SuperscriptBox["ACt", "2"]]], " ", "\[Lambda]"}], 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+         RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], ")"}], " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+       RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+       RowBox[{"ACt", " ", 
+        SqrtBox[
+         FractionBox[
+          RowBox[{
+           RowBox[{
+            RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+              RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+          SuperscriptBox["ACt", "2"]]]}]}], ")"}], "2"]}]], "-", 
+  FractionBox[
+   RowBox[{"52464.0414648349`", " ", 
+    SuperscriptBox["ACt", "3"], " ", 
+    SqrtBox[
+     FractionBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+      SuperscriptBox["ACt", "2"]]], " ", "\[Lambda]"}], 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+         RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], ")"}], " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+       RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+       RowBox[{"ACt", " ", 
+        SqrtBox[
+         FractionBox[
+          RowBox[{
+           RowBox[{
+            RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+              RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+          SuperscriptBox["ACt", "2"]]]}]}], ")"}], "2"]}]], "-", 
+  FractionBox[
+   RowBox[{"6452.261920932546`", " ", 
+    SuperscriptBox["ACt", "4"], " ", 
+    SqrtBox[
+     FractionBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+      SuperscriptBox["ACt", "2"]]], " ", "\[Lambda]"}], 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+         RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], ")"}], " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+       RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+       RowBox[{"ACt", " ", 
+        SqrtBox[
+         FractionBox[
+          RowBox[{
+           RowBox[{
+            RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+              RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+          SuperscriptBox["ACt", "2"]]]}]}], ")"}], "2"]}]], "-", 
+  FractionBox[
+   RowBox[{"349.824096`", " ", "ACt", " ", "\[Lambda]"}], 
+   RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+    RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+    RowBox[{"ACt", " ", 
+     SqrtBox[
+      FractionBox[
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+       SuperscriptBox["ACt", "2"]]]}]}]], "+", 
+  RowBox[{"1.`", " ", 
+   SuperscriptBox["\[Lambda]", "2"]}]}]], "Output",
+ CellChangeTimes->{
+  3.892514325640038*^9, {3.893296688502941*^9, 3.8932967143161755`*^9}, 
+   3.893296769245162*^9},
+ CellLabel->"Out[45]=",ExpressionUUID->"d340b745-13a0-4005-81a6-a5017c3cb8e0"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"4.276976000434101`*^31", "-", 
+      RowBox[{"8.567722911804092`*^31", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]]}], "-", 
+      FractionBox["1.9536895896452474`*^33", "ACt"], "+", 
+      RowBox[{"1.858104877615402`*^31", " ", "ACt"}], "-", 
+      RowBox[{"1.7673148292001167`*^31", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}], "-", 
+      RowBox[{"1.6019752149765414`*^32", " ", 
+       SuperscriptBox["ACt", "2"]}], "-", 
+      RowBox[{"1.617082706670316`*^31", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+       SuperscriptBox["ACt", "2"]}], "-", 
+      FractionBox["5.1996735228182916`*^36", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "-", 
+      FractionBox[
+       RowBox[{"3.886510374365806`*^36", " ", 
+        SqrtBox[
+         RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+          FractionBox["519.9724090518824`", 
+           SuperscriptBox["ACt", "2"]], "-", 
+          FractionBox["237.2818147508882`", "ACt"]}]]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "-", 
+      FractionBox["8.862372110547019`*^37", 
+       RowBox[{"ACt", " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+           RowBox[{
+            SqrtBox[
+             RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+              FractionBox["519.9724090518824`", 
+               SuperscriptBox["ACt", "2"]], "-", 
+              FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+          ")"}], "2"]}]], "-", 
+      FractionBox[
+       RowBox[{"6.286798573276148`*^36", " ", "ACt"}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "-", 
+      FractionBox[
+       RowBox[{"1.114802941341837`*^36", " ", 
+        SqrtBox[
+         RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+          FractionBox["519.9724090518824`", 
+           SuperscriptBox["ACt", "2"]], "-", 
+          FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "-", 
+      FractionBox[
+       RowBox[{"1.545203564920027`*^36", " ", 
+        SuperscriptBox["ACt", "2"]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "-", 
+      FractionBox[
+       RowBox[{"2.644581158529123`*^35", " ", 
+        SqrtBox[
+         RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+          FractionBox["519.9724090518824`", 
+           SuperscriptBox["ACt", "2"]], "-", 
+          FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+        SuperscriptBox["ACt", "2"]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "-", 
+      FractionBox[
+       RowBox[{"6.567087855081584`*^35", " ", 
+        SuperscriptBox["ACt", "3"]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "+", 
+      FractionBox[
+       RowBox[{"8.684406646799811`*^33", " ", 
+        SqrtBox[
+         RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+          FractionBox["519.9724090518824`", 
+           SuperscriptBox["ACt", "2"]], "-", 
+          FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+        SuperscriptBox["ACt", "3"]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "+", 
+      FractionBox[
+       RowBox[{"6.14398802319941`*^35", " ", 
+        SuperscriptBox["ACt", "4"]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "+", 
+      FractionBox[
+       RowBox[{"6.201929149353782`*^34", " ", 
+        SqrtBox[
+         RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+          FractionBox["519.9724090518824`", 
+           SuperscriptBox["ACt", "2"]], "-", 
+          FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+        SuperscriptBox["ACt", "4"]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "-", 
+      RowBox[{"\[Sqrt]", 
+       RowBox[{"(", 
+        RowBox[{
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "4.276976000434101`*^31"}], "+", 
+            RowBox[{"8.567722911804092`*^31", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], "+", 
+            FractionBox["1.9536895896452474`*^33", "ACt"], "-", 
+            RowBox[{"1.858104877615402`*^31", " ", "ACt"}], "+", 
+            RowBox[{"1.7673148292001167`*^31", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}], "+", 
+            RowBox[{"1.6019752149765414`*^32", " ", 
+             SuperscriptBox["ACt", "2"]}], "+", 
+            RowBox[{"1.617082706670316`*^31", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+             SuperscriptBox["ACt", "2"]}], "+", 
+            FractionBox["5.1996735228182916`*^36", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"3.886510374365806`*^36", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox["8.862372110547019`*^37", 
+             RowBox[{"ACt", " ", 
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                 RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                 RowBox[{
+                  SqrtBox[
+                   RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                    FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                    FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                  "ACt"}]}], ")"}], "2"]}]], "+", 
+            FractionBox[
+             RowBox[{"6.286798573276148`*^36", " ", "ACt"}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"1.114802941341837`*^36", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"1.545203564920027`*^36", " ", 
+              SuperscriptBox["ACt", "2"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"2.644581158529123`*^35", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+              SuperscriptBox["ACt", "2"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"6.567087855081584`*^35", " ", 
+              SuperscriptBox["ACt", "3"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "-", 
+            FractionBox[
+             RowBox[{"8.684406646799811`*^33", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+              SuperscriptBox["ACt", "3"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "-", 
+            FractionBox[
+             RowBox[{"6.14398802319941`*^35", " ", 
+              SuperscriptBox["ACt", "4"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "-", 
+            FractionBox[
+             RowBox[{"6.201929149353782`*^34", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+              SuperscriptBox["ACt", "4"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]]}], ")"}], "2"], "-", 
+         RowBox[{"4", " ", 
+          RowBox[{"(", 
+           RowBox[{"1.160169370049803`*^68", "+", 
+            RowBox[{"4.66758165449953`*^66", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], "+", 
+            FractionBox["5.7724284629552455`*^68", 
+             SuperscriptBox["ACt", "2"]], "-", 
+            FractionBox["2.5273757029912972`*^67", "ACt"], "+", 
+            FractionBox[
+             RowBox[{"2.5314444966557915`*^67", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]]}], "ACt"], "+", 
+            RowBox[{"3.707826465811022`*^67", " ", "ACt"}], "+", 
+            RowBox[{"4.422806941351277`*^66", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}], "+", 
+            RowBox[{"2.189718136812486`*^67", " ", 
+             SuperscriptBox["ACt", "2"]}], "+", 
+            RowBox[{"1.921460197495147`*^66", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+             SuperscriptBox["ACt", "2"]}], "-", 
+            RowBox[{"9.003335757563527`*^65", " ", 
+             SuperscriptBox["ACt", "3"]}], "+", 
+            RowBox[{"3.82729690735834`*^65", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+             SuperscriptBox["ACt", "3"]}], "+", 
+            RowBox[{"3.8811374184213754`*^66", " ", 
+             SuperscriptBox["ACt", "4"]}], "+", 
+            RowBox[{"3.917738640939077`*^65", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+             SuperscriptBox["ACt", "4"]}], "+", 
+            FractionBox["5.883627873155849`*^70", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"4.0235075700788835`*^69", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox["3.4628648263876173`*^71", 
+             RowBox[{
+              SuperscriptBox["ACt", "2"], " ", 
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                 RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                 RowBox[{
+                  SqrtBox[
+                   RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                    FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                    FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                  "ACt"}]}], ")"}], "2"]}]], "+", 
+            FractionBox["1.2736265497423038`*^70", 
+             RowBox[{"ACt", " ", 
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                 RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                 RowBox[{
+                  SqrtBox[
+                   RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                    FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                    FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                  "ACt"}]}], ")"}], "2"]}]], "+", 
+            FractionBox[
+             RowBox[{"1.5186069716893456`*^70", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]]}], 
+             RowBox[{"ACt", " ", 
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                 RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                 RowBox[{
+                  SqrtBox[
+                   RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                    FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                    FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                  "ACt"}]}], ")"}], "2"]}]], "+", 
+            FractionBox[
+             RowBox[{"1.9418345901090292`*^70", " ", "ACt"}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"2.460422725775189`*^69", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"6.4291422796601345`*^69", " ", 
+              SuperscriptBox["ACt", "2"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"9.011969810890489`*^68", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+              SuperscriptBox["ACt", "2"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"1.5444153520072194`*^69", " ", 
+              SuperscriptBox["ACt", "3"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"2.38116078206927`*^68", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+              SuperscriptBox["ACt", "3"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "-", 
+            FractionBox[
+             RowBox[{"8.331478363075332`*^67", " ", 
+              SuperscriptBox["ACt", "4"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"2.91327947217952`*^67", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+              SuperscriptBox["ACt", "4"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"2.3323858779611816`*^68", " ", 
+              SuperscriptBox["ACt", "5"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "-", 
+            FractionBox[
+             RowBox[{"4.776738803822924`*^65", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+              SuperscriptBox["ACt", "5"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "-", 
+            FractionBox[
+             RowBox[{"1.9685033068556342`*^68", " ", 
+              SuperscriptBox["ACt", "6"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "-", 
+            FractionBox[
+             RowBox[{"1.9870673564610608`*^67", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+              SuperscriptBox["ACt", "6"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]]}], ")"}]}]}], ")"}]}]}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{"2", " ", 
+      SqrtBox[
+       FractionBox[
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+            RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+        SuperscriptBox["ACt", "2"]]], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"8.031138725`*^15", "+", 
+         RowBox[{"3.489076870249893`*^15", " ", "ACt"}], "+", 
+         RowBox[{"3.52198075`*^14", " ", "ACt", " ", 
+          SqrtBox[
+           FractionBox[
+            RowBox[{
+             RowBox[{
+              RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+            SuperscriptBox["ACt", "2"]]]}]}], ")"}], "2"]}], ")"}]}], ",", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"4.276976000434101`*^31", "-", 
+      RowBox[{"8.567722911804092`*^31", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]]}], "-", 
+      FractionBox["1.9536895896452474`*^33", "ACt"], "+", 
+      RowBox[{"1.858104877615402`*^31", " ", "ACt"}], "-", 
+      RowBox[{"1.7673148292001167`*^31", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}], "-", 
+      RowBox[{"1.6019752149765414`*^32", " ", 
+       SuperscriptBox["ACt", "2"]}], "-", 
+      RowBox[{"1.617082706670316`*^31", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+       SuperscriptBox["ACt", "2"]}], "-", 
+      FractionBox["5.1996735228182916`*^36", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "-", 
+      FractionBox[
+       RowBox[{"3.886510374365806`*^36", " ", 
+        SqrtBox[
+         RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+          FractionBox["519.9724090518824`", 
+           SuperscriptBox["ACt", "2"]], "-", 
+          FractionBox["237.2818147508882`", "ACt"]}]]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "-", 
+      FractionBox["8.862372110547019`*^37", 
+       RowBox[{"ACt", " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+           RowBox[{
+            SqrtBox[
+             RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+              FractionBox["519.9724090518824`", 
+               SuperscriptBox["ACt", "2"]], "-", 
+              FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+          ")"}], "2"]}]], "-", 
+      FractionBox[
+       RowBox[{"6.286798573276148`*^36", " ", "ACt"}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "-", 
+      FractionBox[
+       RowBox[{"1.114802941341837`*^36", " ", 
+        SqrtBox[
+         RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+          FractionBox["519.9724090518824`", 
+           SuperscriptBox["ACt", "2"]], "-", 
+          FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "-", 
+      FractionBox[
+       RowBox[{"1.545203564920027`*^36", " ", 
+        SuperscriptBox["ACt", "2"]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "-", 
+      FractionBox[
+       RowBox[{"2.644581158529123`*^35", " ", 
+        SqrtBox[
+         RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+          FractionBox["519.9724090518824`", 
+           SuperscriptBox["ACt", "2"]], "-", 
+          FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+        SuperscriptBox["ACt", "2"]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "-", 
+      FractionBox[
+       RowBox[{"6.567087855081584`*^35", " ", 
+        SuperscriptBox["ACt", "3"]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "+", 
+      FractionBox[
+       RowBox[{"8.684406646799811`*^33", " ", 
+        SqrtBox[
+         RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+          FractionBox["519.9724090518824`", 
+           SuperscriptBox["ACt", "2"]], "-", 
+          FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+        SuperscriptBox["ACt", "3"]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "+", 
+      FractionBox[
+       RowBox[{"6.14398802319941`*^35", " ", 
+        SuperscriptBox["ACt", "4"]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "+", 
+      FractionBox[
+       RowBox[{"6.201929149353782`*^34", " ", 
+        SqrtBox[
+         RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+          FractionBox["519.9724090518824`", 
+           SuperscriptBox["ACt", "2"]], "-", 
+          FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+        SuperscriptBox["ACt", "4"]}], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+             FractionBox["519.9724090518824`", 
+              SuperscriptBox["ACt", "2"]], "-", 
+             FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}]}], 
+         ")"}], "2"]], "+", 
+      RowBox[{"\[Sqrt]", 
+       RowBox[{"(", 
+        RowBox[{
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "4.276976000434101`*^31"}], "+", 
+            RowBox[{"8.567722911804092`*^31", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], "+", 
+            FractionBox["1.9536895896452474`*^33", "ACt"], "-", 
+            RowBox[{"1.858104877615402`*^31", " ", "ACt"}], "+", 
+            RowBox[{"1.7673148292001167`*^31", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}], "+", 
+            RowBox[{"1.6019752149765414`*^32", " ", 
+             SuperscriptBox["ACt", "2"]}], "+", 
+            RowBox[{"1.617082706670316`*^31", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+             SuperscriptBox["ACt", "2"]}], "+", 
+            FractionBox["5.1996735228182916`*^36", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"3.886510374365806`*^36", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox["8.862372110547019`*^37", 
+             RowBox[{"ACt", " ", 
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                 RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                 RowBox[{
+                  SqrtBox[
+                   RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                    FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                    FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                  "ACt"}]}], ")"}], "2"]}]], "+", 
+            FractionBox[
+             RowBox[{"6.286798573276148`*^36", " ", "ACt"}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"1.114802941341837`*^36", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"1.545203564920027`*^36", " ", 
+              SuperscriptBox["ACt", "2"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"2.644581158529123`*^35", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+              SuperscriptBox["ACt", "2"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"6.567087855081584`*^35", " ", 
+              SuperscriptBox["ACt", "3"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "-", 
+            FractionBox[
+             RowBox[{"8.684406646799811`*^33", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+              SuperscriptBox["ACt", "3"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "-", 
+            FractionBox[
+             RowBox[{"6.14398802319941`*^35", " ", 
+              SuperscriptBox["ACt", "4"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "-", 
+            FractionBox[
+             RowBox[{"6.201929149353782`*^34", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+              SuperscriptBox["ACt", "4"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]]}], ")"}], "2"], "-", 
+         RowBox[{"4", " ", 
+          RowBox[{"(", 
+           RowBox[{"1.160169370049803`*^68", "+", 
+            RowBox[{"4.66758165449953`*^66", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], "+", 
+            FractionBox["5.7724284629552455`*^68", 
+             SuperscriptBox["ACt", "2"]], "-", 
+            FractionBox["2.5273757029912972`*^67", "ACt"], "+", 
+            FractionBox[
+             RowBox[{"2.5314444966557915`*^67", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]]}], "ACt"], "+", 
+            RowBox[{"3.707826465811022`*^67", " ", "ACt"}], "+", 
+            RowBox[{"4.422806941351277`*^66", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}], "+", 
+            RowBox[{"2.189718136812486`*^67", " ", 
+             SuperscriptBox["ACt", "2"]}], "+", 
+            RowBox[{"1.921460197495147`*^66", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+             SuperscriptBox["ACt", "2"]}], "-", 
+            RowBox[{"9.003335757563527`*^65", " ", 
+             SuperscriptBox["ACt", "3"]}], "+", 
+            RowBox[{"3.82729690735834`*^65", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+             SuperscriptBox["ACt", "3"]}], "+", 
+            RowBox[{"3.8811374184213754`*^66", " ", 
+             SuperscriptBox["ACt", "4"]}], "+", 
+            RowBox[{"3.917738640939077`*^65", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+             SuperscriptBox["ACt", "4"]}], "+", 
+            FractionBox["5.883627873155849`*^70", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"4.0235075700788835`*^69", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox["3.4628648263876173`*^71", 
+             RowBox[{
+              SuperscriptBox["ACt", "2"], " ", 
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                 RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                 RowBox[{
+                  SqrtBox[
+                   RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                    FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                    FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                  "ACt"}]}], ")"}], "2"]}]], "+", 
+            FractionBox["1.2736265497423038`*^70", 
+             RowBox[{"ACt", " ", 
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                 RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                 RowBox[{
+                  SqrtBox[
+                   RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                    FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                    FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                  "ACt"}]}], ")"}], "2"]}]], "+", 
+            FractionBox[
+             RowBox[{"1.5186069716893456`*^70", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]]}], 
+             RowBox[{"ACt", " ", 
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                 RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                 RowBox[{
+                  SqrtBox[
+                   RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                    FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                    FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                  "ACt"}]}], ")"}], "2"]}]], "+", 
+            FractionBox[
+             RowBox[{"1.9418345901090292`*^70", " ", "ACt"}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"2.460422725775189`*^69", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"6.4291422796601345`*^69", " ", 
+              SuperscriptBox["ACt", "2"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"9.011969810890489`*^68", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+              SuperscriptBox["ACt", "2"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"1.5444153520072194`*^69", " ", 
+              SuperscriptBox["ACt", "3"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"2.38116078206927`*^68", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+              SuperscriptBox["ACt", "3"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "-", 
+            FractionBox[
+             RowBox[{"8.331478363075332`*^67", " ", 
+              SuperscriptBox["ACt", "4"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"2.91327947217952`*^67", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+              SuperscriptBox["ACt", "4"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "+", 
+            FractionBox[
+             RowBox[{"2.3323858779611816`*^68", " ", 
+              SuperscriptBox["ACt", "5"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "-", 
+            FractionBox[
+             RowBox[{"4.776738803822924`*^65", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+              SuperscriptBox["ACt", "5"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "-", 
+            FractionBox[
+             RowBox[{"1.9685033068556342`*^68", " ", 
+              SuperscriptBox["ACt", "6"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]], "-", 
+            FractionBox[
+             RowBox[{"1.9870673564610608`*^67", " ", 
+              SqrtBox[
+               RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                FractionBox["519.9724090518824`", 
+                 SuperscriptBox["ACt", "2"]], "-", 
+                FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+              SuperscriptBox["ACt", "6"]}], 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}], "+", 
+                RowBox[{
+                 SqrtBox[
+                  RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                   FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                   FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+                 "ACt"}]}], ")"}], "2"]]}], ")"}]}]}], ")"}]}]}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{"2", " ", 
+      SqrtBox[
+       FractionBox[
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+            RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+        SuperscriptBox["ACt", "2"]]], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"8.031138725`*^15", "+", 
+         RowBox[{"3.489076870249893`*^15", " ", "ACt"}], "+", 
+         RowBox[{"3.52198075`*^14", " ", "ACt", " ", 
+          SqrtBox[
+           FractionBox[
+            RowBox[{
+             RowBox[{
+              RowBox[{"-", "689.0791918634443`"}], " ", "ACt"}], "+", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+                RowBox[{"9.90657564`", " ", "ACt"}]}], ")"}], "2"]}], 
+            SuperscriptBox["ACt", "2"]]]}]}], ")"}], "2"]}], ")"}]}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.892514325640038*^9, {3.893296688502941*^9, 3.8932967143161755`*^9}, 
+   3.893296769320793*^9},
+ CellLabel->"Out[46]=",ExpressionUUID->"bcfc16cc-4ba6-419b-a68e-b40153566fdd"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", "8.862372110547019`*^37"}], "-", 
+      RowBox[{"5.1996735228182916`*^36", " ", "ACt"}], "-", 
+      RowBox[{"3.886510374365806`*^36", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}], "-", 
+      RowBox[{"6.286798573276148`*^36", " ", 
+       SuperscriptBox["ACt", "2"]}], "-", 
+      RowBox[{"1.114802941341837`*^36", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+       SuperscriptBox["ACt", "2"]}], "-", 
+      RowBox[{"1.545203564920027`*^36", " ", 
+       SuperscriptBox["ACt", "3"]}], "-", 
+      RowBox[{"2.644581158529123`*^35", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+       SuperscriptBox["ACt", "3"]}], "-", 
+      RowBox[{"6.567087855081584`*^35", " ", 
+       SuperscriptBox["ACt", "4"]}], "+", 
+      RowBox[{"8.684406646799811`*^33", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+       SuperscriptBox["ACt", "4"]}], "+", 
+      RowBox[{"6.14398802319941`*^35", " ", 
+       SuperscriptBox["ACt", "5"]}], "+", 
+      RowBox[{"6.201929149353782`*^34", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+       SuperscriptBox["ACt", "5"]}], "-", 
+      RowBox[{"1.9536895896452474`*^33", " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+           "ACt"}]}], ")"}], "2"]}], "+", 
+      RowBox[{"4.276976000434101`*^31", " ", "ACt", " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+           "ACt"}]}], ")"}], "2"]}], "-", 
+      RowBox[{"8.567722911804092`*^31", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt", " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+           "ACt"}]}], ")"}], "2"]}], "+", 
+      RowBox[{"1.858104877615402`*^31", " ", 
+       SuperscriptBox["ACt", "2"], " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+           "ACt"}]}], ")"}], "2"]}], "-", 
+      RowBox[{"1.7673148292001167`*^31", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+       SuperscriptBox["ACt", "2"], " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+           "ACt"}]}], ")"}], "2"]}], "-", 
+      RowBox[{"1.6019752149765414`*^32", " ", 
+       SuperscriptBox["ACt", "3"], " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+           "ACt"}]}], ")"}], "2"]}], "-", 
+      RowBox[{"1.617082706670316`*^31", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+       SuperscriptBox["ACt", "3"], " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+           "ACt"}]}], ")"}], "2"]}], "-", 
+      RowBox[{"1.`", " ", "ACt", " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+           "ACt"}]}], ")"}], "2"], " ", 
+       RowBox[{"\[Sqrt]", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"4.312402196734612`*^75", "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "2.1781116499142606`*^75"}], "+", 
+               RowBox[{"1.8911636373404828`*^74", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ",
+              "ACt"}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "1.9039174020518096`*^75"}], "-", 
+               RowBox[{"5.2368803319218644`*^73", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "2"]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "1.6422694806497708`*^75"}], "-", 
+               RowBox[{"1.0836766878015764`*^74", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "3"]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "1.0457299990439855`*^75"}], "-", 
+               RowBox[{"9.6116193366509`*^73", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "4"]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "5.45424201723736`*^74"}], "-", 
+               RowBox[{"5.979886346792541`*^73", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "5"]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "2.396122525221885`*^74"}], "-", 
+               RowBox[{"2.909203614381814`*^73", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "6"]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "8.91053872008888`*^73"}], "-", 
+               RowBox[{"1.1396376709081761`*^73", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "7"]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "2.8392193218854244`*^73"}], "-", 
+               RowBox[{"3.565152670933789`*^72", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "8"]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "6.287017161832915`*^72"}], "-", 
+               RowBox[{"8.146193968033241`*^71", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "9"]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "1.4749640024205461`*^72"}], "-", 
+               RowBox[{"1.488873709766119`*^71", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "10"]}]}], ")"}], "/", 
+          RowBox[{"(", 
+           RowBox[{
+            SuperscriptBox["ACt", "2"], " ", 
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+                  SqrtBox[
+                   RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                    FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                    FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ",
+                 "ACt"}]}], ")"}], "4"]}], ")"}]}], ")"}]}]}]}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{"2", " ", 
+      SqrtBox[
+       RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+        FractionBox["519.9724090518824`", 
+         SuperscriptBox["ACt", "2"]], "-", 
+        FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt", " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+            SqrtBox[
+             RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+              FractionBox["519.9724090518824`", 
+               SuperscriptBox["ACt", "2"]], "-", 
+              FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+          "ACt"}]}], ")"}], "2"], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"8.031138725`*^15", "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"3.489076870249893`*^15", "+", 
+            RowBox[{"3.52198075`*^14", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+          "ACt"}]}], ")"}], "2"]}], ")"}]}], ",", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", "8.862372110547019`*^37"}], "-", 
+      RowBox[{"5.1996735228182916`*^36", " ", "ACt"}], "-", 
+      RowBox[{"3.886510374365806`*^36", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt"}], "-", 
+      RowBox[{"6.286798573276148`*^36", " ", 
+       SuperscriptBox["ACt", "2"]}], "-", 
+      RowBox[{"1.114802941341837`*^36", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+       SuperscriptBox["ACt", "2"]}], "-", 
+      RowBox[{"1.545203564920027`*^36", " ", 
+       SuperscriptBox["ACt", "3"]}], "-", 
+      RowBox[{"2.644581158529123`*^35", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+       SuperscriptBox["ACt", "3"]}], "-", 
+      RowBox[{"6.567087855081584`*^35", " ", 
+       SuperscriptBox["ACt", "4"]}], "+", 
+      RowBox[{"8.684406646799811`*^33", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+       SuperscriptBox["ACt", "4"]}], "+", 
+      RowBox[{"6.14398802319941`*^35", " ", 
+       SuperscriptBox["ACt", "5"]}], "+", 
+      RowBox[{"6.201929149353782`*^34", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+       SuperscriptBox["ACt", "5"]}], "-", 
+      RowBox[{"1.9536895896452474`*^33", " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+           "ACt"}]}], ")"}], "2"]}], "+", 
+      RowBox[{"4.276976000434101`*^31", " ", "ACt", " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+           "ACt"}]}], ")"}], "2"]}], "-", 
+      RowBox[{"8.567722911804092`*^31", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt", " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+           "ACt"}]}], ")"}], "2"]}], "+", 
+      RowBox[{"1.858104877615402`*^31", " ", 
+       SuperscriptBox["ACt", "2"], " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+           "ACt"}]}], ")"}], "2"]}], "-", 
+      RowBox[{"1.7673148292001167`*^31", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+       SuperscriptBox["ACt", "2"], " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+           "ACt"}]}], ")"}], "2"]}], "-", 
+      RowBox[{"1.6019752149765414`*^32", " ", 
+       SuperscriptBox["ACt", "3"], " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+           "ACt"}]}], ")"}], "2"]}], "-", 
+      RowBox[{"1.617082706670316`*^31", " ", 
+       SqrtBox[
+        RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+         FractionBox["519.9724090518824`", 
+          SuperscriptBox["ACt", "2"]], "-", 
+         FractionBox["237.2818147508882`", "ACt"]}]], " ", 
+       SuperscriptBox["ACt", "3"], " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+           "ACt"}]}], ")"}], "2"]}], "+", 
+      RowBox[{"ACt", " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+           "ACt"}]}], ")"}], "2"], " ", 
+       RowBox[{"\[Sqrt]", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"4.312402196734612`*^75", "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "2.1781116499142606`*^75"}], "+", 
+               RowBox[{"1.8911636373404828`*^74", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ",
+              "ACt"}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "1.9039174020518096`*^75"}], "-", 
+               RowBox[{"5.2368803319218644`*^73", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "2"]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "1.6422694806497708`*^75"}], "-", 
+               RowBox[{"1.0836766878015764`*^74", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "3"]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "1.0457299990439855`*^75"}], "-", 
+               RowBox[{"9.6116193366509`*^73", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "4"]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "5.45424201723736`*^74"}], "-", 
+               RowBox[{"5.979886346792541`*^73", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "5"]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "2.396122525221885`*^74"}], "-", 
+               RowBox[{"2.909203614381814`*^73", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "6"]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "8.91053872008888`*^73"}], "-", 
+               RowBox[{"1.1396376709081761`*^73", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "7"]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "2.8392193218854244`*^73"}], "-", 
+               RowBox[{"3.565152670933789`*^72", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "8"]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "6.287017161832915`*^72"}], "-", 
+               RowBox[{"8.146193968033241`*^71", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "9"]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "1.4749640024205461`*^72"}], "-", 
+               RowBox[{"1.488873709766119`*^71", " ", 
+                SqrtBox[
+                 RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                  FractionBox["519.9724090518824`", 
+                   SuperscriptBox["ACt", "2"]], "-", 
+                  FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+             SuperscriptBox["ACt", "10"]}]}], ")"}], "/", 
+          RowBox[{"(", 
+           RowBox[{
+            SuperscriptBox["ACt", "2"], " ", 
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+                  SqrtBox[
+                   RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+                    FractionBox["519.9724090518824`", 
+                    SuperscriptBox["ACt", "2"]], "-", 
+                    FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ",
+                 "ACt"}]}], ")"}], "4"]}], ")"}]}], ")"}]}]}]}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{"2", " ", 
+      SqrtBox[
+       RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+        FractionBox["519.9724090518824`", 
+         SuperscriptBox["ACt", "2"]], "-", 
+        FractionBox["237.2818147508882`", "ACt"]}]], " ", "ACt", " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"22.8029035224`", "\[VeryThinSpace]", "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"9.90657564`", "\[VeryThinSpace]", "+", 
+            SqrtBox[
+             RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+              FractionBox["519.9724090518824`", 
+               SuperscriptBox["ACt", "2"]], "-", 
+              FractionBox["237.2818147508882`", "ACt"]}]]}], ")"}], " ", 
+          "ACt"}]}], ")"}], "2"], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"8.031138725`*^15", "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"3.489076870249893`*^15", "+", 
+            RowBox[{"3.52198075`*^14", " ", 
+             SqrtBox[
+              RowBox[{"98.1402409110414`", "\[VeryThinSpace]", "+", 
+               FractionBox["519.9724090518824`", 
+                SuperscriptBox["ACt", "2"]], "-", 
+               FractionBox["237.2818147508882`", "ACt"]}]]}]}], ")"}], " ", 
+          "ACt"}]}], ")"}], "2"]}], ")"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.892514325640038*^9, {3.893296688502941*^9, 3.8932967143161755`*^9}, 
+   3.893296769643792*^9},
+ CellLabel->"Out[47]=",ExpressionUUID->"7b24eb14-f3e0-4d8d-9787-5a73347b2607"]
+}, Open  ]],
+
+Cell[BoxData[{
+ StyleBox[
+  RowBox[{"A", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ACt", "^", "2"}], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"cAMP", " ", "r1"}], "-", 
+       RowBox[{"Dvalue", " ", "r2"}]}], ")"}]}], "+", 
+    RowBox[{"Km2", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"cAMP", " ", "Km2", " ", "r1"}], "+", 
+       RowBox[{"Dvalue", " ", "Km1", " ", "r2"}]}], ")"}]}]}]}], 
+  "Text"], "\n", 
+ StyleBox[
+  RowBox[{"B", "=", 
+   RowBox[{"4", " ", "ACt", " ", "cAMP", " ", "Km2", " ", "r1", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"cAMP", " ", "r1"}], "-", 
+      RowBox[{"Dvalue", " ", "r2"}]}], ")"}]}]}], "Text"], "\n", 
+ StyleBox[
+  RowBox[{"C", "=", 
+   RowBox[{
+    RowBox[{"ACt", " ", "cAMP", " ", "r1"}], "-", 
+    RowBox[{"cAMP", " ", "Km2", " ", "r1"}], "-", 
+    RowBox[{"ACt", " ", "Dvalue", " ", "r2"}], "-", 
+    RowBox[{"Dvalue", " ", "Km1", " ", "r2"}]}]}], "Text"]}], "Input",
+ CellChangeTimes->{{3.892514345250511*^9, 
+  3.8925143452514763`*^9}},ExpressionUUID->"147c62d4-2e30-41bc-8067-\
+4ba2b495ca11"],
+
+Cell[BoxData[
+ RowBox[{"JacobianSimplified", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "k3"}], "-", 
+       RowBox[{"k2", " ", "PDEp"}], "-", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"2", " ", 
+          RowBox[{"ACt", "^", "2"}], " ", "cAMP", " ", "k1", " ", "Km2", " ", 
+          RowBox[{"r1", "^", "2"}], " ", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "1"}], "+", 
+            RowBox[{"Km2", "/", "ACt"}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"2", " ", "ACt", " ", "cAMP", " ", "Km2", " ", "r1"}], 
+               "-", "A"}], ")"}], "/", 
+             RowBox[{"C", "^", "2"}]}]}], ")"}]}], ")"}], "/", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"C", "^", "2"}], "+", 
+          RowBox[{"ACt", "*", 
+           RowBox[{"Sqrt", "[", 
+            RowBox[{"B", "+", 
+             RowBox[{"C", "^", "2"}]}], "]"}]}]}], ")"}]}]}], ",", 
+      RowBox[{
+       RowBox[{"-", "cAMP"}], " ", "k2"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "PDEp"}], "+", "PDEt"}], ")"}], " ", 
+       RowBox[{"r3", "/", "Km3"}]}], ",", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"cAMP", " ", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"Km4", "+", "PDEp"}], ")"}], "^", "2"}], " ", "r3"}], 
+           "+", 
+           RowBox[{"Et", " ", "Km3", " ", "Km4", " ", "r4"}]}], ")"}], "/", 
+         RowBox[{"(", 
+          RowBox[{"Km3", " ", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"Km4", "+", "PDEp"}], ")"}], "^", "2"}]}], ")"}]}], 
+        ")"}]}]}], "}"}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.8925143587012625`*^9, 
+  3.892514358702263*^9}},ExpressionUUID->"6de7bf07-7a2f-47d6-8965-\
+25a68270acdf"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Define", " ", "a", " ", "function", " ", "that", " ", "returns", " ", 
+    "the", " ", "smallest", " ", "real", " ", "part", " ", "of", " ", "the", 
+    " ", "eigenvalues"}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"smallestEigenvalueRealPart", "[", 
+      RowBox[{"ACt_", "?", "NumericQ"}], "]"}], ":=", 
+     RowBox[{"Min", "[", 
+      RowBox[{"Re", "[", 
+       RowBox[{"EigenvaluesAtFixedPoint", "/.", " ", 
+        RowBox[{"ACt", "->", "ACt"}]}], "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Find", " ", "the", " ", "value", " ", "of", " ", "ACt", " ", "that", " ",
+      "makes", " ", "the", " ", "smallest", " ", "real", " ", "part", " ", 
+     "of", " ", "the", " ", "eigenvalues", " ", "equal", " ", "to", " ", 
+     "zero"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"FindRoot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"smallestEigenvalueRealPart", "[", "ACt", "]"}], "==", "0"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"ACt", ",", "3.9367086670866707"}], "}"}]}], "]"}], 
+   "\n"}]}]], "Input",
+ CellChangeTimes->{{3.893296876910297*^9, 3.8932969061697426`*^9}},
+ CellLabel->"In[48]:=",ExpressionUUID->"709b6f1d-b155-4d2d-bc49-ede5b6865617"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"ACt", "\[Rule]", "3.93668846354131`"}], "}"}]], "Output",
+ CellChangeTimes->{3.8932969090438323`*^9},
+ CellLabel->"Out[49]=",ExpressionUUID->"bd254b94-6c48-471b-a6df-509917e4360f"]
+}, Open  ]]
+},
+WindowSize->{1635.4285714285713`, 657.},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"13.0 for Microsoft Windows (64-bit) (February 4, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"55f7e472-918a-4050-a96a-9e5b8e855458"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 3134, 96, 238, "Input",ExpressionUUID->"631c68fe-4cb8-4a45-8a0f-fdc3ee7922b3"],
+Cell[3717, 120, 5555, 150, 157, "Output",ExpressionUUID->"f58c01a0-9064-495b-a2c7-9fde6f7204f6"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9309, 275, 260, 4, 28, "Input",ExpressionUUID->"7f050412-c74b-4bf4-999a-536a4de9dd63"],
+Cell[9572, 281, 5130, 131, 187, "Output",ExpressionUUID->"ee4cfde0-80db-4598-9fb0-9db7bba6b999"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14739, 417, 1448, 40, 333, "Input",ExpressionUUID->"75dfa9f7-4195-471e-a346-401d796aff63"],
+Cell[16190, 459, 2686, 67, 116, "Output",ExpressionUUID->"813925aa-f99d-44e3-9106-f09c5478c372"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18913, 531, 629, 11, 67, "Input",ExpressionUUID->"88f5afbc-af09-4bf5-98d3-0288b408bd1c"],
+Cell[19545, 544, 11965, 330, 514, "Output",ExpressionUUID->"d340b745-13a0-4005-81a6-a5017c3cb8e0"],
+Cell[31513, 876, 70306, 1515, 3095, "Output",ExpressionUUID->"bcfc16cc-4ba6-419b-a68e-b40153566fdd"],
+Cell[101822, 2393, 29927, 670, 955, "Output",ExpressionUUID->"7b24eb14-f3e0-4d8d-9787-5a73347b2607"]
+}, Open  ]],
+Cell[131764, 3066, 1076, 32, 67, "Input",ExpressionUUID->"147c62d4-2e30-41bc-8067-4ba2b495ca11"],
+Cell[132843, 3100, 1977, 59, 48, "Input",ExpressionUUID->"6de7bf07-7a2f-47d6-8965-25a68270acdf"],
+Cell[CellGroupData[{
+Cell[134845, 3163, 1290, 32, 105, "Input",ExpressionUUID->"709b6f1d-b155-4d2d-bc49-ede5b6865617"],
+Cell[136138, 3197, 220, 4, 32, "Output",ExpressionUUID->"bd254b94-6c48-471b-a6df-509917e4360f"]
+}, Open  ]]
+}
+]
+*)
+
