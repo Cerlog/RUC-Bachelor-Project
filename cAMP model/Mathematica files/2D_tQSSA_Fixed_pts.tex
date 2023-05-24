@@ -1,0 +1,55 @@
+%% AMS-LaTeX Created with the Wolfram Language : www.wolfram.com
+
+\documentclass{article}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+\begin{document}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{(*Define the parameters*)}k=6;}\\
+\pmb{\text{W0}=6.57;}\\
+\pmb{\text{W1}=10;}\\
+\pmb{\text{k1}=1.09/k;}\\
+\pmb{\text{k3}=3.5/k;}\\
+\pmb{\text{k2}=5.25/k;}\\
+\pmb{}\\
+\pmb{\text{r1}=2.13/k;}\\
+\pmb{\text{r2}=1.62/k;}\\
+\pmb{\text{r3}=0.56/k;}\\
+\pmb{\text{r4}=0.94/k;}\\
+\pmb{\text{Km1}=1.401430143014302;}\\
+\pmb{\text{Km2}=5;}\\
+\pmb{\text{Km3}=5.1;}\\
+\pmb{\text{Km4}=4.3;}\\
+\pmb{\text{Dvalue}=3.116001600160016;}\\
+\pmb{\text{Et}=1.5;}\\
+\pmb{}\\
+\pmb{\text{(*Define the system of equations*)}}\\
+\pmb{\text{numerator1}=\text{cAMP}*\text{r1}*(-0.5*\text{Km2}+0.5*\text{W0})+(-0.5*\text{cAMP}*\text{r1}-0.5*\text{cAMP}*\text{r2}-0.5*\text{Km1}*\text{r2}-0.5*\text{r2}*\text{W0})*\text{Dvalue};}\\
+\pmb{\text{denominator1}=\text{cAMP}*\text{r1}-1.*\text{r2}*\text{Dvalue};}\\
+\pmb{}\\
+\pmb{\text{numerator2}=\text{cAMP}{}^{\wedge}2*\text{r1}{}^{\wedge}2*(\text{Km2}{}^{\wedge}2+2.*\text{Km2}*\text{W0}+\text{W0}{}^{\wedge}2)+}\\
+\pmb{\text{cAMP}*\text{r1}*(\text{cAMP}*(2.*\text{Km2}*\text{r1}+2.*\text{Km2}*\text{r2}+2.*\text{r1}*\text{W0}-2.*\text{r2}*\text{W0})+}\\
+\pmb{\text{r2}*(2.*\text{Km1}*\text{Km2}-2.*\text{Km1}*\text{W0}-2.*\text{Km2}*\text{W0}-2.*\text{W0}{}^{\wedge}2))*\text{Dvalue}+}\\
+\pmb{(\text{cAMP}{}^{\wedge}2*(\text{r1}{}^{\wedge}2+2.*\text{r1}*\text{r2}+\text{r2}{}^{\wedge}2)+\text{cAMP}*\text{r2}*(2.*\text{Km1}*\text{r1}+2.*\text{Km1}*\text{r2}-2.*\text{r1}*\text{W0}+2.*\text{r2}*\text{W0})+}\\
+\pmb{\text{r2}{}^{\wedge}2*(\text{Km1}{}^{\wedge}2+2.*\text{Km1}*\text{W0}+\text{W0}{}^{\wedge}2))*\text{Dvalue}{}^{\wedge}2;}\\
+\pmb{\text{denominator2}=(\text{cAMP}*\text{r1}-1.*\text{r2}*\text{Dvalue}){}^{\wedge}2;}\\
+\pmb{\text{ACpt}=\text{numerator1}/\text{denominator1}-0.5*\text{Sqrt}[\text{numerator2}/\text{denominator2}];}\\
+\pmb{}\\
+\pmb{\text{dcAMP}=\text{k1}*\text{W0}*\text{ACpt}-(\text{k2}*\text{PDEpt}+\text{k3})*\text{cAMP};}\\
+\pmb{\text{dPDEpt}=\text{r3}*\text{cAMP}*((\text{W1}-\text{PDEpt})/\text{Km3}+\text{cAMP}+(\text{W1}-\text{PDEpt}))-\text{r4}*\text{Et}*\text{PDEpt}/(\text{Km4}+\text{PDEpt}+\text{Et});}\\
+\pmb{}\\
+\pmb{\text{(*Solve for the fixed points*)}}\\
+\pmb{\text{fixedPoints}=\text{NSolve}[\{\text{dcAMP}\text{==}0,\text{dPDEpt}\text{==}0\},\{\text{cAMP},\text{PDEpt}\}]}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\{\{\text{PDEpt}\to -5.92214,\text{cAMP}\to 5.06393\},\{\text{PDEpt}\to 0.229533,\text{cAMP}\to -11.6944\},\{\text{PDEpt}\to 3.24175,\text{cAMP}\to
+0.110175\},\{\text{PDEpt}\to 3.24175,\text{cAMP}\to 0.110175\},\{\text{PDEpt}\to 0,\text{cAMP}\to 0\}\}\)
+\end{doublespace}
+
+\end{document}
